@@ -1,0 +1,184 @@
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: url("/images/login-bg.jpg") no-repeat center center;
+  background-size: cover;
+  font-family: "Lato", sans-serif;
+}
+
+form {
+  background: #faf5f3;
+  width: 280px;
+  margin-top: 15%;
+  margin-bottom: 50px;
+  position: absolute;
+  z-index: 10;
+  padding: 60px 60px 80px;
+  left: 50%;
+  margin-left: -230px;
+  opacity: 0.85;
+}
+form h2 {
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 18px;
+  color: #2f1f1e;
+  letter-spacing: 0.061em;
+  margin-top: 60px;
+  margin-bottom: 20px;
+}
+form h2.success {
+  color: #356e64;
+  margin-top: -40px;
+  margin-bottom: 0px;
+  padding: 0;
+}
+form p.success-dialog {
+  margin-top: -150px;
+  color: #356e64;
+  letter-spacing: 0.02em;
+  text-align: center;
+  line-height: 1.8em;
+  text-transform: uppercase;
+}
+form p.success-dialog a {
+  color: #9d775f;
+  text-decoration: none;
+  transition: 0.8s all ease;
+}
+form p.success-dialog a:hover {
+  color: #c08159;
+  transition: 0.4s all ease;
+}
+form input {
+  width: 100%;
+  background: #fff;
+  padding-left: 5px;
+  margin-bottom: 25px;
+  box-shadow: none;
+  appearance: none;
+  border: none;
+  border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #ebd7cf;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  text-transform: uppercase;
+  font-size: 15px;
+  position: relative;
+  z-index: 500;
+  letter-spacing: 0.06em;
+  height: 30px;
+}
+form input:focus {
+  border: 1px solid #ebd7cf;
+  outline: none;
+  appearance: none;
+}
+form input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+form .submit {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border: none;
+  text-transform: uppercase;
+  font-size: 15px;
+  position: relative;
+  z-index: 500;
+  letter-spacing: 0.06em;
+  text-align: center;
+  cursor: pointer;
+  background: #ec7242;
+  color: #fff;
+  width: 101%;
+  transition: 0.8s all ease;
+  height: 40px;
+}
+
+form .CA {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border: none;
+  text-transform: uppercase;
+  font-size: 11px;
+  position: relative;
+  z-index: 500;
+  letter-spacing: 0.06em;
+  text-align: center;
+  cursor: pointer;
+  background: #50a6ff;
+  color: #fff;
+  width: 101%;
+  transition: 0.8s all ease;
+}
+
+form .submit:hover {
+  background: #d6673c;
+  transform: translateY(1px);
+  transition: 0.4s all ease;
+}
+
+form .CA:hover {
+  background: #3269a2;
+  transform: translateY(1px);
+  transition: 0.4s all ease;
+}
+
+#firstname {
+  margin-top: 20px;
+}
+
+.circle {
+  padding: 15px;
+  height: 25px;
+  width: 25px;
+  margin-top: -80px;
+  margin-left: 115px;
+  position: absolute;
+  z-index: 20;
+  border-radius: 50%;
+  clear: both;
+  opacity: 0.8;
+}
+
+.circle-quill {
+  border: 1px solid #ebd7cf;
+  background: #fff;
+}
+
+.circle-paper {
+  border: 1px solid #9ac0ba;
+  background: #5d978e;
+}
+
+.submit-under,
+.loader,
+.loader2,
+.circle-paper,
+p.success-dialog,
+h2.success {
+  visibility: hidden;
+}
+
+.submit-under {
+  background: #8c6e7a;
+  width: 291px;
+  height: 45px;
+  margin-top: -40px;
+  margin-left: -4px;
+  position: absolute;
+  z-index: -1;
+}
+
+.loader,
+.loader2 {
+  position: absolute;
+  z-index: -5;
+  margin-top: -45px;
+  margin-left: 114px;
+}

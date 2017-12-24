@@ -14,9 +14,4 @@ Auth::routes();
 
 //Base View Routes
 Route::get('/', "PagesController@home");
-Route::get('/about', "PagesController@about");
-// Route::get('/contact', "PagesController@contact");
-Route::get('/login',['as'=>'login','uses'=>"PagesController@login"]);
-Route::get('/register','PagesController@register');
-// Route::post('/contact/submit', "ContactController@submit");
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
