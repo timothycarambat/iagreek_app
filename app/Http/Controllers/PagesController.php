@@ -14,4 +14,12 @@ class PagesController extends Controller
       ]);
     }
 
+    public function dashboard(){
+      return view('app.dashboard',
+      [
+        'title'=>'Dashboard',
+        'view'=>'dashboard'
+      ]);
+    }
+
 }

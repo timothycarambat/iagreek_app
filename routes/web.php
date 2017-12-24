@@ -15,3 +15,5 @@ Auth::routes();
 //Base View Routes
 Route::get('/', "PagesController@home");
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+Route::get('/dashboard', 'PagesController@dashboard');
