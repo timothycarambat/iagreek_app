@@ -7,16 +7,16 @@
                 <span class="icon-bar bar2"></span>
                 <span class="icon-bar bar3"></span>
             </button>
-            <a class="navbar-brand" href="#">{{$title}}</a>
+            <a class="navbar-brand" href="{{Request::is()}}">{{$title}}</a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li>
                   <a href="#"data-toggle="dropdown">
-                        <i class="fa fa-bell-o"></i>
-                        <p class="notification">5</p>
-                  <p>Notifications</p>
-                              </a>
+                        <i class="fas fa-bell"></i>
+                        <p class="notification">0</p>
+                  			<p>Notifications</p>
+                  </a>
                 </li>
 
 

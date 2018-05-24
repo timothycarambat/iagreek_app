@@ -300,12 +300,13 @@ hr {
     .off-canvas-sidebar .nav p {
       margin: 0;
       line-height: 30px;
-      font-size: 12px;
+      font-size: 17px;
       font-weight: 600;
       text-transform: uppercase; }
     .sidebar .nav i,
+    .sidebar .nav svg,
     .off-canvas-sidebar .nav i {
-      font-size: 24px;
+      font-size: 30px;
       float: left;
       margin-right: 15px;
       line-height: 30px;
@@ -2762,3 +2763,12 @@ textarea.form-control {
     overflow-y: hidden;
     -ms-overflow-style: -ms-autohiding-scrollbar;
     -webkit-overflow-scrolling: touch; } }
+
+p.header {
+	margin-bottom: 0px !important;
+	font-weight: 600;
+}
+p.header-sub {
+	font-size: 12px !important;
+	font-style: italic;
+}
