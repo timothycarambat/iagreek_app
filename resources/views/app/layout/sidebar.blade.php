@@ -22,6 +22,36 @@ Tip 2: you can change the color of the active button using the data-active-color
                     <p>Dashboard</p>
                 </a>
             </li>
+            <li class="{{ Request::is('profile') ? 'active':null }}">
+                <a href="/profile">
+                    <i class="fas fa-user-cog"></i>
+                    <p>Profile</p>
+                </a>
+            </li>
+            <li class="{{ Request::is('members') ? 'active':null }}">
+                <a href="/members">
+                    <i class="fas fa-users"></i>
+                    <p>Members</p>
+                </a>
+            </li>
+            <li class="{{ Request::is('documents') ? 'active':null }}">
+                <a href="/documents">
+                    <i class="fas fa-file-alt"></i>
+                    <p>Documents</p>
+                </a>
+            </li>
+            <li class="{{ Request::is('campaigns') ? 'active':null }}">
+                <a href="/campaigns">
+                    <i class="fas fa-bullhorn"></i>
+                    <p>Campaigns</p>
+                </a>
+            </li>
+            <li class="{{ Request::is('archive') ? 'active':null }}">
+                <a href="/archive">
+                    <i class="fas fa-archive"></i>
+                    <p>Archive</p>
+                </a>
+            </li>
         </ul>
   </div>
 </div>
