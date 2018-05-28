@@ -17,3 +17,4 @@ Route::get('/',['as'=>'login','uses'=>"PagesController@home"]);
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/dashboard', 'PagesController@dashboard')->middleware('auth');
+Route::get('/profile', 'PagesController@profile')->middleware('auth');

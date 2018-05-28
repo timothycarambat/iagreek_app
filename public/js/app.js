@@ -31934,12 +31934,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 /*
-
-
+    
+    
 
      Creative Tim Modifications
-
-     Lines: 239, 240 was changed from top: 5px to top: 50% and we added margin-top: -13px. In this way the close button will be aligned vertically
+     
+     Lines: 239, 240 was changed from top: 5px to top: 50% and we added margin-top: -13px. In this way the close button will be aligned vertically 
      Line:242 - modified when the icon is set, we add the class "alert-with-icon", so there will be enough space for the icon.
 
 
@@ -33219,19 +33219,19 @@ demo = {
 /***/ (function(module, exports) {
 
 /*!
-
+    
  =========================================================
  * Paper Dashboard - v1.1.2
  =========================================================
-
+ 
  * Product Page: http://www.creative-tim.com/product/paper-dashboard
  * Copyright 2017 Creative Tim (http://www.creative-tim.com)
  * Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard/blob/master/LICENSE.md)
-
+ 
  =========================================================
-
+ 
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
+ 
  */
 
 var fixedTop = false;
@@ -35417,7 +35417,7 @@ var config = api$1.config;
 var _WINDOW = {};
 try {
   if (typeof window !== 'undefined') _WINDOW = window;
-
+  
 } catch (e) {}
 
 var _ref = _WINDOW.navigator || {};
@@ -36412,7 +36412,7 @@ bunker(function () {
 var _WINDOW = {};
 try {
   if (typeof window !== 'undefined') _WINDOW = window;
-
+  
 } catch (e) {}
 
 var _ref = _WINDOW.navigator || {};

@@ -10776,19 +10776,19 @@ Copyright (c) 2015 Daniel Eden
 }
 
 /*!
-    
+
  =========================================================
  * Paper Dashboard - v1.1.2
  =========================================================
- 
+
  * Product Page: http://www.creative-tim.com/product/paper-dashboard
  * Copyright 2017 Creative Tim (http://www.creative-tim.com)
  * Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard/blob/master/LICENSE.md)
- 
+
  =========================================================
- 
+
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- 
+
  */
 /*      light colors - used for select dropdown         */
 .ct-blue {
@@ -12970,6 +12970,10 @@ textarea.form-control {
   border: 5px solid #ccc5b9;
 }
 
+.card-user .avatar.border-outline {
+  border: 1px solid #dbcac4;
+}
+
 .card-user .title {
   font-weight: 600;
   line-height: 24px;
@@ -14333,4 +14337,17 @@ p.header {
 p.header-sub {
   font-size: 12px !important;
   font-style: italic;
+}
+
+div.counter {
+  background-color: #d68d8d;
+  width: 30px;
+  text-align: center;
+  height: 30px;
+  border-radius: 50%;
+  line-height: 30px;
+  font-size: 20px;
+  color: #FFF;
+  font-weight: 600;
+  border: 1px solid #ff9e9e;
 }
