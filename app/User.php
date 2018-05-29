@@ -54,6 +54,11 @@ class User extends Authenticatable
       return '('.substr($phone, 0, 3).') '.substr($phone, 3, 3).'-'.substr($phone,6);
     }
 
+    public static function cancelAccount($user_id){
+      $user = User::where('id',$user_id)->get()[0];
+      return $user->subscription('main')->cancelNow();
+    }
+
 
     # make identicon for new users stored in avatars/
     private static function makeIdenticon($org_name){
