@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Cashier\Billable;
 use Storage;
 
+use App\Subscription;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -56,7 +58,8 @@ class User extends Authenticatable
 
     public static function cancelAccount($user_id){
       $user = User::where('id',$user_id)->get()[0];
-      return $user->subscription('main')->cancelNow();
+      $sub_name = Subscription::getSubName($user_id);
+      return $user->subscription($sub_name)->cancelNow();
     }
 
 

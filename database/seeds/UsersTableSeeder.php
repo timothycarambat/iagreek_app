@@ -13,6 +13,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('subscriptions')->truncate();
         DB::table('users')->truncate();
 
         //Make Admin
