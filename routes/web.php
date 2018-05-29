@@ -23,3 +23,4 @@ Route::get('/profile', 'PagesController@profile')->middleware('auth');
 Route::post('/profile/upload/letterhead', 'ProfileController@updateLetterhead')->middleware('auth');
 Route::post('/profile/upload/avatar', 'ProfileController@updateAvatar')->middleware('auth');
 Route::post('/profile/update', 'ProfileController@updateInfo')->middleware('auth');
+Route::post('/profile/update/notify', 'ProfileController@updateNotifs')->middleware('auth');

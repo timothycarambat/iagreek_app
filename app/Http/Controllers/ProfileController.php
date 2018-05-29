@@ -106,4 +106,18 @@ class ProfileController extends Controller
       }
       return Redirect::to('/profile');
     }
+
+    public static function updateNotifs(Request $request){
+      $update_user = User::where('id', Auth::user()->id)->update([
+        'email_on_campaign_complete' => $request->email_on_campaign_complete === "on" ? 1:0,
+      ]);
+
+      if( $update_user ){
+        Session::flash('success','Account notifications updated!');
+      }else{
+        Session::flash('failure','Account notifications were not updated!');
+      }
+      return Redirect::to('/profile');
+
+    }
 }

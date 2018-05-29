@@ -8,7 +8,7 @@ fontawesome.library.add(regular)
 fontawesome.library.add(solid)
 
 
-require('./includes/bootstrap-checkbox-radio');
+// require('./includes/bootstrap-checkbox-radio');
 require('./includes/bootstrap-notify');
 require('./includes/chartist.min');
 require('./includes/demo');

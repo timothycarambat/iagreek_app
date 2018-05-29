@@ -144,46 +144,76 @@
                             </div>
 
 														<div class="text-center">
-																<button type="submit" class="btn btn-info btn-fill btn-wd">Update Profile</button>
+																<button type="submit" class="btn btn-info btn-wd">Update Profile</button>
 														</div>
 														<div class="clearfix"></div>
 												{!!Form::close()!!}
+												<hr>
+												{!!Form::open(['url'=>'/profile/update/notify'])!!}
+	                        <div class="row">
+														<div class="col-md-12">
+															<h3 class="subsection-title">Email Notification Settings</h3>
 
-														<hr>
-                            <div class="row">
-                                <div class="col-md-6">
-																	<h3 class="subsection-title">Document Settings</h3>
-                                    <div class="form-group">
-                                        <label>Document Letterhead</label>
-																				<div class="custom-file">
-																					@if( empty(Auth::user()->letterhead) )
-																					<div class="well" data-letterhead-well>
-																						<label>No Letterhead Image Set <br>
-																							Accepted Filetypes: .png, jpeg, jpg
-																						</label><br>
-																						<label id="filename"></label>
-																						<label id="progress"></label>
-																						<label id="progressBar"></label>
-																					</div>
-																						<span class="btn btn-primary btn-file">
-																						    Upload <input id='fileupload' type='file' name='letterhead' class="custom-file-input">
-																						</span>
-																					@else
-																					<div class="well" data-letterhead-well>
-																						<img class='letterhead-img' src='{{Auth::user()->letterhead}}'/>
-																						<label id="filename"></label>
-																						<label id="progress"></label>
-																						<label id="progressBar"></label>
-																					</div>
-																						<span class="btn btn-primary btn-file">
-																								Upload New <input id='fileupload' type='file' name='letterhead' class="custom-file-input">
-																						</span>
-																					@endif
-																				</div>
-                                    </div>
+															<div class="col-md-4">
+	                                <div class="form-group">
+																		<label>Email On Completed Campaign</label>
+																		<br>
+																		<label class="switch">
+																		  <input type="checkbox" {{Auth::user()->email_on_campaign_complete ? 'checked':''}} name='email_on_campaign_complete'>
+																		  <span class="slider round"></span>
+																		</label>
+	                                </div>
+	                            </div>
+
+														</div>
+	                        </div>
+
+													<div class="text-center">
+															<button type="submit" class="btn btn-info btn-wd">Update Notifications</button>
+													</div>
+													<div class="clearfix"></div>
+												{!!Form::close()!!}
+												<hr>
+                        <div class="row">
+                            <div class="col-md-6">
+															<h3 class="subsection-title">Document Settings</h3>
+                                <div class="form-group">
+                                    <label>Document Letterhead</label>
+																		<div class="custom-file">
+																			@if( empty(Auth::user()->letterhead) )
+																			<div class="well" data-letterhead-well>
+																				<label>No Letterhead Image Set <br>
+																					Accepted Filetypes: .png, jpeg, jpg
+																				</label><br>
+																				<label id="filename"></label>
+																				<label id="progress"></label>
+																				<label id="progressBar"></label>
+																			</div>
+																				<span class="btn btn-primary btn-file">
+																				    Upload <input id='fileupload' type='file' name='letterhead' class="custom-file-input">
+																				</span>
+																			@else
+																			<div class="well" data-letterhead-well>
+																				<img class='letterhead-img' src='{{Auth::user()->letterhead}}'/>
+																				<label id="filename"></label>
+																				<label id="progress"></label>
+																				<label id="progressBar"></label>
+																			</div>
+																				<span class="btn btn-primary btn-file">
+																						Upload New <input id='fileupload' type='file' name='letterhead' class="custom-file-input">
+																				</span>
+																			@endif
+																		</div>
                                 </div>
-
                             </div>
+
+                        </div>
+												<hr>
+                        <div class="row">
+													<div class="col-md-12 text-right">
+														<a href="#" class="btn btn-danger btn-wd"> Close Account</a>
+													</div>
+                        </div>
 
                     </div>
                 </div>
@@ -193,7 +223,33 @@
 			</div>
 	</div>
 
-	<!-- User Profile image Modal -->
+<!-- User Profile image Modal -->
+<div style='position:fixed' class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" >Upload a New Profile Image</h5>
+      </div>
+      <div class="modal-body">
+					<div class="well" data-avatar-well>
+						<img class='avatar-img' src='{{Auth::user()->avatar}}'/>
+						<label id="filename"></label>
+						<label id="progress"></label>
+						<label id="progressBar"></label>
+					</div>
+						<span class="btn btn-primary btn-file">
+								Upload New <input id='fileupload' type='file' name='avatar' class="custom-file-input">
+						</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Done</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- User Cancel Profile Modal -->
 <div style='position:fixed' class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
