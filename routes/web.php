@@ -18,3 +18,6 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/dashboard', 'PagesController@dashboard')->middleware('auth');
 Route::get('/profile', 'PagesController@profile')->middleware('auth');
+
+
+Route::post('/profile/upload/letterhead', 'ProfileController@updateLetterhead');

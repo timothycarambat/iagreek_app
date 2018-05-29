@@ -66,6 +66,6 @@ class User extends Authenticatable
       ));
       $img_name = str_random(12).".png";
       Storage::disk($_ENV['FILESYSTEM_DRIVER'])->put("avatars/".$img_name, file_get_contents($icon->getImageDataUri('png')) );
-      return $img_name;
+      return Storage::url("avatars/$img_name");
     }
 }

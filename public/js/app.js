@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -70,8 +70,8 @@
 "use strict";
 
 
-var bind = __webpack_require__(3);
-var isBuffer = __webpack_require__(17);
+var bind = __webpack_require__(4);
+var isBuffer = __webpack_require__(18);
 
 /*global toString:true*/
 
@@ -375,106 +375,6 @@ module.exports = {
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(20);
-
-var DEFAULT_CONTENT_TYPE = {
-  'Content-Type': 'application/x-www-form-urlencoded'
-};
-
-function setContentTypeIfUnset(headers, value) {
-  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
-    headers['Content-Type'] = value;
-  }
-}
-
-function getDefaultAdapter() {
-  var adapter;
-  if (typeof XMLHttpRequest !== 'undefined') {
-    // For browsers use XHR adapter
-    adapter = __webpack_require__(4);
-  } else if (typeof process !== 'undefined') {
-    // For node use HTTP adapter
-    adapter = __webpack_require__(4);
-  }
-  return adapter;
-}
-
-var defaults = {
-  adapter: getDefaultAdapter(),
-
-  transformRequest: [function transformRequest(data, headers) {
-    normalizeHeaderName(headers, 'Content-Type');
-    if (utils.isFormData(data) ||
-      utils.isArrayBuffer(data) ||
-      utils.isBuffer(data) ||
-      utils.isStream(data) ||
-      utils.isFile(data) ||
-      utils.isBlob(data)
-    ) {
-      return data;
-    }
-    if (utils.isArrayBufferView(data)) {
-      return data.buffer;
-    }
-    if (utils.isURLSearchParams(data)) {
-      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
-      return data.toString();
-    }
-    if (utils.isObject(data)) {
-      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
-      return JSON.stringify(data);
-    }
-    return data;
-  }],
-
-  transformResponse: [function transformResponse(data) {
-    /*eslint no-param-reassign:0*/
-    if (typeof data === 'string') {
-      try {
-        data = JSON.parse(data);
-      } catch (e) { /* Ignore */ }
-    }
-    return data;
-  }],
-
-  timeout: 0,
-
-  xsrfCookieName: 'XSRF-TOKEN',
-  xsrfHeaderName: 'X-XSRF-TOKEN',
-
-  maxContentLength: -1,
-
-  validateStatus: function validateStatus(status) {
-    return status >= 200 && status < 300;
-  }
-};
-
-defaults.headers = {
-  common: {
-    'Accept': 'application/json, text/plain, */*'
-  }
-};
-
-utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
-  defaults.headers[method] = {};
-});
-
-utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
-  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
-});
-
-module.exports = defaults;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(19)))
-
-/***/ }),
-/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10734,7 +10634,1855 @@ return jQuery;
 
 
 /***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+var utils = __webpack_require__(0);
+var normalizeHeaderName = __webpack_require__(21);
+
+var DEFAULT_CONTENT_TYPE = {
+  'Content-Type': 'application/x-www-form-urlencoded'
+};
+
+function setContentTypeIfUnset(headers, value) {
+  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
+    headers['Content-Type'] = value;
+  }
+}
+
+function getDefaultAdapter() {
+  var adapter;
+  if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = __webpack_require__(5);
+  } else if (typeof process !== 'undefined') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(5);
+  }
+  return adapter;
+}
+
+var defaults = {
+  adapter: getDefaultAdapter(),
+
+  transformRequest: [function transformRequest(data, headers) {
+    normalizeHeaderName(headers, 'Content-Type');
+    if (utils.isFormData(data) ||
+      utils.isArrayBuffer(data) ||
+      utils.isBuffer(data) ||
+      utils.isStream(data) ||
+      utils.isFile(data) ||
+      utils.isBlob(data)
+    ) {
+      return data;
+    }
+    if (utils.isArrayBufferView(data)) {
+      return data.buffer;
+    }
+    if (utils.isURLSearchParams(data)) {
+      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+      return data.toString();
+    }
+    if (utils.isObject(data)) {
+      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+      return JSON.stringify(data);
+    }
+    return data;
+  }],
+
+  transformResponse: [function transformResponse(data) {
+    /*eslint no-param-reassign:0*/
+    if (typeof data === 'string') {
+      try {
+        data = JSON.parse(data);
+      } catch (e) { /* Ignore */ }
+    }
+    return data;
+  }],
+
+  timeout: 0,
+
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+
+  maxContentLength: -1,
+
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  }
+};
+
+defaults.headers = {
+  common: {
+    'Accept': 'application/json, text/plain, */*'
+  }
+};
+
+utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
+  defaults.headers[method] = {};
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
+});
+
+module.exports = defaults;
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(20)))
+
+/***/ }),
 /* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
+ * simpleUpload.js v.1.1
+ *
+ * Copyright 2018, Michael Brook, All rights reserved.
+ * http://simpleupload.michaelcbrook.com/
+ *
+ * simpleUpload.js is an extremely simple yet powerful jQuery file upload plugin.
+ * It is free to use under the MIT License (http://opensource.org/licenses/MIT)
+ *
+ * https://github.com/michaelcbrook/simpleUpload.js
+ * @michaelcbrook
+ */
+
+function simpleUpload(ajax_url, DOM_file, options)
+{
+
+var forceIframe = false;
+
+var files = null; //files object for HTML5 uploads (if applicable)
+var limit = 0; //the max number of files that can be uploaded from this selection (0 = no limit)
+
+var max_file_size = 0; //max file size for an uploaded file in bytes
+var allowed_exts = []; //array of allowed file extensions for an uploaded file
+var allowed_types = []; //array of allowed MIME types for an uploaded file
+var expect_type = "auto"; //the type of result to expect (can either be auto, json, xml, html, script, or text)
+
+var hash_worker = null; //file path (relative to page) to hash worker javascript file
+var on_hash_complete = null; //function(hash, callbacks){ callbacks.proceed(); //success(), proceed(), or error() }; //called when hash is calculated for a file, the next step is determined by the callback that is called
+
+var request_file_name = "file"; //name of file to be uploaded (should be the same as DOM_file's name)
+var request_data = {}; //additional data to get passed to the backend script with the file upload
+
+var xhrFields = {}; //object of field name/value pairs to send with ajax request (set on native XHR object) - { withCredentials: true } is one example
+
+//default callback functions
+var on_init_callback = function(total_uploads){}; //on initialization of instance, given at least one file is queued for upload (can cancel all uploads or set limit by returning either false or an integer, respectively)
+var on_start_callback = function(file){}; //on beginning of each file upload (can return false to exclude this file from being uploaded)
+var on_progress_callback = function(progress){}; //on upload progress update
+var on_success_callback = function(data){}; //on successful file upload
+var on_error_callback = function(error){}; //on failed file upload
+var on_cancel_callback = function(){}; //on cancelled upload (via this.upload.cancel())
+var on_complete_callback = function(status){}; //on completed upload, regardless of success
+var on_finish_callback = function(){}; //on completion of all file uploads for this instance, regardless of success
+
+var on_before_send_callback = function(jqXHR, settings){}; //gives the opportunity to modify the XHR object before sending the request
+
+var upload_contexts = []; //an array containing objects for each file upload that can be referenced inside each callback using "this"
+var private_upload_data = []; //same as above, except the properties of these objects are not accessible via "this"
+var instance_context = { files: upload_contexts }; //an instance-specific context for "this" to pass to non-file-specific events like init() and finish()
+
+var queued_files = 0; //number of files remaining in the queue for this instance
+var hidden_form = null; //jquery object containing hidden form appended to body of page, which contains the moved DOM_file, if it exists
+
+
+
+//helper function to run after every success, error, or cancel event
+
+var file_completed = function(upload_num, status){
+
+  on_complete(upload_num, status);
+
+  queued_files--;
+
+    if (queued_files==0)
+      on_finish();
+
+  simpleUpload.activeUploads--;
+  simpleUpload.uploadNext();
+
+};
+
+/* Wrappers to the callback functions that additionally perform internal functions */
+
+var on_init = function(total_uploads){
+
+  return on_init_callback.call(instance_context, total_uploads);
+
+};
+
+var on_start = function(upload_num, file){
+
+    if (getUploadState(upload_num) > 0) //if cancelled via the init function, don't start upload
+      return false;
+
+    if (on_start_callback.call(upload_contexts[upload_num], file)===false) { //if start returns false, treat it as a cancellation
+      setUploadState(upload_num, 4);
+      return false;
+    }
+
+    if (getUploadState(upload_num) > 0) //if this.upload.cancel() was called inside the start function, don't start upload
+      return false;
+
+  setUploadState(upload_num, 1);
+
+};
+
+var on_progress = function(upload_num, progress){
+
+    if (getUploadState(upload_num)==1)
+      on_progress_callback.call(upload_contexts[upload_num], progress);
+
+};
+
+var on_success = function(upload_num, data){
+
+    if (getUploadState(upload_num)==1)
+    {
+    setUploadState(upload_num, 2);
+    on_success_callback.call(upload_contexts[upload_num], data);
+    file_completed(upload_num, "success");
+    }
+
+};
+
+var on_error = function(upload_num, error){
+
+    if (getUploadState(upload_num)==1)
+    {
+    setUploadState(upload_num, 3);
+    on_error_callback.call(upload_contexts[upload_num], error);
+    file_completed(upload_num, "error");
+    }
+
+};
+
+var on_cancel = function(upload_num){
+
+  //the this.upload.cancel() function restricts when this can be called
+
+  on_cancel_callback.call(upload_contexts[upload_num]);
+  file_completed(upload_num, "cancel");
+
+};
+
+var on_complete = function(upload_num, status){
+
+  on_complete_callback.call(upload_contexts[upload_num], status);
+
+};
+
+var on_finish = function(){
+
+  on_finish_callback.call(instance_context);
+
+    if (hidden_form!=null)
+      hidden_form.remove();
+
+};
+
+var on_before_send = function(upload_num, jqXHR, settings){
+
+  on_before_send_callback.call(upload_contexts[upload_num], jqXHR, settings);
+
+};
+
+/* End callback wrappers */
+
+
+
+	/*
+	 * Initialize instance and put uploads in the queue
+	 */
+
+	function create()
+	{
+
+	  if (typeof options=="object" && options!==null)
+	  {
+
+	    if (typeof options.forceIframe=="boolean")
+	    {
+	    forceIframe = options.forceIframe;
+	    }
+
+	    if (typeof options.init=="function")
+	    {
+	    on_init_callback = options.init;
+	    }
+
+	    if (typeof options.start=="function")
+	    {
+	    on_start_callback = options.start;
+	    }
+
+	    if (typeof options.progress=="function")
+	    {
+	    on_progress_callback = options.progress;
+	    }
+
+	    if (typeof options.success=="function")
+	    {
+	    on_success_callback = options.success;
+	    }
+
+	    if (typeof options.error=="function")
+	    {
+	    on_error_callback = options.error;
+	    }
+
+	    if (typeof options.cancel=="function")
+	    {
+	    on_cancel_callback = options.cancel;
+	    }
+
+	    if (typeof options.complete=="function")
+	    {
+	    on_complete_callback = options.complete;
+	    }
+
+	    if (typeof options.finish=="function")
+	    {
+	    on_finish_callback = options.finish;
+	    }
+
+	    if (typeof options.beforeSend=="function")
+	    {
+	    on_before_send_callback = options.beforeSend;
+	    }
+
+	    if (typeof options.hashWorker=="string" && options.hashWorker!="")
+	    {
+	    hash_worker = options.hashWorker;
+	    }
+
+	    if (typeof options.hashComplete=="function")
+	    {
+	    on_hash_complete = options.hashComplete;
+	    }
+
+	    if (typeof options.data=="object" && options.data!==null)
+	    {
+
+	      for (var x in options.data) //copy each item in case options.data is actually an array
+	      {
+	      request_data[x] = options.data[x];
+	      }
+
+	    }
+
+	    if (typeof options.limit=="number" && isInt(options.limit) && options.limit > 0)
+	    {
+	    limit = options.limit;
+	    }
+
+	    if (typeof options.maxFileSize=="number" && isInt(options.maxFileSize) && options.maxFileSize > 0)
+	    {
+	    max_file_size = options.maxFileSize;
+	    }
+
+	    if (typeof options.allowedExts=="object" && options.allowedExts!==null)
+	    {
+
+	      for (var x in options.allowedExts) //ensure allowed_exts stays an array
+	      {
+	      allowed_exts.push(options.allowedExts[x]);
+	      }
+
+	    }
+
+	    if (typeof options.allowedTypes=="object" && options.allowedTypes!==null)
+	    {
+
+	      for (var x in options.allowedTypes) //ensure allowed_types stays an array
+	      {
+	      allowed_types.push(options.allowedTypes[x]);
+	      }
+
+	    }
+
+	    if (typeof options.expect=="string" && options.expect!="")
+	    {
+
+	    var lower_expect = options.expect.toLowerCase();
+	    var valid_expect_types = ["auto", "json", "xml", "html", "script", "text"]; //expect_type must be one of these
+
+	      for (var x in valid_expect_types)
+	      {
+
+	        if (valid_expect_types[x]==lower_expect)
+	        {
+	        expect_type = lower_expect;
+	        break;
+	        }
+
+	      }
+
+	    }
+
+	    if (typeof options.xhrFields=="object" && options.xhrFields!==null)
+	    {
+
+	      for (var x in options.xhrFields) //maintain as object
+	      {
+	      xhrFields[x] = options.xhrFields[x];
+	      }
+
+	    }
+
+	  }
+
+	  if (typeof DOM_file=="object" && DOM_file!==null && DOM_file instanceof jQuery)
+	  {
+
+	    if (DOM_file.length > 0)
+	    {
+	    DOM_file = DOM_file.get(0); //if DOM_file was passed in as a jquery object, extract its first DOM element and use it instead
+	    }
+	    else
+	    {
+	    return false; //if jquery object was empty, quit now
+	    }
+
+	  }
+
+	  if (!forceIframe && window.File && window.FileReader && window.FileList && window.Blob) //check whether browser supports HTML5 File API
+	  {
+
+	    if (typeof options=="object" && options!==null && typeof options.files=="object" && options.files!==null)
+	    {
+	    files = options.files; //if options.files is defined along with DOM_file, it is the caller's responsibility to make sure they are the same
+	    }
+	    else if (typeof DOM_file=="object" && DOM_file!==null && typeof DOM_file.files=="object" && DOM_file.files!==null)
+	    {
+	    files = DOM_file.files; //fallback on DOM file input if no options.files are given
+	    }
+
+	  }
+
+	  if ((typeof DOM_file!="object" || DOM_file===null) && files==null)
+	  {
+	  return false; //we've got nothing to work with, so just quit
+	  }
+
+	  //request_file_name will be based on (in order of preference) options.name, DOM_file.name, "file"
+
+	  //if there is an attempt to upload multiple files as an array in one request, restrict it to one file per request, otherwise it will break consistency between ajax and iframe upload methods
+
+	  if (typeof options=="object" && options!==null && typeof options.name=="string" && options.name!="")
+	  {
+	  request_file_name = options.name.replace(/\[\s*\]/g, '[0]');
+	  }
+	  else if (typeof DOM_file=="object" && DOM_file!==null && typeof DOM_file.name=="string" && DOM_file.name!="")
+	  {
+	  request_file_name = DOM_file.name.replace(/\[\s*\]/g, '[0]');
+	  }
+
+	var num_files = 0;
+
+	  if (files!=null)
+	  {
+
+	    if (files.length > 0)
+	    {
+
+	      //the following conditions are necessary in order to do an AJAX upload (minus hashing), so don't start more than one upload if we're certain we'll fallback to the iframe method anyway
+
+	      if (files.length > 1 && window.FormData && $.ajaxSettings.xhr().upload)
+	      {
+
+	        if (limit > 0 && files.length > limit) //apply limit if multiple files have been selected
+	        {
+	        num_files = limit;
+	        }
+	        else
+	        {
+	        num_files = files.length;
+	        }
+
+	      }
+	      else
+	      {
+	      num_files = 1;
+	      }
+
+	    }
+
+	  }
+	  else
+	  {
+
+	    if (DOM_file.value!="")
+	    {
+	    num_files = 1;
+	    }
+
+	  }
+
+	  if (num_files > 0)
+	  {
+
+	    if (typeof DOM_file=="object" && DOM_file!==null)
+	    {
+
+	    var $DOM_file = $(DOM_file);
+
+	    hidden_form = $('<form>').hide().attr("enctype", "multipart/form-data").attr("method", "post").appendTo('body');
+
+	    //move the original file input into the hidden form and create a clone of the original to replace it (clone doesn't retain value)
+	    $DOM_file.after($DOM_file.clone(true).val("")).removeAttr("onchange").off().removeAttr("id").attr("name", request_file_name).appendTo(hidden_form);
+
+	    }
+
+	    for (var i = 0; i < num_files; i++)
+	    {
+
+	    (function(i){
+
+	      //setting up contextual data...
+
+	      //not accessible in callbacks directly, but provides data for certain functions that can be run in the callbacks
+	      private_upload_data[i] = {
+	      	state: 0, //state of upload in number form (0 = init, 1 = uploading, 2 = success, 3 = error, 4 = cancel)
+	      	hashWorker: null, //Worker object from hashing
+	        xhr: null, //jqXHR object from ajax upload
+	        iframe: null //iframe id from iframe upload
+	      };
+
+	      //this object is accessible via "this" in each file-specific callback (for init and finish, this object is stacked in an array for each file)
+	      upload_contexts[i] = {
+	        upload: {
+	          index: i,
+	          state: "init", //textual form of "state" in private_upload_data
+	          file: (files!=null) ? files[i] : { name: DOM_file.value.split(/(\\|\/)/g).pop() }, //ensure "name" always exists, regardless of HTML5 support
+	          cancel: function(){
+
+	              if (getUploadState(i)==0) //if upload hasn't started, don't call the callback, just change the state
+	              {
+	              setUploadState(i, 4);
+	              }
+	              else if (getUploadState(i)==1) //cancel if active and call the callback
+	              {
+
+	              setUploadState(i, 4);
+
+	                if (private_upload_data[i].hashWorker!=null)
+	                {
+	                private_upload_data[i].hashWorker.terminate();
+	                private_upload_data[i].hashWorker = null;
+	                }
+
+	                if (private_upload_data[i].xhr!=null)
+	                {
+	                private_upload_data[i].xhr.abort();
+	                private_upload_data[i].xhr = null;
+	                }
+
+	                if (private_upload_data[i].iframe!=null)
+	                {
+	                $('iframe[name=simpleUpload_iframe_' + private_upload_data[i].iframe + ']').attr("src", "javascript:false;"); //for IE
+	                simpleUpload.dequeueIframe(private_upload_data[i].iframe);
+	                private_upload_data[i].iframe = null;
+	                }
+
+	              on_cancel(i);
+
+	              }
+	              else //return false if upload has already completed or been cancelled
+	              {
+	              return false;
+	              }
+
+	            return true; //cancel was a success
+
+	          }
+	        }
+	      };
+
+	    })(i);
+
+	    }
+
+	  var init_value = on_init(num_files);
+
+	    if (init_value!==false)
+	    {
+
+	    //if the return value of on_init (init_value) is a number, limit the amount of uploads to that number (a value of 0, like false, will cancel all uploads)
+
+	    var num_files_limit = num_files;
+
+	      if (typeof init_value=="number" && isInt(init_value) && init_value >= 0 && init_value < num_files)
+	      {
+
+	      num_files_limit = init_value;
+
+	        for (var z = num_files_limit; z < num_files; z++)
+	        {
+	        setUploadState(z, 4); //mark each remaining file after the new limit as cancelled
+	        }
+
+	      }
+
+	    var remaining_uploads = []; //array of indexes of files to be uploaded from this instance
+
+	      for (var j = 0; j < num_files_limit; j++)
+	      {
+
+	        if (on_start(j, upload_contexts[j].upload.file)!==false) //if false is returned, exclude this file from being uploaded
+	          remaining_uploads[remaining_uploads.length] = j;
+
+	      }
+
+	      if (remaining_uploads.length > 0)
+	      {
+
+	      queued_files = remaining_uploads.length;
+
+	      simpleUpload.queueUpload(remaining_uploads, function(upload_num){
+	        validateFile(upload_num);
+	      });
+
+	      simpleUpload.uploadNext();
+
+	      }
+	      else
+	      {
+	      on_finish();
+	      }
+
+	    }
+	    else //init returned false
+	    {
+
+	      for (var z in upload_contexts)
+	      {
+	      setUploadState(z, 4); //mark each file as cancelled
+	      }
+
+	    on_finish();
+
+	    }
+
+	  }
+
+	}
+
+
+
+	/*
+	 * Run each file through the validation process
+	 */
+
+	function validateFile(upload_num)
+	{
+
+	  if (getUploadState(upload_num)!=1) //stop if upload has been cancelled
+	    return;
+
+	var file = null;
+
+	  if (files!=null) //HTML5
+	  {
+
+	    if (files[upload_num]!=undefined && files[upload_num]!=null)
+	    {
+	    file = files[upload_num];
+	    }
+	    else //shouldn't happen, unless the files parameter passed in the beginning is not valid, or the passed-by-reference files object has been changed
+	    {
+	    on_error(upload_num, { name: "InternalError", message: "There was an error uploading the file" });
+	    return;
+	    }
+
+	  }
+	  else
+	  {
+
+	    if (DOM_file.value=="")
+	    {
+	    on_error(upload_num, { name: "InternalError", message: "There was an error uploading the file" });
+	    return;
+	    }
+
+	  }
+
+	//it's okay for file to be null, which signifies lack of HTML5 support
+
+	//if certain information cannot be obtained because of a lack of support via javascript, these checks will return as valid by default, pending server-side checks after uploading
+
+	  if (allowed_exts.length > 0 && !validateFileExtension(allowed_exts, file))
+	  {
+	  on_error(upload_num, { name: "InvalidFileExtensionError", message: "That file format is not allowed" });
+	  return;
+	  }
+
+	  if (allowed_types.length > 0 && !validateFileMimeType(allowed_types, file))
+	  {
+	  on_error(upload_num, { name: "InvalidFileTypeError", message: "That file format is not allowed" });
+	  return;
+	  }
+
+	  if (max_file_size > 0 && !validateFileSize(max_file_size, file))
+	  {
+	  on_error(upload_num, { name: "MaxFileSizeError", message: "That file is too big" });
+	  return;
+	  }
+
+	//file passed validation checks
+
+	  if (hash_worker!=null && on_hash_complete!=null) //if hash worker and hash complete function are present, attempt hashing...
+	  {
+	  hashFile(upload_num);
+	  }
+	  else //skip hashing and continue to upload file...
+	  {
+	  uploadFile(upload_num);
+	  }
+
+	}
+
+
+
+	/*
+	 * If a hash is desired, complete the hashing
+	 */
+
+	function hashFile(upload_num)
+	{
+
+	  if (files!=null) //HTML5
+	  {
+
+	    if (files[upload_num]!=undefined && files[upload_num]!=null)
+	    {
+
+	      if (window.Worker) //if the Web Workers API is supported (without it, hashing may lock up the browser)
+	      {
+
+	      var file = files[upload_num];
+
+	        if (file.size!=undefined && file.size!=null && file.size!="" && isInt(file.size) && (file.slice || file.webkitSlice || file.mozSlice)) //check whether we've got the necessary HTML5 stuff
+	        {
+
+	          try {
+
+	            var worker = new Worker(hash_worker);
+
+	            worker.addEventListener('error', function(event){ //if anything goes wrong, just upload the file
+	              worker.terminate();
+	              private_upload_data[upload_num].hashWorker = null;
+	              uploadFile(upload_num);
+	            }, false);
+
+	            worker.addEventListener('message', function(event){
+	              if (event.data.result) {
+	                var hash = event.data.result;
+	                worker.terminate();
+	                private_upload_data[upload_num].hashWorker = null;
+	                checkHash(upload_num, hash); //hash was calculated successfully, now go check it
+	              }
+	            }, false);
+
+	            var buffer_size, block, reader, blob, handle_hash_block, handle_load_block;
+
+	            handle_load_block = function(event){
+	              worker.postMessage({
+	                'message' : event.target.result,
+	                'block' : block
+	              });
+	            };
+
+	            handle_hash_block = function(event){
+
+	              if (block.end !== file.size)
+	              {
+
+	              block.start += buffer_size;
+	              block.end += buffer_size;
+
+	                if (block.end > file.size)
+	                {
+	                block.end = file.size;
+	                }
+
+	              reader = new FileReader();
+	              reader.onload = handle_load_block;
+
+	                if (file.slice) {
+	                  blob = file.slice(block.start, block.end);
+	                } else if (file.webkitSlice) {
+	                  blob = file.webkitSlice(block.start, block.end);
+	                } else if (file.mozSlice) {
+	                  blob = file.mozSlice(block.start, block.end);
+	                }
+
+	              reader.readAsArrayBuffer(blob);
+
+	              }
+
+	            };
+
+	            buffer_size = 64 * 16 * 1024;
+
+	            block = {
+	              'file_size' : file.size,
+	              'start' : 0
+	            };
+
+	            block.end = buffer_size > file.size ? file.size : buffer_size;
+
+	            worker.addEventListener('message', handle_hash_block, false);
+
+	            reader = new FileReader();
+	            reader.onload = handle_load_block;
+
+	              if (file.slice) {
+	                blob = file.slice(block.start, block.end);
+	              } else if (file.webkitSlice) {
+	                blob = file.webkitSlice(block.start, block.end);
+	              } else if (file.mozSlice) {
+	                blob = file.mozSlice(block.start, block.end);
+	              }
+
+	            reader.readAsArrayBuffer(blob);
+
+	            private_upload_data[upload_num].hashWorker = worker; //store the worker to make it cancellable
+
+	            return;
+
+	          } catch(e) { //some unknown error occurred
+
+	          }
+
+	        } //else could not determine file size or could not use the File API's slice() method
+
+	      } //else the Web Workers API is not supported
+
+	    }
+
+	  }
+
+	uploadFile(upload_num);
+
+	}
+
+
+
+	/*
+	 * Once a hash is calculated, send the hash along with some callbacks to the hashComplete() callback
+	 */
+
+	function checkHash(upload_num, hash)
+	{
+
+	  if (getUploadState(upload_num)!=1) //stop if upload has been cancelled
+	    return;
+
+	//because on_hash_complete is likely to run an asynchronous ajax call, pass callbacks to the function in order to take action when ready
+
+	var callback_received = false; //only allow one callback to run once
+
+	var success_callback = function(data){
+	  if (getUploadState(upload_num)!=1) return false;
+	  if (callback_received) return false;
+	  callback_received = true;
+	  on_progress(upload_num, 100);
+	  on_success(upload_num, data);
+	  return true;
+	};
+
+	var proceed_callback = function(){
+	  if (getUploadState(upload_num)!=1) return false;
+	  if (callback_received) return false;
+	  callback_received = true;
+	  uploadFile(upload_num);
+	  return true;
+	};
+
+	var error_callback = function(error){
+	  if (getUploadState(upload_num)!=1) return false;
+	  if (callback_received) return false;
+	  callback_received = true;
+	  on_error(upload_num, { name: "HashError", message: error });
+	  return true;
+	};
+
+	on_hash_complete.call(upload_contexts[upload_num], hash, { success: success_callback, proceed: proceed_callback, error: error_callback }); //IE has issues with "continue" as property name
+
+	}
+
+
+
+	/*
+	 * Either after validation or a proceed() signal is received from the hash callback, continue to upload the file via AJAX
+	 */
+
+	function uploadFile(upload_num)
+	{
+
+	  if (getUploadState(upload_num)!=1) //stop if upload has been cancelled
+	    return;
+
+	  if (files!=null) //HTML5
+	  {
+
+	    if (files[upload_num]!=undefined && files[upload_num]!=null)
+	    {
+
+	      if (window.FormData)
+	      {
+
+	      var ajax_xhr = $.ajaxSettings.xhr();
+
+	        if (ajax_xhr.upload) //check if upload property exists in XMLHttpRequest object
+	        {
+
+	        var file = files[upload_num];
+
+	        var formData = new FormData();
+
+	        objectToFormData(formData, request_data);
+
+	        formData.append(request_file_name, file); //associate the file with options.name, the name of the DOM_file element, or "file" if one does not exist (in that order)
+
+	        var ajax_settings = { url: ajax_url, data: formData, type: 'post', cache: false, xhrFields: xhrFields, beforeSend: function(jqXHR, settings) {
+            
+            on_before_send(upload_num, jqXHR, settings);
+
+	          private_upload_data[upload_num].xhr = jqXHR; //store the jqXHR object to make the upload cancellable
+
+	        }, xhr: function() { //custom xhr
+
+	          ajax_xhr.upload.addEventListener('progress', function(e) {
+
+	            if (e.lengthComputable)
+	            {
+	            on_progress(upload_num, (e.loaded/e.total)*100);
+	            }
+
+	          }, false); // for handling the progress of the upload
+
+	          return ajax_xhr;
+
+	        }, error: function(xhr) {
+
+	          private_upload_data[upload_num].xhr = null;
+
+	          on_error(upload_num, { name: "RequestError", message: "Upload failed", xhr: xhr });
+
+	        }, success: function(data) {
+
+	          private_upload_data[upload_num].xhr = null;
+
+	          on_progress(upload_num, 100);
+	          on_success(upload_num, data);
+
+	        }, contentType: false, processData: false }; //options to tell JQuery not to process data or worry about content-type
+
+	          //if expect_type is "auto", let the ajax function determine the type of output based on the mime-type of the response, otherwise force it
+
+	          if (expect_type!="auto")
+	          {
+	          ajax_settings.dataType = expect_type;
+	          }
+
+	        $.ajax(ajax_settings); //execute ajax request
+
+	        return;
+
+	        }
+
+	      }
+
+	    }
+	    else
+	    {
+	    on_error(upload_num, { name: "InternalError", message: "There was an error uploading the file" });
+	    return;
+	    }
+
+	  }
+
+	  if (typeof DOM_file=="object" && DOM_file!==null) //FALLBACK TO IFRAME IF BROWSER NOT HTML5 CAPABLE
+	  {
+	  uploadFileFallback(upload_num);
+	  }
+	  else //can't do AJAX file upload, and we weren't given a DOM_file to fall back on (can be caused by a drag-n-drop operation where "files" was given but DOM_file was not)
+	  {
+	  on_error(upload_num, { name: "UnsupportedError", message: "Your browser does not support this upload method" });
+	  }
+
+	}
+
+
+
+	/*
+	 * If the browser does not support AJAX file uploads, fall back to the iframe method
+	 */
+
+	function uploadFileFallback(upload_num)
+	{
+
+	  /*
+	   * Limit uploads using the iframe method to 1 for the following reasons:
+	   * 1. To keep it consistent with the one-file-per-request structure
+	   * 2. To prevent confusingly long wait times on individual files because we must wait for all the files to be processed first
+	   */
+
+	  if (upload_num==0)
+	  {
+
+	  var iframe_id = simpleUpload.queueIframe({
+
+	    origin: getOrigin(ajax_url), //origin of ajax_url, in order to verify potential cross-domain request via postMessage() is secure
+
+	    expect: expect_type, //expected type of response
+
+	    complete: function(data){ //on complete
+
+	        if (getUploadState(upload_num)!=1) //stop if upload has been cancelled
+	          return;
+
+	      private_upload_data[upload_num].iframe = null;
+
+	      simpleUpload.dequeueIframe(iframe_id);
+
+	      on_progress(upload_num, 100);
+	      on_success(upload_num, data);
+
+	    },
+
+	    error: function(error){ //on error (since iframes can't catch HTTP status codes, this only happens on parsing error)
+
+	        if (getUploadState(upload_num)!=1) //stop if upload has been cancelled
+	          return;
+
+	      private_upload_data[upload_num].iframe = null;
+
+	      simpleUpload.dequeueIframe(iframe_id);
+
+	      on_error(upload_num, { name: "RequestError", message: error });
+
+	    }
+
+	  });
+
+	  private_upload_data[upload_num].iframe = iframe_id; //store the iframe id to make the upload cancellable
+
+	  //hook up hidden form with iframe and include request_data as hidden fields, then submit
+
+	  var upload_data = objectToInput(request_data);
+
+	  //add "_iframeUpload" parameter to ajax_url with id to iframe, and "_" parameter with current time in milliseconds to prevent caching
+	  hidden_form.attr("action", ajax_url + ((ajax_url.lastIndexOf("?")==-1) ? "?" : "&") + "_iframeUpload=" + iframe_id + "&_=" + (new Date()).getTime()).attr("target", "simpleUpload_iframe_" + iframe_id).prepend(upload_data).submit();
+
+	  }
+	  else
+	  {
+	  on_error(upload_num, { name: "UnsupportedError", message: "Multiple file uploads not supported" }); //it is very unlikely this error will ever be returned, if not impossible
+	  }
+
+	}
+
+
+
+	/*
+	 * Convert an object to hidden input fields (must return as string to maintain order)
+	 */
+
+	function objectToInput(obj, parent_node)
+	{
+
+	  if (parent_node===undefined || parent_node===null || parent_node==="")
+	  {
+	  parent_node = null;
+	  }
+
+	var html = "";
+
+	  for (var key in obj)
+	  {
+
+	    if (obj[key]===undefined || obj[key]===null)
+	    {
+	    html += $('<div>').append($('<input type="hidden">').attr("name", (parent_node==null) ? key + "" : parent_node + "[" + key + "]").val("")).html();
+	    }
+	    else if (typeof obj[key]=="object")
+	    {
+	    html += objectToInput(obj[key], (parent_node==null) ? key + "" : parent_node + "[" + key + "]");
+	    }
+	    else if (typeof obj[key]=="boolean")
+	    {
+	    html += $('<div>').append($('<input type="hidden">').attr("name", (parent_node==null) ? key + "" : parent_node + "[" + key + "]").val((obj[key]) ? "true" : "false")).html();
+	    }
+	    else if (typeof obj[key]=="number")
+	    {
+	    html += $('<div>').append($('<input type="hidden">').attr("name", (parent_node==null) ? key + "" : parent_node + "[" + key + "]").val(obj[key] + "")).html();
+	    }
+	    else if (typeof obj[key]=="string")
+	    {
+	    html += $('<div>').append($('<input type="hidden">').attr("name", (parent_node==null) ? key + "" : parent_node + "[" + key + "]").val(obj[key])).html();
+	    }
+
+	  }
+
+	return html;
+
+	}
+
+
+
+	/*
+	 * Append each key/value pair in an object to a formData object
+	 */
+
+	function objectToFormData(formData, obj, parent_node)
+	{
+
+	  if (parent_node===undefined || parent_node===null || parent_node==="")
+	  {
+	  parent_node = null;
+	  }
+
+	  for (var key in obj)
+	  {
+
+	    if (obj[key]===undefined || obj[key]===null)
+	    {
+	    formData.append((parent_node==null) ? key + "" : parent_node + "[" + key + "]", "");
+	    }
+	    else if (typeof obj[key]=="object")
+	    {
+	    objectToFormData(formData, obj[key], (parent_node==null) ? key + "" : parent_node + "[" + key + "]");
+	    }
+	    else if (typeof obj[key]=="boolean")
+	    {
+	    formData.append((parent_node==null) ? key + "" : parent_node + "[" + key + "]", (obj[key]) ? "true" : "false");
+	    }
+	    else if (typeof obj[key]=="number")
+	    {
+	    formData.append((parent_node==null) ? key + "" : parent_node + "[" + key + "]", obj[key] + "");
+	    }
+	    else if (typeof obj[key]=="string")
+	    {
+	    formData.append((parent_node==null) ? key + "" : parent_node + "[" + key + "]", obj[key]);
+	    }
+
+	  }
+
+	}
+
+
+
+	/*
+	 * Get/set state in number form and text form in private_upload_data and upload_contexts
+	 */
+
+	function getUploadState(upload_num)
+	{
+	return private_upload_data[upload_num].state;
+	}
+
+	function setUploadState(upload_num, state)
+	{
+
+	var textState = "";
+
+	  if (state==0)
+	    textState = "init";
+	  else if (state==1)
+	    textState = "uploading";
+	  else if (state==2)
+	    textState = "success";
+	  else if (state==3)
+	    textState = "error";
+	  else if (state==4)
+	    textState = "cancel";
+	  else
+	    return false;
+
+	private_upload_data[upload_num].state = state; //for internal use
+
+	upload_contexts[upload_num].upload.state = textState; //for public use
+
+	}
+
+
+
+	/*
+	 * Get the extension of a filename
+	 */
+
+	function getFileExtension(filename)
+	{
+	var filename_dot_pos = filename.lastIndexOf('.');
+	return (filename_dot_pos!=-1) ? filename.substr(filename_dot_pos + 1) : "";
+	}
+
+
+
+	/*
+	 * Validate file extension and return true if valid (if not sure, assume it's valid)
+	 */
+
+	function validateFileExtension(valid_exts, file)
+	{
+
+	  if (file!=undefined && file!=null) //if file is specified (would require HTML5)
+	  {
+
+	  var file_name = file.name;
+
+	    if (file_name!=undefined && file_name!=null && file_name!="") //the browser could return an empty value, even if it's a legit upload
+	    {
+
+	    var file_ext = getFileExtension(file_name).toLowerCase();
+
+	      if (file_ext!="") //extension exists
+	      {
+
+	      var valid_ext = false;
+
+	        for (var i in valid_exts)
+	        {
+
+	          if (valid_exts[i].toLowerCase()==file_ext)
+	          {
+	          valid_ext = true;
+	          break;
+	          }
+
+	        }
+
+	        if (valid_ext)
+	        {
+	        return true;
+	        }
+	        else
+	        {
+	        return false;
+	        }
+
+	      }
+	      else
+	      {
+	      return false;
+	      }
+
+	    }
+
+	  }
+
+	//if the HTML5 check fails, fallback to the old-school way (won't support multiple file uploads)
+
+	  if (typeof DOM_file=="object" && DOM_file!==null)
+	  {
+
+	  var DOM_file_name = DOM_file.value;
+
+	    if (DOM_file_name!="")
+	    {
+
+	    var file_ext = getFileExtension(DOM_file_name).toLowerCase();
+
+	      if (file_ext!="")
+	      {
+
+	      var valid_ext = false;
+
+	        for (var i in valid_exts)
+	        {
+
+	          if (valid_exts[i].toLowerCase()==file_ext)
+	          {
+	          valid_ext = true;
+	          break;
+	          }
+
+	        }
+
+	        if (valid_ext)
+	        {
+	        return true;
+	        }
+
+	      }
+
+	    }
+
+	  }
+	  else
+	  {
+	  return true; //we can't check DOM_file or file, so assume it's valid (could occur during a drag-n-drop operation where we are only given the file, but perhaps the browser won't give us a filename)
+	  }
+
+	return false;
+
+	}
+
+
+
+	/*
+	 * Validate file mime-type and return true if valid (if not sure, assume it's valid)
+	 */
+
+	function validateFileMimeType(valid_mime_types, file)
+	{
+
+	  if (file!=undefined && file!=null) //if file is specified (would require HTML5)
+	  {
+
+	  var file_mime_type = file.type;
+
+	    if (file_mime_type!=undefined && file_mime_type!=null && file_mime_type!="") //the browser could return an empty value, even if it's a legit upload
+	    {
+
+	    file_mime_type = file_mime_type.toLowerCase();
+
+	    var valid_mime_type = false;
+
+	      for (var i in valid_mime_types)
+	      {
+
+	        if (valid_mime_types[i].toLowerCase()==file_mime_type)
+	        {
+	        valid_mime_type = true;
+	        break;
+	        }
+
+	      }
+
+	      if (valid_mime_type)
+	      {
+	      return true;
+	      }
+	      else
+	      {
+	      return false;
+	      }
+
+	    }
+
+	  }
+
+	return true; //we can only check the mime-type if the browser has the HTML5 File API, so if that fails, it may be a valid upload for all we know
+
+	}
+
+
+
+	/*
+	 * Validate file size in bytes and return true if valid (if not sure, assume it's valid)
+	 */
+
+	function validateFileSize(max_size, file)
+	{
+
+	  if (file!=undefined && file!=null) //if file is specified (would require HTML5)
+	  {
+
+	  var file_size = file.size;
+
+	    if (file_size!=undefined && file_size!=null && file_size!="" && isInt(file_size)) //the browser could return an empty value, even if it's a legit upload
+	    {
+
+	      if (file_size <= max_size) //must be less than or equal to max_size (in bytes)
+	      {
+	      return true;
+	      }
+	      else
+	      {
+	      return false;
+	      }
+
+	    }
+
+	  }
+
+	return true; //we can only check the file size if the browser has the HTML5 File API, so if that fails, it may be a valid upload for all we know
+
+	}
+
+
+
+	/*
+	 * Input filtering function
+	 */
+
+	function isInt(num)
+	{
+
+	  if (!isNaN(num))
+	  {
+
+	    if ((parseInt(num)+"")==num)
+	    {
+	    return true;
+	    }
+
+	  }
+
+	return false;
+
+	}
+
+
+
+	/*
+	 * Get the "origin" of a URL (e.g. http://example.org:8080). Used for verifying the identity of messages received via postMessage().
+	 */
+
+	function getOrigin(url)
+	{
+
+	var a = document.createElement('a');
+	a.href = url;
+
+	var host = a.host;
+	var protocol = a.protocol;
+
+	  if (host=="")
+	    host = window.location.host;
+
+	  if (protocol=="" || protocol==":") //for protocol-relative URLs, sometimes IE will return ":"
+	    protocol = window.location.protocol;
+
+	return protocol.replace(/\:$/, '') + "://" + host; //normalize colon in protocol in case of browser inconsistencies
+
+	}
+
+
+
+create();
+
+
+
+}
+
+
+
+/*
+ * Global variables and functions that need to be maintained throughout upload instances
+ */
+
+simpleUpload.maxUploads = 10; //maximum amount of simultaneous uploads
+simpleUpload.activeUploads = 0; //keep track of active uploads
+
+simpleUpload.uploads = []; //multi-dimensional array containing the id's and callbacks of all remaining file uploads
+
+simpleUpload.iframes = {}; //"associative array" where the iframe id is the key
+simpleUpload.iframeCount = 0; //more efficient way to keep track of the number of iframes
+
+/*
+ * When an upload is started, it is first put into a global queue to ensure the browser isn't under too heavy a load.
+ * These functions are used to add and subtract uploads to/from the queue.
+ */
+
+simpleUpload.queueUpload = function(remaining_uploads, upload_callback){ //queue upload instance (an instance is a set of files to upload after each file selection)
+
+  simpleUpload.uploads[simpleUpload.uploads.length] = { uploads: remaining_uploads, callback: upload_callback };
+
+};
+
+simpleUpload.uploadNext = function(){
+
+    if (simpleUpload.uploads.length > 0 && simpleUpload.activeUploads < simpleUpload.maxUploads) //there are remaining uploads and we haven't hit the limit of max simultaneous uploads yet
+    {
+
+    var upload_instance = simpleUpload.uploads[0];
+
+    var upload_callback = upload_instance.callback;
+    var upload_num = upload_instance.uploads.splice(0, 1)[0];
+
+      if (upload_instance.uploads.length==0)
+      {
+      simpleUpload.uploads.splice(0, 1);
+      }
+
+    simpleUpload.activeUploads++;
+    upload_callback(upload_num);
+
+    simpleUpload.uploadNext();
+
+    }
+
+};
+
+/*
+ * Used to track iframes during an upload
+ */
+
+simpleUpload.queueIframe = function(opts){
+
+  var id = 0;
+
+    while (id==0 || id in simpleUpload.iframes)
+    {
+    id = Math.floor((Math.random()*999999999)+1); //generate unique id for iframe
+    }
+
+  simpleUpload.iframes[id] = opts; //an object containing data and callbacks that refer back to the originating upload instance
+  simpleUpload.iframeCount++;
+
+  $('body').append('<iframe name="simpleUpload_iframe_' + id + '" style="display: none;"></iframe>');
+
+  return id;
+
+};
+
+simpleUpload.dequeueIframe = function(id){
+
+    if (id in simpleUpload.iframes)
+    {
+
+    $('iframe[name=simpleUpload_iframe_' + id + ']').remove(); //remove iframe from the DOM
+
+    delete simpleUpload.iframes[id];
+    simpleUpload.iframeCount--;
+
+    }
+
+};
+
+/*
+ * Negotiate the correct data type and return the data in the proper format
+ *
+ * expected_type: as declared by the upload instance's "expect" parameter
+ * declared_type: the type defined in the iframe during callback
+ * data: data as it was passed in the callback, may be a string, object, or object encoded as a string
+ */
+
+simpleUpload.convertDataType = function(expected_type, declared_type, data){
+
+  var type = "auto"; //ultimate type to return data as
+
+    if (expected_type=="auto") //if expected type is auto, base the type on the declared type
+    {
+
+      if (typeof declared_type=="string" && declared_type!="")
+      {
+
+      var lower_type = declared_type.toLowerCase();
+      var valid_types = ["json", "xml", "html", "script", "text"];
+
+        for (var x in valid_types)
+        {
+
+          if (valid_types[x]==lower_type)
+          {
+          type = lower_type; //only set if value is one of the types above
+          break;
+          }
+
+        }
+
+      }
+
+    }
+    else //force the type to be the expected type
+    {
+    type = expected_type;
+    }
+
+    /*
+     * Attempt to keep data conversions similar to that of jQuery's $.ajax() function to stay consistent
+     * See "dataType" setting: http://api.jquery.com/jquery.ajax/
+     */
+
+    if (type=="auto") //type could not be determined, so pass data back as object if it is an object, or string otherwise
+    {
+
+    // Output: string, object, null
+
+      if (typeof data=="undefined")
+      {
+      return ""; //if data was not set, return an empty string
+      }
+
+      if (typeof data=="object")
+      {
+      return data; //if object, return as object (allow null)
+      }
+
+    return String(data); //if anything else, convert it to a string and return the string value
+
+    }
+    else if (type=="json")
+    {
+
+    // Output: object, null
+
+      if (typeof data=="undefined" || data===null)
+      {
+      return null;
+      }
+
+      if (typeof data=="object")
+      {
+      return data; //if already an object, pass it right through
+      }
+
+      if (typeof data=="string")
+      {
+
+        try {
+
+          return $.parseJSON(data); //JSON is valid, return object or null
+
+        } catch(e) {
+
+          return false; //JSON not valid
+
+        }
+
+      }
+
+    return false; //data could not possibly be a valid JSON object or string
+
+    }
+    else if (type=="xml")
+    {
+
+    // Output: object (XMLDoc), null
+
+      if (typeof data=="undefined" || data===null)
+      {
+      return null;
+      }
+
+      if (typeof data=="string")
+      {
+
+        try {
+
+          return $.parseXML(data); //XML is valid, return object (native XMLDocument object) or null
+
+        } catch(e) {
+
+          return false; //XML is not valid
+
+        }
+
+      }
+
+    return false; //data is not a string containing valid XML
+
+    }
+    else if (type=="script")
+    {
+
+    // Output: string
+
+      if (typeof data=="undefined")
+      {
+      return "";
+      }
+
+      if (typeof data=="string")
+      {
+
+        try {
+
+          $.globalEval(data); //execute script in the global scope
+
+          return data; //return script as string
+
+        } catch(e) {
+
+          return false; //there was an error while executing the script with $.globalEval() - the script still may have run partially, but this is consistent behavior with $.ajax()
+
+        }
+
+      }
+
+    return false; //data is not a string containing script to execute
+
+    }
+    else //if type is html or text, return as plain text...
+    {
+
+    // Output: string
+
+      if (typeof data=="undefined")
+      {
+      return "";
+      }
+
+    return String(data); //convert data to string, regardless of data type
+
+    }
+
+};
+
+/*
+ * Callbacks to pass data back from an iframe, with the first applying to same-domain exchanges and the second to cross-domain exchanges using postMessage()
+ */
+
+simpleUpload.iframeCallback = function(data){
+
+    if (typeof data=="object" && data!==null)
+    {
+
+    var id = data.id;
+
+      if (id in simpleUpload.iframes)
+      {
+
+      var converted_data = simpleUpload.convertDataType(simpleUpload.iframes[id].expect, data.type, data.data);
+
+        if (converted_data!==false)
+        {
+        simpleUpload.iframes[id].complete(converted_data);
+        }
+        else
+        {
+        simpleUpload.iframes[id].error("Upload failed");
+        }
+
+      }
+
+    }
+
+};
+
+simpleUpload.postMessageCallback = function(e){
+
+    try {
+
+      var key = e.message ? "message" : "data";
+      var data = e[key];
+
+        if (typeof data=="string" && data!="") //data was passed as string
+        {
+
+        data = $.parseJSON(data); //convert JSON string to object (throws error on malformed JSON for jQuery >= 1.9, can return null if data is empty string, null, or undefined for older versions of jQuery)
+
+          if (typeof data=="object" && data!==null) //data is now an object
+          {
+
+            //since window.addEventListener casts a large net for all messages, make sure this one is intended for us...
+
+            if (typeof data.namespace=="string" && data.namespace=="simpleUpload")
+            {
+
+            //from now on, we can assume the message was meant for us, but NOT that it was delivered from a trusted source
+
+            var id = data.id;
+
+              if (id in simpleUpload.iframes) //id is valid
+              {
+
+                if (e.origin===simpleUpload.iframes[id].origin)
+                {
+
+                //origin of postMessage() is consistent with the origin of the URL to which the request was made, now we can trust the source
+
+                //now determine the correct type of output and pass our data...
+
+                var converted_data = simpleUpload.convertDataType(simpleUpload.iframes[id].expect, data.type, data.data);
+
+                  if (converted_data!==false)
+                  {
+                  simpleUpload.iframes[id].complete(converted_data);
+                  }
+                  else
+                  {
+                  simpleUpload.iframes[id].error("Upload failed");
+                  }
+
+                }
+
+              }
+
+            }
+
+          }
+
+        }
+
+    } catch(e) {
+
+      //an error was thrown, could be the JSON data was unparsable
+
+    }
+
+};
+
+
+
+// Listen for messages arriving over iframe using postMessage()
+
+if (window.addEventListener) window.addEventListener("message", simpleUpload.postMessageCallback, false);
+else window.attachEvent("onmessage", simpleUpload.postMessageCallback);
+
+
+
+/*
+ * jQuery plugin for simpleUpload
+ */
+
+(function (factory) {
+
+  if (true) {
+    // AMD. Register as an anonymous module.
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(1)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else if (typeof exports==="object") {
+    // Node/CommonJS
+    module.exports = factory(require("jquery"));
+  } else {
+    // Browser globals
+    factory(jQuery);
+  }
+
+}(function ($) {
+
+  //the main call
+
+  $.fn.simpleUpload = function(url, opts){
+
+    //if calling with $.fn.simpleUpload() and the "files" option is present, go ahead and pass it along...
+
+  	if ($(this).length==0) {
+  	  if (typeof opts=="object" && opts!==null && typeof opts.files=="object" && opts.files!==null) {
+  	    new simpleUpload(url, null, opts);
+  	    return this;
+  	  }
+  	}
+
+    //likely being used in a chain
+
+    return this.each(function(){
+      new simpleUpload(url, this, opts);
+    });
+
+  };
+
+  //allow getting/setting the simpleUpload.maxUploads variable
+
+  $.fn.simpleUpload.maxSimultaneousUploads = function(num){
+
+    if (typeof num==="undefined") {
+      return simpleUpload.maxUploads;
+    } else if (typeof num==="number" && num > 0) {
+      simpleUpload.maxUploads = num;
+      return this;
+    }
+
+  };
+
+}));
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10752,19 +12500,19 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var settle = __webpack_require__(21);
-var buildURL = __webpack_require__(23);
-var parseHeaders = __webpack_require__(24);
-var isURLSameOrigin = __webpack_require__(25);
-var createError = __webpack_require__(5);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(26);
+var settle = __webpack_require__(22);
+var buildURL = __webpack_require__(24);
+var parseHeaders = __webpack_require__(25);
+var isURLSameOrigin = __webpack_require__(26);
+var createError = __webpack_require__(6);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(27);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -10861,7 +12609,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(27);
+      var cookies = __webpack_require__(28);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -10939,13 +12687,13 @@ module.exports = function xhrAdapter(config) {
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var enhanceError = __webpack_require__(22);
+var enhanceError = __webpack_require__(23);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -10964,7 +12712,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10976,7 +12724,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11002,23 +12750,23 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(9);
-module.exports = __webpack_require__(41);
+__webpack_require__(10);
+module.exports = __webpack_require__(45);
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fortawesome_fontawesome__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fortawesome_fontawesome_free_regular__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__fortawesome_fontawesome_free_solid__ = __webpack_require__(48);
-__webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fortawesome_fontawesome__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__fortawesome_fontawesome_free_regular__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__fortawesome_fontawesome_free_solid__ = __webpack_require__(38);
+__webpack_require__(11);
 
 
 
@@ -11027,21 +12775,26 @@ __webpack_require__(10);
 __WEBPACK_IMPORTED_MODULE_0__fortawesome_fontawesome__["a" /* default */].library.add(__WEBPACK_IMPORTED_MODULE_1__fortawesome_fontawesome_free_regular__["a" /* default */]);
 __WEBPACK_IMPORTED_MODULE_0__fortawesome_fontawesome__["a" /* default */].library.add(__WEBPACK_IMPORTED_MODULE_2__fortawesome_fontawesome_free_solid__["a" /* default */]);
 
-__webpack_require__(35);
-__webpack_require__(36);
-__webpack_require__(37);
-__webpack_require__(38);
 __webpack_require__(39);
 __webpack_require__(40);
+__webpack_require__(41);
+__webpack_require__(42);
+__webpack_require__(43);
+__webpack_require__(44);
+__webpack_require__(3);
+__webpack_require__(52);
 
 window.view = $('meta[name=view]').attr("content");
+window.csrf_token = $('meta[name="csrf-token"]').attr('content');
+
+__webpack_require__(51);
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(11);
+window._ = __webpack_require__(12);
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -11050,9 +12803,9 @@ window._ = __webpack_require__(11);
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(2);
+  window.$ = window.jQuery = __webpack_require__(1);
 
-  __webpack_require__(14);
+  __webpack_require__(15);
 } catch (e) {}
 
 /**
@@ -11061,7 +12814,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(15);
+window.axios = __webpack_require__(16);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -11095,7 +12848,7 @@ if (token) {
 // });
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -28184,10 +29937,10 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12), __webpack_require__(13)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13), __webpack_require__(14)(module)))
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports) {
 
 var g;
@@ -28214,7 +29967,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -28242,7 +29995,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports) {
 
 /*!
@@ -30625,22 +32378,22 @@ if (typeof jQuery === 'undefined') {
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(16);
+module.exports = __webpack_require__(17);
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var bind = __webpack_require__(3);
-var Axios = __webpack_require__(18);
-var defaults = __webpack_require__(1);
+var bind = __webpack_require__(4);
+var Axios = __webpack_require__(19);
+var defaults = __webpack_require__(2);
 
 /**
  * Create an instance of Axios
@@ -30673,15 +32426,15 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(7);
-axios.CancelToken = __webpack_require__(33);
-axios.isCancel = __webpack_require__(6);
+axios.Cancel = __webpack_require__(8);
+axios.CancelToken = __webpack_require__(34);
+axios.isCancel = __webpack_require__(7);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(34);
+axios.spread = __webpack_require__(35);
 
 module.exports = axios;
 
@@ -30690,7 +32443,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports) {
 
 /*!
@@ -30717,18 +32470,18 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var defaults = __webpack_require__(1);
+var defaults = __webpack_require__(2);
 var utils = __webpack_require__(0);
-var InterceptorManager = __webpack_require__(28);
-var dispatchRequest = __webpack_require__(29);
-var isAbsoluteURL = __webpack_require__(31);
-var combineURLs = __webpack_require__(32);
+var InterceptorManager = __webpack_require__(29);
+var dispatchRequest = __webpack_require__(30);
+var isAbsoluteURL = __webpack_require__(32);
+var combineURLs = __webpack_require__(33);
 
 /**
  * Create a new instance of Axios
@@ -30810,7 +32563,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -31000,7 +32753,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31019,13 +32772,13 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var createError = __webpack_require__(5);
+var createError = __webpack_require__(6);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -31052,7 +32805,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31080,7 +32833,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31155,7 +32908,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31199,7 +32952,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31274,7 +33027,7 @@ module.exports = (
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31317,7 +33070,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31377,7 +33130,7 @@ module.exports = (
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31436,16 +33189,16 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var transformData = __webpack_require__(30);
-var isCancel = __webpack_require__(6);
-var defaults = __webpack_require__(1);
+var transformData = __webpack_require__(31);
+var isCancel = __webpack_require__(7);
+var defaults = __webpack_require__(2);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -31522,7 +33275,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31549,7 +33302,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31570,7 +33323,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31591,13 +33344,13 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Cancel = __webpack_require__(7);
+var Cancel = __webpack_require__(8);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -31655,7 +33408,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31689,1783 +33442,7 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 35 */
-/***/ (function(module, exports) {
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-!function ($) {
-
-  /* CHECKBOX PUBLIC CLASS DEFINITION
-   * ============================== */
-
-  var Checkbox = function Checkbox(element, options) {
-    this.init(element, options);
-  };
-
-  Checkbox.prototype = {
-
-    constructor: Checkbox,
-
-    init: function init(element, options) {
-      var $el = this.$element = $(element);
-
-      this.options = $.extend({}, $.fn.checkbox.defaults, options);
-      $el.before(this.options.template);
-      this.setState();
-    },
-
-    setState: function setState() {
-      var $el = this.$element,
-          $parent = $el.closest('.checkbox');
-
-      $el.prop('disabled') && $parent.addClass('disabled');
-      $el.prop('checked') && $parent.addClass('checked');
-    },
-
-    toggle: function toggle() {
-      var ch = 'checked',
-          $el = this.$element,
-          $parent = $el.closest('.checkbox'),
-          checked = $el.prop(ch),
-          e = $.Event('toggle');
-
-      if ($el.prop('disabled') == false) {
-        $parent.toggleClass(ch) && checked ? $el.removeAttr(ch) : $el.prop(ch, ch);
-        $el.trigger(e).trigger('change');
-      }
-    },
-
-    setCheck: function setCheck(option) {
-      var d = 'disabled',
-          ch = 'checked',
-          $el = this.$element,
-          $parent = $el.closest('.checkbox'),
-          checkAction = option == 'check' ? true : false,
-          e = $.Event(option);
-
-      $parent[checkAction ? 'addClass' : 'removeClass'](ch) && checkAction ? $el.prop(ch, ch) : $el.removeAttr(ch);
-      $el.trigger(e).trigger('change');
-    }
-
-    /* CHECKBOX PLUGIN DEFINITION
-     * ======================== */
-
-  };var old = $.fn.checkbox;
-
-  $.fn.checkbox = function (option) {
-    return this.each(function () {
-      var $this = $(this),
-          data = $this.data('checkbox'),
-          options = $.extend({}, $.fn.checkbox.defaults, $this.data(), (typeof option === 'undefined' ? 'undefined' : _typeof(option)) == 'object' && option);
-      if (!data) $this.data('checkbox', data = new Checkbox(this, options));
-      if (option == 'toggle') data.toggle();
-      if (option == 'check' || option == 'uncheck') data.setCheck(option);else if (option) data.setState();
-    });
-  };
-
-  $.fn.checkbox.defaults = {
-    template: '<span class="icons"><span class="first-icon fa fa-square fa-base"></span><span class="second-icon fa fa-check-square fa-base"></span></span>'
-
-    /* CHECKBOX NO CONFLICT
-     * ================== */
-
-  };$.fn.checkbox.noConflict = function () {
-    $.fn.checkbox = old;
-    return this;
-  };
-
-  /* CHECKBOX DATA-API
-   * =============== */
-
-  $(document).on('click.checkbox.data-api', '[data-toggle^=checkbox], .checkbox', function (e) {
-    var $checkbox = $(e.target);
-    if (e.target.tagName != "A") {
-      e && e.preventDefault() && e.stopPropagation();
-      if (!$checkbox.hasClass('checkbox')) $checkbox = $checkbox.closest('.checkbox');
-      $checkbox.find(':checkbox').checkbox('toggle');
-    }
-  });
-
-  $(function () {
-    $('input[type="checkbox"]').each(function () {
-      var $checkbox = $(this);
-      $checkbox.checkbox();
-    });
-  });
-}(window.jQuery);
-
-/* =============================================================
- * flatui-radio v0.0.3
- * ============================================================ */
-
-!function ($) {
-
-  /* RADIO PUBLIC CLASS DEFINITION
-   * ============================== */
-
-  var Radio = function Radio(element, options) {
-    this.init(element, options);
-  };
-
-  Radio.prototype = {
-
-    constructor: Radio,
-
-    init: function init(element, options) {
-      var $el = this.$element = $(element);
-
-      this.options = $.extend({}, $.fn.radio.defaults, options);
-      $el.before(this.options.template);
-      this.setState();
-    },
-
-    setState: function setState() {
-      var $el = this.$element,
-          $parent = $el.closest('.radio');
-
-      $el.prop('disabled') && $parent.addClass('disabled');
-      $el.prop('checked') && $parent.addClass('checked');
-    },
-
-    toggle: function toggle() {
-      var d = 'disabled',
-          ch = 'checked',
-          $el = this.$element,
-          checked = $el.prop(ch),
-          $parent = $el.closest('.radio'),
-          $parentWrap = $el.closest('form').length ? $el.closest('form') : $el.closest('body'),
-          $elemGroup = $parentWrap.find(':radio[name="' + $el.attr('name') + '"]'),
-          e = $.Event('toggle');
-
-      if ($el.prop(d) == false) {
-        $elemGroup.not($el).each(function () {
-          var $el = $(this),
-              $parent = $(this).closest('.radio');
-
-          if ($el.prop(d) == false) {
-            $parent.removeClass(ch) && $el.removeAttr(ch).trigger('change');
-          }
-        });
-
-        if (checked == false) $parent.addClass(ch) && $el.prop(ch, true);
-        $el.trigger(e);
-
-        if (checked !== $el.prop(ch)) {
-          $el.trigger('change');
-        }
-      }
-    },
-
-    setCheck: function setCheck(option) {
-      var ch = 'checked',
-          $el = this.$element,
-          $parent = $el.closest('.radio'),
-          checkAction = option == 'check' ? true : false,
-          checked = $el.prop(ch),
-          $parentWrap = $el.closest('form').length ? $el.closest('form') : $el.closest('body'),
-          $elemGroup = $parentWrap.find(':radio[name="' + $el['attr']('name') + '"]'),
-          e = $.Event(option);
-
-      $elemGroup.not($el).each(function () {
-        var $el = $(this),
-            $parent = $(this).closest('.radio');
-
-        $parent.removeClass(ch) && $el.removeAttr(ch);
-      });
-
-      $parent[checkAction ? 'addClass' : 'removeClass'](ch) && checkAction ? $el.prop(ch, ch) : $el.removeAttr(ch);
-      $el.trigger(e);
-
-      if (checked !== $el.prop(ch)) {
-        $el.trigger('change');
-      }
-    }
-
-    /* RADIO PLUGIN DEFINITION
-     * ======================== */
-
-  };var old = $.fn.radio;
-
-  $.fn.radio = function (option) {
-    return this.each(function () {
-      var $this = $(this),
-          data = $this.data('radio'),
-          options = $.extend({}, $.fn.radio.defaults, $this.data(), (typeof option === 'undefined' ? 'undefined' : _typeof(option)) == 'object' && option);
-      if (!data) $this.data('radio', data = new Radio(this, options));
-      if (option == 'toggle') data.toggle();
-      if (option == 'check' || option == 'uncheck') data.setCheck(option);else if (option) data.setState();
-    });
-  };
-
-  $.fn.radio.defaults = {
-    template: '<span class="icons"><span class="first-icon fa fa-circle-o fa-base"></span><span class="second-icon fa fa-dot-circle-o fa-base"></span></span>'
-
-    /* RADIO NO CONFLICT
-     * ================== */
-
-  };$.fn.radio.noConflict = function () {
-    $.fn.radio = old;
-    return this;
-  };
-
-  /* RADIO DATA-API
-   * =============== */
-
-  $(document).on('click.radio.data-api', '[data-toggle^=radio], .radio', function (e) {
-    var $radio = $(e.target);
-    e && e.preventDefault() && e.stopPropagation();
-    if (!$radio.hasClass('radio')) $radio = $radio.closest('.radio');
-    $radio.find(':radio').radio('toggle');
-  });
-
-  $(function () {
-    $('input[type="radio"]').each(function () {
-      var $radio = $(this);
-      $radio.radio();
-    });
-  });
-}(window.jQuery);
-
-/***/ }),
 /* 36 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-/*
-    
-    
-
-     Creative Tim Modifications
-     
-     Lines: 239, 240 was changed from top: 5px to top: 50% and we added margin-top: -13px. In this way the close button will be aligned vertically 
-     Line:242 - modified when the icon is set, we add the class "alert-with-icon", so there will be enough space for the icon.
-
-
-
-
-*/
-
-/*
-* Project: Bootstrap Notify = v3.1.5
-* Description: Turns standard Bootstrap alerts into "Growl-like" notifications.
-* Author: Mouse0270 aka Robert McIntosh
-* License: MIT License
-* Website: https://github.com/mouse0270/bootstrap-growl
-*/
-
-/* global define:false, require: false, jQuery:false */
-
-(function (factory) {
-	if (true) {
-		// AMD. Register as an anonymous module.
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(2)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	} else if ((typeof exports === 'undefined' ? 'undefined' : _typeof(exports)) === 'object') {
-		// Node/CommonJS
-		factory(require('jquery'));
-	} else {
-		// Browser globals
-		factory(jQuery);
-	}
-})(function ($) {
-	// Create the defaults once
-	var defaults = {
-		element: 'body',
-		position: null,
-		type: "info",
-		allow_dismiss: true,
-		allow_duplicates: true,
-		newest_on_top: false,
-		showProgressbar: false,
-		placement: {
-			from: "top",
-			align: "right"
-		},
-		offset: 20,
-		spacing: 10,
-		z_index: 1031,
-		delay: 5000,
-		timer: 1000,
-		url_target: '_blank',
-		mouse_over: null,
-		animate: {
-			enter: 'animated fadeInDown',
-			exit: 'animated fadeOutUp'
-		},
-		onShow: null,
-		onShown: null,
-		onClose: null,
-		onClosed: null,
-		icon_type: 'class',
-		template: '<div data-notify="container" class="col-xs-11 col-sm-4 alert alert-{0}" role="alert"><button type="button" aria-hidden="true" class="close" data-notify="dismiss">&times;</button><span data-notify="icon"></span> <span data-notify="title">{1}</span> <span data-notify="message">{2}</span><div class="progress" data-notify="progressbar"><div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div></div><a href="{3}" target="{4}" data-notify="url"></a></div>'
-	};
-
-	String.format = function () {
-		var str = arguments[0];
-		for (var i = 1; i < arguments.length; i++) {
-			str = str.replace(RegExp("\\{" + (i - 1) + "\\}", "gm"), arguments[i]);
-		}
-		return str;
-	};
-
-	function isDuplicateNotification(notification) {
-		var isDupe = false;
-
-		$('[data-notify="container"]').each(function (i, el) {
-			var $el = $(el);
-			var title = $el.find('[data-notify="title"]').text().trim();
-			var message = $el.find('[data-notify="message"]').html().trim();
-
-			// The input string might be different than the actual parsed HTML string!
-			// (<br> vs <br /> for example)
-			// So we have to force-parse this as HTML here!
-			var isSameTitle = title === $("<div>" + notification.settings.content.title + "</div>").html().trim();
-			var isSameMsg = message === $("<div>" + notification.settings.content.message + "</div>").html().trim();
-			var isSameType = $el.hasClass('alert-' + notification.settings.type);
-
-			if (isSameTitle && isSameMsg && isSameType) {
-				//we found the dupe. Set the var and stop checking.
-				isDupe = true;
-			}
-			return !isDupe;
-		});
-
-		return isDupe;
-	}
-
-	function Notify(element, content, options) {
-		// Setup Content of Notify
-		var contentObj = {
-			content: {
-				message: (typeof content === 'undefined' ? 'undefined' : _typeof(content)) === 'object' ? content.message : content,
-				title: content.title ? content.title : '',
-				icon: content.icon ? content.icon : '',
-				url: content.url ? content.url : '#',
-				target: content.target ? content.target : '-'
-			}
-		};
-
-		options = $.extend(true, {}, contentObj, options);
-		this.settings = $.extend(true, {}, defaults, options);
-		this._defaults = defaults;
-		if (this.settings.content.target === "-") {
-			this.settings.content.target = this.settings.url_target;
-		}
-		this.animations = {
-			start: 'webkitAnimationStart oanimationstart MSAnimationStart animationstart',
-			end: 'webkitAnimationEnd oanimationend MSAnimationEnd animationend'
-		};
-
-		if (typeof this.settings.offset === 'number') {
-			this.settings.offset = {
-				x: this.settings.offset,
-				y: this.settings.offset
-			};
-		}
-
-		//if duplicate messages are not allowed, then only continue if this new message is not a duplicate of one that it already showing
-		if (this.settings.allow_duplicates || !this.settings.allow_duplicates && !isDuplicateNotification(this)) {
-			this.init();
-		}
-	}
-
-	$.extend(Notify.prototype, {
-		init: function init() {
-			var self = this;
-
-			this.buildNotify();
-			if (this.settings.content.icon) {
-				this.setIcon();
-			}
-			if (this.settings.content.url != "#") {
-				this.styleURL();
-			}
-			this.styleDismiss();
-			this.placement();
-			this.bind();
-
-			this.notify = {
-				$ele: this.$ele,
-				update: function update(command, _update) {
-					var commands = {};
-					if (typeof command === "string") {
-						commands[command] = _update;
-					} else {
-						commands = command;
-					}
-					for (var cmd in commands) {
-						switch (cmd) {
-							case "type":
-								this.$ele.removeClass('alert-' + self.settings.type);
-								this.$ele.find('[data-notify="progressbar"] > .progress-bar').removeClass('progress-bar-' + self.settings.type);
-								self.settings.type = commands[cmd];
-								this.$ele.addClass('alert-' + commands[cmd]).find('[data-notify="progressbar"] > .progress-bar').addClass('progress-bar-' + commands[cmd]);
-								break;
-							case "icon":
-								var $icon = this.$ele.find('[data-notify="icon"]');
-								if (self.settings.icon_type.toLowerCase() === 'class') {
-									$icon.removeClass(self.settings.content.icon).addClass(commands[cmd]);
-								} else {
-									if (!$icon.is('img')) {
-										$icon.find('img');
-									}
-									$icon.attr('src', commands[cmd]);
-								}
-								break;
-							case "progress":
-								var newDelay = self.settings.delay - self.settings.delay * (commands[cmd] / 100);
-								this.$ele.data('notify-delay', newDelay);
-								this.$ele.find('[data-notify="progressbar"] > div').attr('aria-valuenow', commands[cmd]).css('width', commands[cmd] + '%');
-								break;
-							case "url":
-								this.$ele.find('[data-notify="url"]').attr('href', commands[cmd]);
-								break;
-							case "target":
-								this.$ele.find('[data-notify="url"]').attr('target', commands[cmd]);
-								break;
-							default:
-								this.$ele.find('[data-notify="' + cmd + '"]').html(commands[cmd]);
-						}
-					}
-					var posX = this.$ele.outerHeight() + parseInt(self.settings.spacing) + parseInt(self.settings.offset.y);
-					self.reposition(posX);
-				},
-				close: function close() {
-					self.close();
-				}
-			};
-		},
-		buildNotify: function buildNotify() {
-			var content = this.settings.content;
-			this.$ele = $(String.format(this.settings.template, this.settings.type, content.title, content.message, content.url, content.target));
-			this.$ele.attr('data-notify-position', this.settings.placement.from + '-' + this.settings.placement.align);
-			if (!this.settings.allow_dismiss) {
-				this.$ele.find('[data-notify="dismiss"]').css('display', 'none');
-			}
-			if (this.settings.delay <= 0 && !this.settings.showProgressbar || !this.settings.showProgressbar) {
-				this.$ele.find('[data-notify="progressbar"]').remove();
-			}
-		},
-		setIcon: function setIcon() {
-
-			this.$ele.addClass('alert-with-icon');
-
-			if (this.settings.icon_type.toLowerCase() === 'class') {
-				this.$ele.find('[data-notify="icon"]').addClass(this.settings.content.icon);
-			} else {
-				if (this.$ele.find('[data-notify="icon"]').is('img')) {
-					this.$ele.find('[data-notify="icon"]').attr('src', this.settings.content.icon);
-				} else {
-					this.$ele.find('[data-notify="icon"]').append('<img src="' + this.settings.content.icon + '" alt="Notify Icon" />');
-				}
-			}
-		},
-		styleDismiss: function styleDismiss() {
-			this.$ele.find('[data-notify="dismiss"]').css({
-				position: 'absolute',
-				right: '10px',
-				top: '50%',
-				marginTop: '-13px',
-				zIndex: this.settings.z_index + 2
-			});
-		},
-		styleURL: function styleURL() {
-			this.$ele.find('[data-notify="url"]').css({
-				backgroundImage: 'url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)',
-				height: '100%',
-				left: 0,
-				position: 'absolute',
-				top: 0,
-				width: '100%',
-				zIndex: this.settings.z_index + 1
-			});
-		},
-		placement: function placement() {
-			var self = this,
-			    offsetAmt = this.settings.offset.y,
-			    css = {
-				display: 'inline-block',
-				margin: '0px auto',
-				position: this.settings.position ? this.settings.position : this.settings.element === 'body' ? 'fixed' : 'absolute',
-				transition: 'all .5s ease-in-out',
-				zIndex: this.settings.z_index
-			},
-			    hasAnimation = false,
-			    settings = this.settings;
-
-			$('[data-notify-position="' + this.settings.placement.from + '-' + this.settings.placement.align + '"]:not([data-closing="true"])').each(function () {
-				offsetAmt = Math.max(offsetAmt, parseInt($(this).css(settings.placement.from)) + parseInt($(this).outerHeight()) + parseInt(settings.spacing));
-			});
-			if (this.settings.newest_on_top === true) {
-				offsetAmt = this.settings.offset.y;
-			}
-			css[this.settings.placement.from] = offsetAmt + 'px';
-
-			switch (this.settings.placement.align) {
-				case "left":
-				case "right":
-					css[this.settings.placement.align] = this.settings.offset.x + 'px';
-					break;
-				case "center":
-					css.left = 0;
-					css.right = 0;
-					break;
-			}
-			this.$ele.css(css).addClass(this.settings.animate.enter);
-			$.each(Array('webkit-', 'moz-', 'o-', 'ms-', ''), function (index, prefix) {
-				self.$ele[0].style[prefix + 'AnimationIterationCount'] = 1;
-			});
-
-			$(this.settings.element).append(this.$ele);
-
-			if (this.settings.newest_on_top === true) {
-				offsetAmt = parseInt(offsetAmt) + parseInt(this.settings.spacing) + this.$ele.outerHeight();
-				this.reposition(offsetAmt);
-			}
-
-			if ($.isFunction(self.settings.onShow)) {
-				self.settings.onShow.call(this.$ele);
-			}
-
-			this.$ele.one(this.animations.start, function () {
-				hasAnimation = true;
-			}).one(this.animations.end, function () {
-				if ($.isFunction(self.settings.onShown)) {
-					self.settings.onShown.call(this);
-				}
-			});
-
-			setTimeout(function () {
-				if (!hasAnimation) {
-					if ($.isFunction(self.settings.onShown)) {
-						self.settings.onShown.call(this);
-					}
-				}
-			}, 600);
-		},
-		bind: function bind() {
-			var self = this;
-
-			this.$ele.find('[data-notify="dismiss"]').on('click', function () {
-				self.close();
-			});
-
-			this.$ele.mouseover(function () {
-				$(this).data('data-hover', "true");
-			}).mouseout(function () {
-				$(this).data('data-hover', "false");
-			});
-			this.$ele.data('data-hover', "false");
-
-			if (this.settings.delay > 0) {
-				self.$ele.data('notify-delay', self.settings.delay);
-				var timer = setInterval(function () {
-					var delay = parseInt(self.$ele.data('notify-delay')) - self.settings.timer;
-					if (self.$ele.data('data-hover') === 'false' && self.settings.mouse_over === "pause" || self.settings.mouse_over != "pause") {
-						var percent = (self.settings.delay - delay) / self.settings.delay * 100;
-						self.$ele.data('notify-delay', delay);
-						self.$ele.find('[data-notify="progressbar"] > div').attr('aria-valuenow', percent).css('width', percent + '%');
-					}
-					if (delay <= -self.settings.timer) {
-						clearInterval(timer);
-						self.close();
-					}
-				}, self.settings.timer);
-			}
-		},
-		close: function close() {
-			var self = this,
-			    posX = parseInt(this.$ele.css(this.settings.placement.from)),
-			    hasAnimation = false;
-
-			this.$ele.data('closing', 'true').addClass(this.settings.animate.exit);
-			self.reposition(posX);
-
-			if ($.isFunction(self.settings.onClose)) {
-				self.settings.onClose.call(this.$ele);
-			}
-
-			this.$ele.one(this.animations.start, function () {
-				hasAnimation = true;
-			}).one(this.animations.end, function () {
-				$(this).remove();
-				if ($.isFunction(self.settings.onClosed)) {
-					self.settings.onClosed.call(this);
-				}
-			});
-
-			setTimeout(function () {
-				if (!hasAnimation) {
-					self.$ele.remove();
-					if (self.settings.onClosed) {
-						self.settings.onClosed(self.$ele);
-					}
-				}
-			}, 600);
-		},
-		reposition: function reposition(posX) {
-			var self = this,
-			    notifies = '[data-notify-position="' + this.settings.placement.from + '-' + this.settings.placement.align + '"]:not([data-closing="true"])',
-			    $elements = this.$ele.nextAll(notifies);
-			if (this.settings.newest_on_top === true) {
-				$elements = this.$ele.prevAll(notifies);
-			}
-			$elements.each(function () {
-				$(this).css(self.settings.placement.from, posX);
-				posX = parseInt(posX) + parseInt(self.settings.spacing) + $(this).outerHeight();
-			});
-		}
-	});
-
-	$.notify = function (content, options) {
-		var plugin = new Notify(this, content, options);
-		return plugin.notify;
-	};
-	$.notifyDefaults = function (options) {
-		defaults = $.extend(true, {}, defaults, options);
-		return defaults;
-	};
-	$.notifyClose = function (command) {
-		if (typeof command === "undefined" || command === "all") {
-			$('[data-notify]').find('[data-notify="dismiss"]').trigger('click');
-		} else {
-			$('[data-notify-position="' + command + '"]').find('[data-notify="dismiss"]').trigger('click');
-		}
-	};
-});
-
-/***/ }),
-/* 37 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-/* Chartist.js 0.9.4
- * Copyright © 2015 Gion Kunz
- * Free to use under the WTFPL license.
- * http://www.wtfpl.net/
- */
-
-!function (a, b) {
-   true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
-    return a.Chartist = b();
-  }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : "object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) ? module.exports = b() : a.Chartist = b();
-}(this, function () {
-  var a = { version: "0.9.4" };return function (a, b, c) {
-    "use strict";
-    c.noop = function (a) {
-      return a;
-    }, c.alphaNumerate = function (a) {
-      return String.fromCharCode(97 + a % 26);
-    }, c.extend = function (a) {
-      a = a || {};var b = Array.prototype.slice.call(arguments, 1);return b.forEach(function (b) {
-        for (var d in b) {
-          "object" != _typeof(b[d]) || null === b[d] || b[d] instanceof Array ? a[d] = b[d] : a[d] = c.extend({}, a[d], b[d]);
-        }
-      }), a;
-    }, c.replaceAll = function (a, b, c) {
-      return a.replace(new RegExp(b, "g"), c);
-    }, c.stripUnit = function (a) {
-      return "string" == typeof a && (a = a.replace(/[^0-9\+-\.]/g, "")), +a;
-    }, c.ensureUnit = function (a, b) {
-      return "number" == typeof a && (a += b), a;
-    }, c.querySelector = function (a) {
-      return a instanceof Node ? a : b.querySelector(a);
-    }, c.times = function (a) {
-      return Array.apply(null, new Array(a));
-    }, c.sum = function (a, b) {
-      return a + (b ? b : 0);
-    }, c.mapMultiply = function (a) {
-      return function (b) {
-        return b * a;
-      };
-    }, c.mapAdd = function (a) {
-      return function (b) {
-        return b + a;
-      };
-    }, c.serialMap = function (a, b) {
-      var d = [],
-          e = Math.max.apply(null, a.map(function (a) {
-        return a.length;
-      }));return c.times(e).forEach(function (c, e) {
-        var f = a.map(function (a) {
-          return a[e];
-        });d[e] = b.apply(null, f);
-      }), d;
-    }, c.roundWithPrecision = function (a, b) {
-      var d = Math.pow(10, b || c.precision);return Math.round(a * d) / d;
-    }, c.precision = 8, c.escapingMap = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }, c.serialize = function (a) {
-      return null === a || void 0 === a ? a : ("number" == typeof a ? a = "" + a : "object" == (typeof a === "undefined" ? "undefined" : _typeof(a)) && (a = JSON.stringify({ data: a })), Object.keys(c.escapingMap).reduce(function (a, b) {
-        return c.replaceAll(a, b, c.escapingMap[b]);
-      }, a));
-    }, c.deserialize = function (a) {
-      if ("string" != typeof a) return a;a = Object.keys(c.escapingMap).reduce(function (a, b) {
-        return c.replaceAll(a, c.escapingMap[b], b);
-      }, a);try {
-        a = JSON.parse(a), a = void 0 !== a.data ? a.data : a;
-      } catch (b) {}return a;
-    }, c.createSvg = function (a, b, d, e) {
-      var f;return b = b || "100%", d = d || "100%", Array.prototype.slice.call(a.querySelectorAll("svg")).filter(function (a) {
-        return a.getAttributeNS("http://www.w3.org/2000/xmlns/", c.xmlNs.prefix);
-      }).forEach(function (b) {
-        a.removeChild(b);
-      }), f = new c.Svg("svg").attr({ width: b, height: d }).addClass(e).attr({ style: "width: " + b + "; height: " + d + ";" }), a.appendChild(f._node), f;
-    }, c.reverseData = function (a) {
-      a.labels.reverse(), a.series.reverse();for (var b = 0; b < a.series.length; b++) {
-        "object" == _typeof(a.series[b]) && void 0 !== a.series[b].data ? a.series[b].data.reverse() : a.series[b] instanceof Array && a.series[b].reverse();
-      }
-    }, c.getDataArray = function (a, b, d) {
-      function e(a) {
-        if (c.isFalseyButZero(a)) return void 0;if ((a.data || a) instanceof Array) return (a.data || a).map(e);if (a.hasOwnProperty("value")) return e(a.value);if (d) {
-          var b = {};return "string" == typeof d ? b[d] = c.getNumberOrUndefined(a) : b.y = c.getNumberOrUndefined(a), b.x = a.hasOwnProperty("x") ? c.getNumberOrUndefined(a.x) : b.x, b.y = a.hasOwnProperty("y") ? c.getNumberOrUndefined(a.y) : b.y, b;
-        }return c.getNumberOrUndefined(a);
-      }return (b && !a.reversed || !b && a.reversed) && (c.reverseData(a), a.reversed = !a.reversed), a.series.map(e);
-    }, c.normalizePadding = function (a, b) {
-      return b = b || 0, "number" == typeof a ? { top: a, right: a, bottom: a, left: a } : { top: "number" == typeof a.top ? a.top : b, right: "number" == typeof a.right ? a.right : b, bottom: "number" == typeof a.bottom ? a.bottom : b, left: "number" == typeof a.left ? a.left : b };
-    }, c.getMetaData = function (a, b) {
-      var d = a.data ? a.data[b] : a[b];return d ? c.serialize(d.meta) : void 0;
-    }, c.orderOfMagnitude = function (a) {
-      return Math.floor(Math.log(Math.abs(a)) / Math.LN10);
-    }, c.projectLength = function (a, b, c) {
-      return b / c.range * a;
-    }, c.getAvailableHeight = function (a, b) {
-      return Math.max((c.stripUnit(b.height) || a.height()) - (b.chartPadding.top + b.chartPadding.bottom) - b.axisX.offset, 0);
-    }, c.getHighLow = function (a, b, d) {
-      function e(a) {
-        if (void 0 === a) return void 0;if (a instanceof Array) for (var b = 0; b < a.length; b++) {
-          e(a[b]);
-        } else {
-          var c = d ? +a[d] : +a;g && c > f.high && (f.high = c), h && c < f.low && (f.low = c);
-        }
-      }b = c.extend({}, b, d ? b["axis" + d.toUpperCase()] : {});var f = { high: void 0 === b.high ? -Number.MAX_VALUE : +b.high, low: void 0 === b.low ? Number.MAX_VALUE : +b.low },
-          g = void 0 === b.high,
-          h = void 0 === b.low;return (g || h) && e(a), (b.referenceValue || 0 === b.referenceValue) && (f.high = Math.max(b.referenceValue, f.high), f.low = Math.min(b.referenceValue, f.low)), f.high <= f.low && (0 === f.low ? f.high = 1 : f.low < 0 ? f.high = 0 : f.low = 0), f;
-    }, c.isNum = function (a) {
-      return !isNaN(a) && isFinite(a);
-    }, c.isFalseyButZero = function (a) {
-      return !a && 0 !== a;
-    }, c.getNumberOrUndefined = function (a) {
-      return isNaN(+a) ? void 0 : +a;
-    }, c.getMultiValue = function (a, b) {
-      return c.isNum(a) ? +a : a ? a[b || "y"] || 0 : 0;
-    }, c.rho = function (a) {
-      function b(a, c) {
-        return a % c === 0 ? c : b(c, a % c);
-      }function c(a) {
-        return a * a + 1;
-      }if (1 === a) return a;var d,
-          e = 2,
-          f = 2;if (a % 2 === 0) return 2;do {
-        e = c(e) % a, f = c(c(f)) % a, d = b(Math.abs(e - f), a);
-      } while (1 === d);return d;
-    }, c.getBounds = function (a, b, d, e) {
-      var f,
-          g,
-          h,
-          i = 0,
-          j = { high: b.high, low: b.low };j.valueRange = j.high - j.low, j.oom = c.orderOfMagnitude(j.valueRange), j.step = Math.pow(10, j.oom), j.min = Math.floor(j.low / j.step) * j.step, j.max = Math.ceil(j.high / j.step) * j.step, j.range = j.max - j.min, j.numberOfSteps = Math.round(j.range / j.step);var k = c.projectLength(a, j.step, j),
-          l = d > k,
-          m = e ? c.rho(j.range) : 0;if (e && c.projectLength(a, 1, j) >= d) j.step = 1;else if (e && m < j.step && c.projectLength(a, m, j) >= d) j.step = m;else for (;;) {
-        if (l && c.projectLength(a, j.step, j) <= d) j.step *= 2;else {
-          if (l || !(c.projectLength(a, j.step / 2, j) >= d)) break;if (j.step /= 2, e && j.step % 1 !== 0) {
-            j.step *= 2;break;
-          }
-        }if (i++ > 1e3) throw new Error("Exceeded maximum number of iterations while optimizing scale step!");
-      }for (g = j.min, h = j.max; g + j.step <= j.low;) {
-        g += j.step;
-      }for (; h - j.step >= j.high;) {
-        h -= j.step;
-      }for (j.min = g, j.max = h, j.range = j.max - j.min, j.values = [], f = j.min; f <= j.max; f += j.step) {
-        j.values.push(c.roundWithPrecision(f));
-      }return j;
-    }, c.polarToCartesian = function (a, b, c, d) {
-      var e = (d - 90) * Math.PI / 180;return { x: a + c * Math.cos(e), y: b + c * Math.sin(e) };
-    }, c.createChartRect = function (a, b, d) {
-      var e = !(!b.axisX && !b.axisY),
-          f = e ? b.axisY.offset : 0,
-          g = e ? b.axisX.offset : 0,
-          h = a.width() || c.stripUnit(b.width) || 0,
-          i = a.height() || c.stripUnit(b.height) || 0,
-          j = c.normalizePadding(b.chartPadding, d);h = Math.max(h, f + j.left + j.right), i = Math.max(i, g + j.top + j.bottom);var k = { padding: j, width: function width() {
-          return this.x2 - this.x1;
-        }, height: function height() {
-          return this.y1 - this.y2;
-        } };return e ? ("start" === b.axisX.position ? (k.y2 = j.top + g, k.y1 = Math.max(i - j.bottom, k.y2 + 1)) : (k.y2 = j.top, k.y1 = Math.max(i - j.bottom - g, k.y2 + 1)), "start" === b.axisY.position ? (k.x1 = j.left + f, k.x2 = Math.max(h - j.right, k.x1 + 1)) : (k.x1 = j.left, k.x2 = Math.max(h - j.right - f, k.x1 + 1))) : (k.x1 = j.left, k.x2 = Math.max(h - j.right, k.x1 + 1), k.y2 = j.top, k.y1 = Math.max(i - j.bottom, k.y2 + 1)), k;
-    }, c.createGrid = function (a, b, d, e, f, g, h, i) {
-      var j = {};j[d.units.pos + "1"] = a, j[d.units.pos + "2"] = a, j[d.counterUnits.pos + "1"] = e, j[d.counterUnits.pos + "2"] = e + f;var k = g.elem("line", j, h.join(" "));i.emit("draw", c.extend({ type: "grid", axis: d, index: b, group: g, element: k }, j));
-    }, c.createLabel = function (a, b, d, e, f, g, h, i, j, k, l) {
-      var m,
-          n = {};if (n[f.units.pos] = a + h[f.units.pos], n[f.counterUnits.pos] = h[f.counterUnits.pos], n[f.units.len] = b, n[f.counterUnits.len] = g - 10, k) {
-        var o = '<span class="' + j.join(" ") + '" style="' + f.units.len + ": " + Math.round(n[f.units.len]) + "px; " + f.counterUnits.len + ": " + Math.round(n[f.counterUnits.len]) + 'px">' + e[d] + "</span>";m = i.foreignObject(o, c.extend({ style: "overflow: visible;" }, n));
-      } else m = i.elem("text", n, j.join(" ")).text(e[d]);l.emit("draw", c.extend({ type: "label", axis: f, index: d, group: i, element: m, text: e[d] }, n));
-    }, c.getSeriesOption = function (a, b, c) {
-      if (a.name && b.series && b.series[a.name]) {
-        var d = b.series[a.name];return d.hasOwnProperty(c) ? d[c] : b[c];
-      }return b[c];
-    }, c.optionsProvider = function (b, d, e) {
-      function f(b) {
-        var f = h;if (h = c.extend({}, j), d) for (i = 0; i < d.length; i++) {
-          var g = a.matchMedia(d[i][0]);g.matches && (h = c.extend(h, d[i][1]));
-        }e && !b && e.emit("optionsChanged", { previousOptions: f, currentOptions: h });
-      }function g() {
-        k.forEach(function (a) {
-          a.removeListener(f);
-        });
-      }var h,
-          i,
-          j = c.extend({}, b),
-          k = [];if (!a.matchMedia) throw "window.matchMedia not found! Make sure you're using a polyfill.";if (d) for (i = 0; i < d.length; i++) {
-        var l = a.matchMedia(d[i][0]);l.addListener(f), k.push(l);
-      }return f(!0), { removeMediaQueryListeners: g, getCurrentOptions: function getCurrentOptions() {
-          return c.extend({}, h);
-        } };
-    };
-  }(window, document, a), function (a, b, c) {
-    "use strict";
-    c.Interpolation = {}, c.Interpolation.none = function () {
-      return function (a, b) {
-        for (var d = new c.Svg.Path(), e = !0, f = 1; f < a.length; f += 2) {
-          var g = b[(f - 1) / 2];void 0 === g.value ? e = !0 : e ? (d.move(a[f - 1], a[f], !1, g), e = !1) : d.line(a[f - 1], a[f], !1, g);
-        }return d;
-      };
-    }, c.Interpolation.simple = function (a) {
-      var b = { divisor: 2 };a = c.extend({}, b, a);var d = 1 / Math.max(1, a.divisor);return function (a, b) {
-        for (var e = new c.Svg.Path(), f = !0, g = 2; g < a.length; g += 2) {
-          var h = a[g - 2],
-              i = a[g - 1],
-              j = a[g],
-              k = a[g + 1],
-              l = (j - h) * d,
-              m = b[g / 2 - 1],
-              n = b[g / 2];void 0 === m.value ? f = !0 : (f && e.move(h, i, !1, m), void 0 !== n.value && (e.curve(h + l, i, j - l, k, j, k, !1, n), f = !1));
-        }return e;
-      };
-    }, c.Interpolation.cardinal = function (a) {
-      function b(a, b) {
-        for (var c = [], d = !0, e = 0; e < a.length; e += 2) {
-          void 0 === b[e / 2].value ? d = !0 : (d && (c.push({ pathCoordinates: [], valueData: [] }), d = !1), c[c.length - 1].pathCoordinates.push(a[e], a[e + 1]), c[c.length - 1].valueData.push(b[e / 2]));
-        }return c;
-      }var d = { tension: 1 };a = c.extend({}, d, a);var e = Math.min(1, Math.max(0, a.tension)),
-          f = 1 - e;return function g(a, d) {
-        var h = b(a, d);if (h.length > 1) {
-          var i = [];return h.forEach(function (a) {
-            i.push(g(a.pathCoordinates, a.valueData));
-          }), c.Svg.Path.join(i);
-        }if (a = h[0].pathCoordinates, d = h[0].valueData, a.length <= 4) return c.Interpolation.none()(a, d);for (var j, k = new c.Svg.Path().move(a[0], a[1], !1, d[0]), l = 0, m = a.length; m - 2 * !j > l; l += 2) {
-          var n = [{ x: +a[l - 2], y: +a[l - 1] }, { x: +a[l], y: +a[l + 1] }, { x: +a[l + 2], y: +a[l + 3] }, { x: +a[l + 4], y: +a[l + 5] }];j ? l ? m - 4 === l ? n[3] = { x: +a[0], y: +a[1] } : m - 2 === l && (n[2] = { x: +a[0], y: +a[1] }, n[3] = { x: +a[2], y: +a[3] }) : n[0] = { x: +a[m - 2], y: +a[m - 1] } : m - 4 === l ? n[3] = n[2] : l || (n[0] = { x: +a[l], y: +a[l + 1] }), k.curve(e * (-n[0].x + 6 * n[1].x + n[2].x) / 6 + f * n[2].x, e * (-n[0].y + 6 * n[1].y + n[2].y) / 6 + f * n[2].y, e * (n[1].x + 6 * n[2].x - n[3].x) / 6 + f * n[2].x, e * (n[1].y + 6 * n[2].y - n[3].y) / 6 + f * n[2].y, n[2].x, n[2].y, !1, d[(l + 2) / 2]);
-        }return k;
-      };
-    }, c.Interpolation.step = function (a) {
-      var b = { postpone: !0 };return a = c.extend({}, b, a), function (b, d) {
-        for (var e = new c.Svg.Path(), f = !0, g = 2; g < b.length; g += 2) {
-          var h = b[g - 2],
-              i = b[g - 1],
-              j = b[g],
-              k = b[g + 1],
-              l = d[g / 2 - 1],
-              m = d[g / 2];void 0 === l.value ? f = !0 : (f && e.move(h, i, !1, l), void 0 !== m.value && (a.postpone ? e.line(j, i, !1, l) : e.line(h, k, !1, m), e.line(j, k, !1, m), f = !1));
-        }return e;
-      };
-    };
-  }(window, document, a), function (a, b, c) {
-    "use strict";
-    c.EventEmitter = function () {
-      function a(a, b) {
-        d[a] = d[a] || [], d[a].push(b);
-      }function b(a, b) {
-        d[a] && (b ? (d[a].splice(d[a].indexOf(b), 1), 0 === d[a].length && delete d[a]) : delete d[a]);
-      }function c(a, b) {
-        d[a] && d[a].forEach(function (a) {
-          a(b);
-        }), d["*"] && d["*"].forEach(function (c) {
-          c(a, b);
-        });
-      }var d = [];return { addEventHandler: a, removeEventHandler: b, emit: c };
-    };
-  }(window, document, a), function (a, b, c) {
-    "use strict";
-    function d(a) {
-      var b = [];if (a.length) for (var c = 0; c < a.length; c++) {
-        b.push(a[c]);
-      }return b;
-    }function e(a, b) {
-      var d = b || this.prototype || c.Class,
-          e = Object.create(d);c.Class.cloneDefinitions(e, a);var f = function f() {
-        var a,
-            b = e.constructor || function () {};return a = this === c ? Object.create(e) : this, b.apply(a, Array.prototype.slice.call(arguments, 0)), a;
-      };return f.prototype = e, f["super"] = d, f.extend = this.extend, f;
-    }function f() {
-      var a = d(arguments),
-          b = a[0];return a.splice(1, a.length - 1).forEach(function (a) {
-        Object.getOwnPropertyNames(a).forEach(function (c) {
-          delete b[c], Object.defineProperty(b, c, Object.getOwnPropertyDescriptor(a, c));
-        });
-      }), b;
-    }c.Class = { extend: e, cloneDefinitions: f };
-  }(window, document, a), function (a, b, c) {
-    "use strict";
-    function d(a, b, d) {
-      return a && (this.data = a, this.eventEmitter.emit("data", { type: "update", data: this.data })), b && (this.options = c.extend({}, d ? this.options : this.defaultOptions, b), this.initializeTimeoutId || (this.optionsProvider.removeMediaQueryListeners(), this.optionsProvider = c.optionsProvider(this.options, this.responsiveOptions, this.eventEmitter))), this.initializeTimeoutId || this.createChart(this.optionsProvider.getCurrentOptions()), this;
-    }function e() {
-      return this.initializeTimeoutId ? a.clearTimeout(this.initializeTimeoutId) : (a.removeEventListener("resize", this.resizeListener), this.optionsProvider.removeMediaQueryListeners()), this;
-    }function f(a, b) {
-      return this.eventEmitter.addEventHandler(a, b), this;
-    }function g(a, b) {
-      return this.eventEmitter.removeEventHandler(a, b), this;
-    }function h() {
-      a.addEventListener("resize", this.resizeListener), this.optionsProvider = c.optionsProvider(this.options, this.responsiveOptions, this.eventEmitter), this.eventEmitter.addEventHandler("optionsChanged", function () {
-        this.update();
-      }.bind(this)), this.options.plugins && this.options.plugins.forEach(function (a) {
-        a instanceof Array ? a[0](this, a[1]) : a(this);
-      }.bind(this)), this.eventEmitter.emit("data", { type: "initial", data: this.data }), this.createChart(this.optionsProvider.getCurrentOptions()), this.initializeTimeoutId = void 0;
-    }function i(a, b, d, e, f) {
-      this.container = c.querySelector(a), this.data = b, this.defaultOptions = d, this.options = e, this.responsiveOptions = f, this.eventEmitter = c.EventEmitter(), this.supportsForeignObject = c.Svg.isSupported("Extensibility"), this.supportsAnimations = c.Svg.isSupported("AnimationEventsAttribute"), this.resizeListener = function () {
-        this.update();
-      }.bind(this), this.container && (this.container.__chartist__ && this.container.__chartist__.detach(), this.container.__chartist__ = this), this.initializeTimeoutId = setTimeout(h.bind(this), 0);
-    }c.Base = c.Class.extend({ constructor: i, optionsProvider: void 0, container: void 0, svg: void 0, eventEmitter: void 0, createChart: function createChart() {
-        throw new Error("Base chart type can't be instantiated!");
-      }, update: d, detach: e, on: f, off: g, version: c.version, supportsForeignObject: !1 });
-  }(window, document, a), function (a, b, c) {
-    "use strict";
-    function d(a, d, e, f, g) {
-      a instanceof Element ? this._node = a : (this._node = b.createElementNS(z, a), "svg" === a && this._node.setAttributeNS(A, c.xmlNs.qualifiedName, c.xmlNs.uri)), d && this.attr(d), e && this.addClass(e), f && (g && f._node.firstChild ? f._node.insertBefore(this._node, f._node.firstChild) : f._node.appendChild(this._node));
-    }function e(a, b) {
-      return "string" == typeof a ? b ? this._node.getAttributeNS(b, a) : this._node.getAttribute(a) : (Object.keys(a).forEach(function (d) {
-        void 0 !== a[d] && (b ? this._node.setAttributeNS(b, [c.xmlNs.prefix, ":", d].join(""), a[d]) : this._node.setAttribute(d, a[d]));
-      }.bind(this)), this);
-    }function f(a, b, d, e) {
-      return new c.Svg(a, b, d, this, e);
-    }function g() {
-      return this._node.parentNode instanceof SVGElement ? new c.Svg(this._node.parentNode) : null;
-    }function h() {
-      for (var a = this._node; "svg" !== a.nodeName;) {
-        a = a.parentNode;
-      }return new c.Svg(a);
-    }function i(a) {
-      var b = this._node.querySelector(a);return b ? new c.Svg(b) : null;
-    }function j(a) {
-      var b = this._node.querySelectorAll(a);return b.length ? new c.Svg.List(b) : null;
-    }function k(a, c, d, e) {
-      if ("string" == typeof a) {
-        var f = b.createElement("div");f.innerHTML = a, a = f.firstChild;
-      }a.setAttribute("xmlns", B);var g = this.elem("foreignObject", c, d, e);return g._node.appendChild(a), g;
-    }function l(a) {
-      return this._node.appendChild(b.createTextNode(a)), this;
-    }function m() {
-      for (; this._node.firstChild;) {
-        this._node.removeChild(this._node.firstChild);
-      }return this;
-    }function n() {
-      return this._node.parentNode.removeChild(this._node), this.parent();
-    }function o(a) {
-      return this._node.parentNode.replaceChild(a._node, this._node), a;
-    }function p(a, b) {
-      return b && this._node.firstChild ? this._node.insertBefore(a._node, this._node.firstChild) : this._node.appendChild(a._node), this;
-    }function q() {
-      return this._node.getAttribute("class") ? this._node.getAttribute("class").trim().split(/\s+/) : [];
-    }function r(a) {
-      return this._node.setAttribute("class", this.classes(this._node).concat(a.trim().split(/\s+/)).filter(function (a, b, c) {
-        return c.indexOf(a) === b;
-      }).join(" ")), this;
-    }function s(a) {
-      var b = a.trim().split(/\s+/);return this._node.setAttribute("class", this.classes(this._node).filter(function (a) {
-        return -1 === b.indexOf(a);
-      }).join(" ")), this;
-    }function t() {
-      return this._node.setAttribute("class", ""), this;
-    }function u(a, b) {
-      try {
-        return a.getBBox()[b];
-      } catch (c) {}return 0;
-    }function v() {
-      return this._node.clientHeight || Math.round(u(this._node, "height")) || this._node.parentNode.clientHeight;
-    }function w() {
-      return this._node.clientWidth || Math.round(u(this._node, "width")) || this._node.parentNode.clientWidth;
-    }function x(a, b, d) {
-      return void 0 === b && (b = !0), Object.keys(a).forEach(function (e) {
-        function f(a, b) {
-          var f,
-              g,
-              h,
-              i = {};a.easing && (h = a.easing instanceof Array ? a.easing : c.Svg.Easing[a.easing], delete a.easing), a.begin = c.ensureUnit(a.begin, "ms"), a.dur = c.ensureUnit(a.dur, "ms"), h && (a.calcMode = "spline", a.keySplines = h.join(" "), a.keyTimes = "0;1"), b && (a.fill = "freeze", i[e] = a.from, this.attr(i), g = c.stripUnit(a.begin || 0), a.begin = "indefinite"), f = this.elem("animate", c.extend({ attributeName: e }, a)), b && setTimeout(function () {
-            try {
-              f._node.beginElement();
-            } catch (b) {
-              i[e] = a.to, this.attr(i), f.remove();
-            }
-          }.bind(this), g), d && f._node.addEventListener("beginEvent", function () {
-            d.emit("animationBegin", { element: this, animate: f._node, params: a });
-          }.bind(this)), f._node.addEventListener("endEvent", function () {
-            d && d.emit("animationEnd", { element: this, animate: f._node, params: a }), b && (i[e] = a.to, this.attr(i), f.remove());
-          }.bind(this));
-        }a[e] instanceof Array ? a[e].forEach(function (a) {
-          f.bind(this)(a, !1);
-        }.bind(this)) : f.bind(this)(a[e], b);
-      }.bind(this)), this;
-    }function y(a) {
-      var b = this;this.svgElements = [];for (var d = 0; d < a.length; d++) {
-        this.svgElements.push(new c.Svg(a[d]));
-      }Object.keys(c.Svg.prototype).filter(function (a) {
-        return -1 === ["constructor", "parent", "querySelector", "querySelectorAll", "replace", "append", "classes", "height", "width"].indexOf(a);
-      }).forEach(function (a) {
-        b[a] = function () {
-          var d = Array.prototype.slice.call(arguments, 0);return b.svgElements.forEach(function (b) {
-            c.Svg.prototype[a].apply(b, d);
-          }), b;
-        };
-      });
-    }var z = "http://www.w3.org/2000/svg",
-        A = "http://www.w3.org/2000/xmlns/",
-        B = "http://www.w3.org/1999/xhtml";c.xmlNs = { qualifiedName: "xmlns:ct", prefix: "ct", uri: "http://gionkunz.github.com/chartist-js/ct" }, c.Svg = c.Class.extend({ constructor: d, attr: e, elem: f, parent: g, root: h, querySelector: i, querySelectorAll: j, foreignObject: k, text: l, empty: m, remove: n, replace: o, append: p, classes: q, addClass: r, removeClass: s, removeAllClasses: t, height: v, width: w, animate: x }), c.Svg.isSupported = function (a) {
-      return b.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#" + a, "1.1");
-    };var C = { easeInSine: [.47, 0, .745, .715], easeOutSine: [.39, .575, .565, 1], easeInOutSine: [.445, .05, .55, .95], easeInQuad: [.55, .085, .68, .53], easeOutQuad: [.25, .46, .45, .94], easeInOutQuad: [.455, .03, .515, .955], easeInCubic: [.55, .055, .675, .19], easeOutCubic: [.215, .61, .355, 1], easeInOutCubic: [.645, .045, .355, 1], easeInQuart: [.895, .03, .685, .22], easeOutQuart: [.165, .84, .44, 1], easeInOutQuart: [.77, 0, .175, 1], easeInQuint: [.755, .05, .855, .06], easeOutQuint: [.23, 1, .32, 1], easeInOutQuint: [.86, 0, .07, 1], easeInExpo: [.95, .05, .795, .035], easeOutExpo: [.19, 1, .22, 1], easeInOutExpo: [1, 0, 0, 1], easeInCirc: [.6, .04, .98, .335], easeOutCirc: [.075, .82, .165, 1], easeInOutCirc: [.785, .135, .15, .86], easeInBack: [.6, -.28, .735, .045], easeOutBack: [.175, .885, .32, 1.275], easeInOutBack: [.68, -.55, .265, 1.55] };c.Svg.Easing = C, c.Svg.List = c.Class.extend({ constructor: y });
-  }(window, document, a), function (a, b, c) {
-    "use strict";
-    function d(a, b, d, e, f, g) {
-      var h = c.extend({ command: f ? a.toLowerCase() : a.toUpperCase() }, b, g ? { data: g } : {});d.splice(e, 0, h);
-    }function e(a, b) {
-      a.forEach(function (c, d) {
-        u[c.command.toLowerCase()].forEach(function (e, f) {
-          b(c, e, d, f, a);
-        });
-      });
-    }function f(a, b) {
-      this.pathElements = [], this.pos = 0, this.close = a, this.options = c.extend({}, v, b);
-    }function g(a) {
-      return void 0 !== a ? (this.pos = Math.max(0, Math.min(this.pathElements.length, a)), this) : this.pos;
-    }function h(a) {
-      return this.pathElements.splice(this.pos, a), this;
-    }function i(a, b, c, e) {
-      return d("M", { x: +a, y: +b }, this.pathElements, this.pos++, c, e), this;
-    }function j(a, b, c, e) {
-      return d("L", { x: +a, y: +b }, this.pathElements, this.pos++, c, e), this;
-    }function k(a, b, c, e, f, g, h, i) {
-      return d("C", { x1: +a, y1: +b, x2: +c, y2: +e, x: +f, y: +g }, this.pathElements, this.pos++, h, i), this;
-    }function l(a, b, c, e, f, g, h, i, j) {
-      return d("A", { rx: +a, ry: +b, xAr: +c, lAf: +e, sf: +f, x: +g, y: +h }, this.pathElements, this.pos++, i, j), this;
-    }function m(a) {
-      var b = a.replace(/([A-Za-z])([0-9])/g, "$1 $2").replace(/([0-9])([A-Za-z])/g, "$1 $2").split(/[\s,]+/).reduce(function (a, b) {
-        return b.match(/[A-Za-z]/) && a.push([]), a[a.length - 1].push(b), a;
-      }, []);"Z" === b[b.length - 1][0].toUpperCase() && b.pop();var d = b.map(function (a) {
-        var b = a.shift(),
-            d = u[b.toLowerCase()];return c.extend({ command: b }, d.reduce(function (b, c, d) {
-          return b[c] = +a[d], b;
-        }, {}));
-      }),
-          e = [this.pos, 0];return Array.prototype.push.apply(e, d), Array.prototype.splice.apply(this.pathElements, e), this.pos += d.length, this;
-    }function n() {
-      var a = Math.pow(10, this.options.accuracy);return this.pathElements.reduce(function (b, c) {
-        var d = u[c.command.toLowerCase()].map(function (b) {
-          return this.options.accuracy ? Math.round(c[b] * a) / a : c[b];
-        }.bind(this));return b + c.command + d.join(",");
-      }.bind(this), "") + (this.close ? "Z" : "");
-    }function o(a, b) {
-      return e(this.pathElements, function (c, d) {
-        c[d] *= "x" === d[0] ? a : b;
-      }), this;
-    }function p(a, b) {
-      return e(this.pathElements, function (c, d) {
-        c[d] += "x" === d[0] ? a : b;
-      }), this;
-    }function q(a) {
-      return e(this.pathElements, function (b, c, d, e, f) {
-        var g = a(b, c, d, e, f);(g || 0 === g) && (b[c] = g);
-      }), this;
-    }function r(a) {
-      var b = new c.Svg.Path(a || this.close);return b.pos = this.pos, b.pathElements = this.pathElements.slice().map(function (a) {
-        return c.extend({}, a);
-      }), b.options = c.extend({}, this.options), b;
-    }function s(a) {
-      var b = [new c.Svg.Path()];return this.pathElements.forEach(function (d) {
-        d.command === a.toUpperCase() && 0 !== b[b.length - 1].pathElements.length && b.push(new c.Svg.Path()), b[b.length - 1].pathElements.push(d);
-      }), b;
-    }function t(a, b, d) {
-      for (var e = new c.Svg.Path(b, d), f = 0; f < a.length; f++) {
-        for (var g = a[f], h = 0; h < g.pathElements.length; h++) {
-          e.pathElements.push(g.pathElements[h]);
-        }
-      }return e;
-    }var u = { m: ["x", "y"], l: ["x", "y"], c: ["x1", "y1", "x2", "y2", "x", "y"], a: ["rx", "ry", "xAr", "lAf", "sf", "x", "y"] },
-        v = { accuracy: 3 };c.Svg.Path = c.Class.extend({ constructor: f, position: g, remove: h, move: i, line: j, curve: k, arc: l, scale: o, translate: p, transform: q, parse: m, stringify: n, clone: r, splitByCommand: s }), c.Svg.Path.elementDescriptions = u, c.Svg.Path.join = t;
-  }(window, document, a), function (a, b, c) {
-    "use strict";
-    function d(a, b, c, d) {
-      this.units = a, this.counterUnits = a === f.x ? f.y : f.x, this.chartRect = b, this.axisLength = b[a.rectEnd] - b[a.rectStart], this.gridOffset = b[a.rectOffset], this.ticks = c, this.options = d;
-    }function e(a, b, d, e, f) {
-      var g = e["axis" + this.units.pos.toUpperCase()],
-          h = this.ticks.map(this.projectValue.bind(this)),
-          i = this.ticks.map(g.labelInterpolationFnc);h.forEach(function (j, k) {
-        var l,
-            m = { x: 0, y: 0 };l = h[k + 1] ? h[k + 1] - j : Math.max(this.axisLength - j, 30), (i[k] || 0 === i[k]) && ("x" === this.units.pos ? (j = this.chartRect.x1 + j, m.x = e.axisX.labelOffset.x, "start" === e.axisX.position ? m.y = this.chartRect.padding.top + e.axisX.labelOffset.y + (d ? 5 : 20) : m.y = this.chartRect.y1 + e.axisX.labelOffset.y + (d ? 5 : 20)) : (j = this.chartRect.y1 - j, m.y = e.axisY.labelOffset.y - (d ? l : 0), "start" === e.axisY.position ? m.x = d ? this.chartRect.padding.left + e.axisY.labelOffset.x : this.chartRect.x1 - 10 : m.x = this.chartRect.x2 + e.axisY.labelOffset.x + 10), g.showGrid && c.createGrid(j, k, this, this.gridOffset, this.chartRect[this.counterUnits.len](), a, [e.classNames.grid, e.classNames[this.units.dir]], f), g.showLabel && c.createLabel(j, l, k, i, this, g.offset, m, b, [e.classNames.label, e.classNames[this.units.dir], e.classNames[g.position]], d, f));
-      }.bind(this));
-    }var f = { x: { pos: "x", len: "width", dir: "horizontal", rectStart: "x1", rectEnd: "x2", rectOffset: "y2" }, y: { pos: "y", len: "height", dir: "vertical", rectStart: "y2", rectEnd: "y1", rectOffset: "x1" } };c.Axis = c.Class.extend({ constructor: d, createGridAndLabels: e, projectValue: function projectValue(a, b, c) {
-        throw new Error("Base axis can't be instantiated!");
-      } }), c.Axis.units = f;
-  }(window, document, a), function (a, b, c) {
-    "use strict";
-    function d(a, b, d, e) {
-      var f = e.highLow || c.getHighLow(b.normalized, e, a.pos);this.bounds = c.getBounds(d[a.rectEnd] - d[a.rectStart], f, e.scaleMinSpace || 20, e.onlyInteger), this.range = { min: this.bounds.min, max: this.bounds.max }, c.AutoScaleAxis["super"].constructor.call(this, a, d, this.bounds.values, e);
-    }function e(a) {
-      return this.axisLength * (+c.getMultiValue(a, this.units.pos) - this.bounds.min) / this.bounds.range;
-    }c.AutoScaleAxis = c.Axis.extend({ constructor: d, projectValue: e });
-  }(window, document, a), function (a, b, c) {
-    "use strict";
-    function d(a, b, d, e) {
-      var f = e.highLow || c.getHighLow(b.normalized, e, a.pos);this.divisor = e.divisor || 1, this.ticks = e.ticks || c.times(this.divisor).map(function (a, b) {
-        return f.low + (f.high - f.low) / this.divisor * b;
-      }.bind(this)), this.range = { min: f.low, max: f.high }, c.FixedScaleAxis["super"].constructor.call(this, a, d, this.ticks, e), this.stepLength = this.axisLength / this.divisor;
-    }function e(a) {
-      return this.axisLength * (+c.getMultiValue(a, this.units.pos) - this.range.min) / (this.range.max - this.range.min);
-    }c.FixedScaleAxis = c.Axis.extend({ constructor: d, projectValue: e });
-  }(window, document, a), function (a, b, c) {
-    "use strict";
-    function d(a, b, d, e) {
-      c.StepAxis["super"].constructor.call(this, a, d, e.ticks, e), this.stepLength = this.axisLength / (e.ticks.length - (e.stretch ? 1 : 0));
-    }function e(a, b) {
-      return this.stepLength * b;
-    }c.StepAxis = c.Axis.extend({ constructor: d, projectValue: e });
-  }(window, document, a), function (a, b, c) {
-    "use strict";
-    function d(a) {
-      var b = { raw: this.data, normalized: c.getDataArray(this.data, a.reverseData, !0) };this.svg = c.createSvg(this.container, a.width, a.height, a.classNames.chart);var d,
-          e,
-          g = this.svg.elem("g").addClass(a.classNames.gridGroup),
-          h = this.svg.elem("g"),
-          i = this.svg.elem("g").addClass(a.classNames.labelGroup),
-          j = c.createChartRect(this.svg, a, f.padding);d = void 0 === a.axisX.type ? new c.StepAxis(c.Axis.units.x, b, j, c.extend({}, a.axisX, { ticks: b.raw.labels, stretch: a.fullWidth })) : a.axisX.type.call(c, c.Axis.units.x, b, j, a.axisX), e = void 0 === a.axisY.type ? new c.AutoScaleAxis(c.Axis.units.y, b, j, c.extend({}, a.axisY, { high: c.isNum(a.high) ? a.high : a.axisY.high, low: c.isNum(a.low) ? a.low : a.axisY.low })) : a.axisY.type.call(c, c.Axis.units.y, b, j, a.axisY), d.createGridAndLabels(g, i, this.supportsForeignObject, a, this.eventEmitter), e.createGridAndLabels(g, i, this.supportsForeignObject, a, this.eventEmitter), b.raw.series.forEach(function (f, g) {
-        var i = h.elem("g");i.attr({ "series-name": f.name, meta: c.serialize(f.meta) }, c.xmlNs.uri), i.addClass([a.classNames.series, f.className || a.classNames.series + "-" + c.alphaNumerate(g)].join(" "));var k = [],
-            l = [];b.normalized[g].forEach(function (a, h) {
-          var i = { x: j.x1 + d.projectValue(a, h, b.normalized[g]), y: j.y1 - e.projectValue(a, h, b.normalized[g]) };k.push(i.x, i.y), l.push({ value: a, valueIndex: h, meta: c.getMetaData(f, h) });
-        }.bind(this));var m = { lineSmooth: c.getSeriesOption(f, a, "lineSmooth"), showPoint: c.getSeriesOption(f, a, "showPoint"), showLine: c.getSeriesOption(f, a, "showLine"), showArea: c.getSeriesOption(f, a, "showArea"), areaBase: c.getSeriesOption(f, a, "areaBase") },
-            n = "function" == typeof m.lineSmooth ? m.lineSmooth : m.lineSmooth ? c.Interpolation.cardinal() : c.Interpolation.none(),
-            o = n(k, l);if (m.showPoint && o.pathElements.forEach(function (b) {
-          var h = i.elem("line", { x1: b.x, y1: b.y, x2: b.x + .01, y2: b.y }, a.classNames.point).attr({ value: [b.data.value.x, b.data.value.y].filter(function (a) {
-              return a;
-            }).join(","), meta: b.data.meta }, c.xmlNs.uri);this.eventEmitter.emit("draw", { type: "point", value: b.data.value, index: b.data.valueIndex, meta: b.data.meta, series: f, seriesIndex: g, axisX: d, axisY: e, group: i, element: h, x: b.x, y: b.y });
-        }.bind(this)), m.showLine) {
-          var p = i.elem("path", { d: o.stringify() }, a.classNames.line, !0);this.eventEmitter.emit("draw", { type: "line", values: b.normalized[g], path: o.clone(), chartRect: j, index: g, series: f, seriesIndex: g, axisX: d, axisY: e, group: i, element: p });
-        }if (m.showArea && e.range) {
-          var q = Math.max(Math.min(m.areaBase, e.range.max), e.range.min),
-              r = j.y1 - e.projectValue(q);o.splitByCommand("M").filter(function (a) {
-            return a.pathElements.length > 1;
-          }).map(function (a) {
-            var b = a.pathElements[0],
-                c = a.pathElements[a.pathElements.length - 1];return a.clone(!0).position(0).remove(1).move(b.x, r).line(b.x, b.y).position(a.pathElements.length + 1).line(c.x, r);
-          }).forEach(function (h) {
-            var k = i.elem("path", { d: h.stringify() }, a.classNames.area, !0).attr({ values: b.normalized[g] }, c.xmlNs.uri);this.eventEmitter.emit("draw", { type: "area", values: b.normalized[g], path: h.clone(), series: f, seriesIndex: g, axisX: d, axisY: e, chartRect: j, index: g, group: i, element: k });
-          }.bind(this));
-        }
-      }.bind(this)), this.eventEmitter.emit("created", { bounds: e.bounds, chartRect: j, axisX: d, axisY: e, svg: this.svg, options: a });
-    }function e(a, b, d, e) {
-      c.Line["super"].constructor.call(this, a, b, f, c.extend({}, f, d), e);
-    }var f = { axisX: { offset: 30, position: "end", labelOffset: { x: 0, y: 0 }, showLabel: !0, showGrid: !0, labelInterpolationFnc: c.noop, type: void 0 }, axisY: { offset: 40, position: "start", labelOffset: { x: 0, y: 0 }, showLabel: !0, showGrid: !0, labelInterpolationFnc: c.noop, type: void 0, scaleMinSpace: 20, onlyInteger: !1 }, width: void 0, height: void 0, showLine: !0, showPoint: !0, showArea: !1, areaBase: 0, lineSmooth: !0, low: void 0, high: void 0, chartPadding: { top: 15, right: 15, bottom: 5, left: 10 }, fullWidth: !1, reverseData: !1, classNames: { chart: "ct-chart-line", label: "ct-label", labelGroup: "ct-labels", series: "ct-series", line: "ct-line", point: "ct-point", area: "ct-area", grid: "ct-grid", gridGroup: "ct-grids", vertical: "ct-vertical", horizontal: "ct-horizontal", start: "ct-start", end: "ct-end" } };c.Line = c.Base.extend({ constructor: e, createChart: d });
-  }(window, document, a), function (a, b, c) {
-    "use strict";
-    function d(a) {
-      var b,
-          d = { raw: this.data, normalized: a.distributeSeries ? c.getDataArray(this.data, a.reverseData, a.horizontalBars ? "x" : "y").map(function (a) {
-          return [a];
-        }) : c.getDataArray(this.data, a.reverseData, a.horizontalBars ? "x" : "y") };this.svg = c.createSvg(this.container, a.width, a.height, a.classNames.chart + (a.horizontalBars ? " " + a.classNames.horizontalBars : ""));var e = this.svg.elem("g").addClass(a.classNames.gridGroup),
-          g = this.svg.elem("g"),
-          h = this.svg.elem("g").addClass(a.classNames.labelGroup);if (a.stackBars) {
-        var i = c.serialMap(d.normalized, function () {
-          return Array.prototype.slice.call(arguments).map(function (a) {
-            return a;
-          }).reduce(function (a, b) {
-            return { x: a.x + b.x || 0, y: a.y + b.y || 0 };
-          }, { x: 0, y: 0 });
-        });b = c.getHighLow([i], c.extend({}, a, { referenceValue: 0 }), a.horizontalBars ? "x" : "y");
-      } else b = c.getHighLow(d.normalized, c.extend({}, a, { referenceValue: 0 }), a.horizontalBars ? "x" : "y");b.high = +a.high || (0 === a.high ? 0 : b.high), b.low = +a.low || (0 === a.low ? 0 : b.low);var j,
-          k,
-          l,
-          m,
-          n,
-          o = c.createChartRect(this.svg, a, f.padding);k = a.distributeSeries && a.stackBars ? d.raw.labels.slice(0, 1) : d.raw.labels, a.horizontalBars ? (j = m = void 0 === a.axisX.type ? new c.AutoScaleAxis(c.Axis.units.x, d, o, c.extend({}, a.axisX, { highLow: b, referenceValue: 0 })) : a.axisX.type.call(c, c.Axis.units.x, d, o, c.extend({}, a.axisX, { highLow: b, referenceValue: 0 })), l = n = void 0 === a.axisY.type ? new c.StepAxis(c.Axis.units.y, d, o, { ticks: k }) : a.axisY.type.call(c, c.Axis.units.y, d, o, a.axisY)) : (l = m = void 0 === a.axisX.type ? new c.StepAxis(c.Axis.units.x, d, o, { ticks: k }) : a.axisX.type.call(c, c.Axis.units.x, d, o, a.axisX), j = n = void 0 === a.axisY.type ? new c.AutoScaleAxis(c.Axis.units.y, d, o, c.extend({}, a.axisY, { highLow: b, referenceValue: 0 })) : a.axisY.type.call(c, c.Axis.units.y, d, o, c.extend({}, a.axisY, { highLow: b, referenceValue: 0 })));var p = a.horizontalBars ? o.x1 + j.projectValue(0) : o.y1 - j.projectValue(0),
-          q = [];l.createGridAndLabels(e, h, this.supportsForeignObject, a, this.eventEmitter), j.createGridAndLabels(e, h, this.supportsForeignObject, a, this.eventEmitter), d.raw.series.forEach(function (b, e) {
-        var f,
-            h,
-            i = e - (d.raw.series.length - 1) / 2;f = a.distributeSeries && !a.stackBars ? l.axisLength / d.normalized.length / 2 : a.distributeSeries && a.stackBars ? l.axisLength / 2 : l.axisLength / d.normalized[e].length / 2, h = g.elem("g"), h.attr({ "series-name": b.name, meta: c.serialize(b.meta) }, c.xmlNs.uri), h.addClass([a.classNames.series, b.className || a.classNames.series + "-" + c.alphaNumerate(e)].join(" ")), d.normalized[e].forEach(function (g, k) {
-          var r, s, t, u;if (u = a.distributeSeries && !a.stackBars ? e : a.distributeSeries && a.stackBars ? 0 : k, r = a.horizontalBars ? { x: o.x1 + j.projectValue(g && g.x ? g.x : 0, k, d.normalized[e]), y: o.y1 - l.projectValue(g && g.y ? g.y : 0, u, d.normalized[e]) } : { x: o.x1 + l.projectValue(g && g.x ? g.x : 0, u, d.normalized[e]), y: o.y1 - j.projectValue(g && g.y ? g.y : 0, k, d.normalized[e]) }, l instanceof c.StepAxis && (l.options.stretch || (r[l.units.pos] += f * (a.horizontalBars ? -1 : 1)), r[l.units.pos] += a.stackBars || a.distributeSeries ? 0 : i * a.seriesBarDistance * (a.horizontalBars ? -1 : 1)), t = q[k] || p, q[k] = t - (p - r[l.counterUnits.pos]), void 0 !== g) {
-            var v = {};v[l.units.pos + "1"] = r[l.units.pos], v[l.units.pos + "2"] = r[l.units.pos], v[l.counterUnits.pos + "1"] = a.stackBars ? t : p, v[l.counterUnits.pos + "2"] = a.stackBars ? q[k] : r[l.counterUnits.pos], v.x1 = Math.min(Math.max(v.x1, o.x1), o.x2), v.x2 = Math.min(Math.max(v.x2, o.x1), o.x2), v.y1 = Math.min(Math.max(v.y1, o.y2), o.y1), v.y2 = Math.min(Math.max(v.y2, o.y2), o.y1), s = h.elem("line", v, a.classNames.bar).attr({ value: [g.x, g.y].filter(function (a) {
-                return a;
-              }).join(","), meta: c.getMetaData(b, k) }, c.xmlNs.uri), this.eventEmitter.emit("draw", c.extend({ type: "bar", value: g, index: k, meta: c.getMetaData(b, k), series: b, seriesIndex: e, axisX: m, axisY: n, chartRect: o, group: h, element: s }, v));
-          }
-        }.bind(this));
-      }.bind(this)), this.eventEmitter.emit("created", { bounds: j.bounds, chartRect: o, axisX: m, axisY: n, svg: this.svg, options: a });
-    }function e(a, b, d, e) {
-      c.Bar["super"].constructor.call(this, a, b, f, c.extend({}, f, d), e);
-    }var f = { axisX: { offset: 30, position: "end", labelOffset: { x: 0, y: 0 }, showLabel: !0, showGrid: !0, labelInterpolationFnc: c.noop, scaleMinSpace: 30, onlyInteger: !1 }, axisY: { offset: 40, position: "start", labelOffset: { x: 0, y: 0 }, showLabel: !0, showGrid: !0, labelInterpolationFnc: c.noop, scaleMinSpace: 20, onlyInteger: !1 }, width: void 0, height: void 0, high: void 0, low: void 0, onlyInteger: !1, chartPadding: { top: 15, right: 15, bottom: 5, left: 10 }, seriesBarDistance: 15, stackBars: !1, horizontalBars: !1, distributeSeries: !1, reverseData: !1, classNames: { chart: "ct-chart-bar", horizontalBars: "ct-horizontal-bars", label: "ct-label", labelGroup: "ct-labels", series: "ct-series", bar: "ct-bar", grid: "ct-grid", gridGroup: "ct-grids", vertical: "ct-vertical", horizontal: "ct-horizontal", start: "ct-start", end: "ct-end" } };c.Bar = c.Base.extend({ constructor: e, createChart: d });
-  }(window, document, a), function (a, b, c) {
-    "use strict";
-    function d(a, b, c) {
-      var d = b.x > a.x;return d && "explode" === c || !d && "implode" === c ? "start" : d && "implode" === c || !d && "explode" === c ? "end" : "middle";
-    }function e(a) {
-      var b,
-          e,
-          f,
-          h,
-          i,
-          j = [],
-          k = a.startAngle,
-          l = c.getDataArray(this.data, a.reverseData);this.svg = c.createSvg(this.container, a.width, a.height, a.donut ? a.classNames.chartDonut : a.classNames.chartPie), e = c.createChartRect(this.svg, a, g.padding), f = Math.min(e.width() / 2, e.height() / 2), i = a.total || l.reduce(function (a, b) {
-        return a + b;
-      }, 0), f -= a.donut ? a.donutWidth / 2 : 0, h = "outside" === a.labelPosition || a.donut ? f : "center" === a.labelPosition ? 0 : f / 2, h += a.labelOffset;var m = { x: e.x1 + e.width() / 2, y: e.y2 + e.height() / 2 },
-          n = 1 === this.data.series.filter(function (a) {
-        return a.hasOwnProperty("value") ? 0 !== a.value : 0 !== a;
-      }).length;a.showLabel && (b = this.svg.elem("g", null, null, !0));for (var o = 0; o < this.data.series.length; o++) {
-        var p = this.data.series[o];j[o] = this.svg.elem("g", null, null, !0), j[o].attr({ "series-name": p.name }, c.xmlNs.uri), j[o].addClass([a.classNames.series, p.className || a.classNames.series + "-" + c.alphaNumerate(o)].join(" "));var q = k + l[o] / i * 360;q - k === 360 && (q -= .01);var r = c.polarToCartesian(m.x, m.y, f, k - (0 === o || n ? 0 : .2)),
-            s = c.polarToCartesian(m.x, m.y, f, q),
-            t = new c.Svg.Path(!a.donut).move(s.x, s.y).arc(f, f, 0, q - k > 180, 0, r.x, r.y);a.donut || t.line(m.x, m.y);var u = j[o].elem("path", { d: t.stringify() }, a.donut ? a.classNames.sliceDonut : a.classNames.slicePie);if (u.attr({ value: l[o], meta: c.serialize(p.meta) }, c.xmlNs.uri), a.donut && u.attr({ style: "stroke-width: " + +a.donutWidth + "px" }), this.eventEmitter.emit("draw", { type: "slice", value: l[o], totalDataSum: i, index: o, meta: p.meta, series: p, group: j[o], element: u, path: t.clone(), center: m, radius: f, startAngle: k, endAngle: q }), a.showLabel) {
-          var v = c.polarToCartesian(m.x, m.y, h, k + (q - k) / 2),
-              w = a.labelInterpolationFnc(this.data.labels ? this.data.labels[o] : l[o], o);if (w || 0 === w) {
-            var x = b.elem("text", { dx: v.x, dy: v.y, "text-anchor": d(m, v, a.labelDirection) }, a.classNames.label).text("" + w);this.eventEmitter.emit("draw", { type: "label", index: o, group: b, element: x, text: "" + w, x: v.x, y: v.y });
-          }
-        }k = q;
-      }this.eventEmitter.emit("created", { chartRect: e, svg: this.svg, options: a });
-    }function f(a, b, d, e) {
-      c.Pie["super"].constructor.call(this, a, b, g, c.extend({}, g, d), e);
-    }var g = { width: void 0, height: void 0, chartPadding: 5, classNames: { chartPie: "ct-chart-pie", chartDonut: "ct-chart-donut", series: "ct-series", slicePie: "ct-slice-pie", sliceDonut: "ct-slice-donut", label: "ct-label" }, startAngle: 0, total: void 0, donut: !1, donutWidth: 60, showLabel: !0, labelOffset: 0, labelPosition: "inside", labelInterpolationFnc: c.noop, labelDirection: "neutral", reverseData: !1 };c.Pie = c.Base.extend({ constructor: f, createChart: e, determineAnchorPosition: d });
-  }(window, document, a), a;
-});
-//# sourceMappingURL=chartist.min.js.map
-
-/***/ }),
-/* 38 */
-/***/ (function(module, exports) {
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-type = ['', 'info', 'success', 'warning', 'danger'];
-
-demo = {
-  initPickColor: function initPickColor() {
-    $('.pick-class-label').click(function () {
-      var new_class = $(this).attr('new-class');
-      var old_class = $('#display-buttons').attr('data-class');
-      var display_div = $('#display-buttons');
-      if (display_div.length) {
-        var display_buttons = display_div.find('.btn');
-        display_buttons.removeClass(old_class);
-        display_buttons.addClass(new_class);
-        display_div.attr('data-class', new_class);
-      }
-    });
-  },
-
-  initChartist: function initChartist() {
-    var _optionsSales;
-
-    var dataSales = {
-      labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM', '3:00AM', '6:00AM'],
-      series: [[287, 385, 490, 562, 594, 626, 698, 895, 952], [67, 152, 193, 240, 387, 435, 535, 642, 744], [23, 113, 67, 108, 190, 239, 307, 410, 410]]
-    };
-
-    var optionsSales = (_optionsSales = {
-      lineSmooth: false,
-      low: 0,
-      high: 1000,
-      showArea: true,
-      height: "245px",
-      axisX: {
-        showGrid: false
-      }
-    }, _defineProperty(_optionsSales, 'lineSmooth', Chartist.Interpolation.simple({
-      divisor: 3
-    })), _defineProperty(_optionsSales, 'showLine', true), _defineProperty(_optionsSales, 'showPoint', false), _optionsSales);
-
-    var responsiveSales = [['screen and (max-width: 640px)', {
-      axisX: {
-        labelInterpolationFnc: function labelInterpolationFnc(value) {
-          return value[0];
-        }
-      }
-    }]];
-
-    Chartist.Line('#chartHours', dataSales, optionsSales, responsiveSales);
-
-    var data = {
-      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-      series: [[542, 543, 520, 680, 653, 753, 326, 434, 568, 610, 756, 895], [230, 293, 380, 480, 503, 553, 600, 664, 698, 710, 736, 795]]
-    };
-
-    var options = {
-      seriesBarDistance: 10,
-      axisX: {
-        showGrid: false
-      },
-      height: "245px"
-    };
-
-    var responsiveOptions = [['screen and (max-width: 640px)', {
-      seriesBarDistance: 5,
-      axisX: {
-        labelInterpolationFnc: function labelInterpolationFnc(value) {
-          return value[0];
-        }
-      }
-    }]];
-
-    Chartist.Line('#chartActivity', data, options, responsiveOptions);
-
-    var dataPreferences = {
-      series: [[25, 30, 20, 25]]
-    };
-
-    var optionsPreferences = {
-      donut: true,
-      donutWidth: 40,
-      startAngle: 0,
-      total: 100,
-      showLabel: false,
-      axisX: {
-        showGrid: false
-      }
-    };
-
-    Chartist.Pie('#chartPreferences', dataPreferences, optionsPreferences);
-
-    Chartist.Pie('#chartPreferences', {
-      labels: ['62%', '32%', '6%'],
-      series: [62, 32, 6]
-    });
-  },
-
-  initGoogleMaps: function initGoogleMaps() {
-    var myLatlng = new google.maps.LatLng(40.748817, -73.985428);
-    var mapOptions = {
-      zoom: 13,
-      center: myLatlng,
-      scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
-      styles: [{ "featureType": "water", "stylers": [{ "saturation": 43 }, { "lightness": -11 }, { "hue": "#0088ff" }] }, { "featureType": "road", "elementType": "geometry.fill", "stylers": [{ "hue": "#ff0000" }, { "saturation": -100 }, { "lightness": 99 }] }, { "featureType": "road", "elementType": "geometry.stroke", "stylers": [{ "color": "#808080" }, { "lightness": 54 }] }, { "featureType": "landscape.man_made", "elementType": "geometry.fill", "stylers": [{ "color": "#ece2d9" }] }, { "featureType": "poi.park", "elementType": "geometry.fill", "stylers": [{ "color": "#ccdca1" }] }, { "featureType": "road", "elementType": "labels.text.fill", "stylers": [{ "color": "#767676" }] }, { "featureType": "road", "elementType": "labels.text.stroke", "stylers": [{ "color": "#ffffff" }] }, { "featureType": "poi", "stylers": [{ "visibility": "off" }] }, { "featureType": "landscape.natural", "elementType": "geometry.fill", "stylers": [{ "visibility": "on" }, { "color": "#b8cb93" }] }, { "featureType": "poi.park", "stylers": [{ "visibility": "on" }] }, { "featureType": "poi.sports_complex", "stylers": [{ "visibility": "on" }] }, { "featureType": "poi.medical", "stylers": [{ "visibility": "on" }] }, { "featureType": "poi.business", "stylers": [{ "visibility": "simplified" }] }]
-
-    };
-    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-    var marker = new google.maps.Marker({
-      position: myLatlng,
-      title: "Hello World!"
-    });
-
-    // To add the marker to the map, call setMap();
-    marker.setMap(map);
-  },
-
-  showNotification: function showNotification(from, align) {
-    color = Math.floor(Math.random() * 4 + 1);
-
-    $.notify({
-      icon: "ti-gift",
-      message: "Welcome to <b>Paper Dashboard</b> - a beautiful freebie for every web developer."
-
-    }, {
-      type: type[color],
-      timer: 4000,
-      placement: {
-        from: from,
-        align: align
-      }
-    });
-  },
-  initDocumentationCharts: function initDocumentationCharts() {
-    var _optionsStock, _optionsSales2;
-
-    //     	init single simple line chart
-    var dataPerformance = {
-      labels: ['6pm', '9pm', '11pm', '2am', '4am', '8am', '2pm', '5pm', '8pm', '11pm', '4am'],
-      series: [[1, 6, 8, 7, 4, 7, 8, 12, 16, 17, 14, 13]]
-    };
-
-    var optionsPerformance = _defineProperty({
-      showPoint: false,
-      lineSmooth: true,
-      height: "200px",
-      axisX: {
-        showGrid: false,
-        showLabel: true
-      },
-      axisY: {
-        offset: 40
-      },
-      low: 0,
-      high: 16
-    }, 'height', "250px");
-
-    Chartist.Line('#chartPerformance', dataPerformance, optionsPerformance);
-
-    //     init single line with points chart
-    var dataStock = {
-      labels: ['\'07', '\'08', '\'09', '\'10', '\'11', '\'12', '\'13', '\'14', '\'15'],
-      series: [[22.20, 34.90, 42.28, 51.93, 62.21, 80.23, 62.21, 82.12, 102.50, 107.23]]
-    };
-
-    var optionsStock = (_optionsStock = {
-      lineSmooth: false,
-      height: "200px",
-      axisY: {
-        offset: 40,
-        labelInterpolationFnc: function labelInterpolationFnc(value) {
-          return '$' + value;
-        }
-
-      },
-      low: 10
-    }, _defineProperty(_optionsStock, 'height', "250px"), _defineProperty(_optionsStock, 'high', 110), _defineProperty(_optionsStock, 'classNames', {
-      point: 'ct-point ct-green',
-      line: 'ct-line ct-green'
-    }), _optionsStock);
-
-    Chartist.Line('#chartStock', dataStock, optionsStock);
-
-    //      init multiple lines chart
-    var dataSales = {
-      labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM', '3:00AM', '6:00AM'],
-      series: [[287, 385, 490, 562, 594, 626, 698, 895, 952], [67, 152, 193, 240, 387, 435, 535, 642, 744], [23, 113, 67, 108, 190, 239, 307, 410, 410]]
-    };
-
-    var optionsSales = (_optionsSales2 = {
-      lineSmooth: false,
-      low: 0,
-      high: 1000,
-      showArea: true,
-      height: "245px",
-      axisX: {
-        showGrid: false
-      }
-    }, _defineProperty(_optionsSales2, 'lineSmooth', Chartist.Interpolation.simple({
-      divisor: 3
-    })), _defineProperty(_optionsSales2, 'showLine', true), _defineProperty(_optionsSales2, 'showPoint', false), _optionsSales2);
-
-    var responsiveSales = [['screen and (max-width: 640px)', {
-      axisX: {
-        labelInterpolationFnc: function labelInterpolationFnc(value) {
-          return value[0];
-        }
-      }
-    }]];
-
-    Chartist.Line('#chartHours', dataSales, optionsSales, responsiveSales);
-
-    //      pie chart
-    Chartist.Pie('#chartPreferences', {
-      labels: ['62%', '32%', '6%'],
-      series: [62, 32, 6]
-    });
-
-    //      bar chart
-    var dataViews = {
-      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-      series: [[542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]]
-    };
-
-    var optionsViews = {
-      seriesBarDistance: 10,
-      classNames: {
-        bar: 'ct-bar'
-      },
-      axisX: {
-        showGrid: false
-
-      },
-      height: "250px"
-
-    };
-
-    var responsiveOptionsViews = [['screen and (max-width: 640px)', {
-      seriesBarDistance: 5,
-      axisX: {
-        labelInterpolationFnc: function labelInterpolationFnc(value) {
-          return value[0];
-        }
-      }
-    }]];
-
-    Chartist.Bar('#chartViews', dataViews, optionsViews, responsiveOptionsViews);
-
-    //     multiple bars chart
-    var data = {
-      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-      series: [[542, 543, 520, 680, 653, 753, 326, 434, 568, 610, 756, 895], [230, 293, 380, 480, 503, 553, 600, 664, 698, 710, 736, 795]]
-    };
-
-    var options = {
-      seriesBarDistance: 10,
-      axisX: {
-        showGrid: false
-      },
-      height: "245px"
-    };
-
-    var responsiveOptions = [['screen and (max-width: 640px)', {
-      seriesBarDistance: 5,
-      axisX: {
-        labelInterpolationFnc: function labelInterpolationFnc(value) {
-          return value[0];
-        }
-      }
-    }]];
-
-    Chartist.Line('#chartActivity', data, options, responsiveOptions);
-  }
-
-};
-
-/***/ }),
-/* 39 */
-/***/ (function(module, exports) {
-
-/*!
-    
- =========================================================
- * Paper Dashboard - v1.1.2
- =========================================================
- 
- * Product Page: http://www.creative-tim.com/product/paper-dashboard
- * Copyright 2017 Creative Tim (http://www.creative-tim.com)
- * Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard/blob/master/LICENSE.md)
- 
- =========================================================
- 
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- 
- */
-
-var fixedTop = false;
-var transparent = true;
-var navbar_initialized = false;
-
-$(document).ready(function () {
-    window_width = $(window).width();
-
-    // Init navigation toggle for small screens
-    if (window_width <= 991) {
-        pd.initRightMenu();
-    }
-
-    //  Activate the tooltips
-    $('[rel="tooltip"]').tooltip();
-});
-
-// activate collapse right menu when the windows is resized
-$(window).resize(function () {
-    if ($(window).width() <= 991) {
-        pd.initRightMenu();
-    }
-});
-
-pd = {
-    misc: {
-        navbar_menu_visible: 0
-    },
-    checkScrollForTransparentNavbar: debounce(function () {
-        if ($(document).scrollTop() > 381) {
-            if (transparent) {
-                transparent = false;
-                $('.navbar-color-on-scroll').removeClass('navbar-transparent');
-                $('.navbar-title').removeClass('hidden');
-            }
-        } else {
-            if (!transparent) {
-                transparent = true;
-                $('.navbar-color-on-scroll').addClass('navbar-transparent');
-                $('.navbar-title').addClass('hidden');
-            }
-        }
-    }),
-    initRightMenu: function initRightMenu() {
-        if (!navbar_initialized) {
-            $off_canvas_sidebar = $('nav').find('.navbar-collapse').first().clone(true);
-
-            $sidebar = $('.sidebar');
-            sidebar_bg_color = $sidebar.data('background-color');
-            sidebar_active_color = $sidebar.data('active-color');
-
-            $logo = $sidebar.find('.logo').first();
-            logo_content = $logo[0].outerHTML;
-
-            ul_content = '';
-
-            // set the bg color and active color from the default sidebar to the off canvas sidebar;
-            $off_canvas_sidebar.attr('data-background-color', sidebar_bg_color);
-            $off_canvas_sidebar.attr('data-active-color', sidebar_active_color);
-
-            $off_canvas_sidebar.addClass('off-canvas-sidebar');
-
-            //add the content from the regular header to the right menu
-            $off_canvas_sidebar.children('ul').each(function () {
-                content_buff = $(this).html();
-                ul_content = ul_content + content_buff;
-            });
-
-            // add the content from the sidebar to the right menu
-            content_buff = $sidebar.find('.nav').html();
-            ul_content = ul_content + '<li class="divider"></li>' + content_buff;
-
-            ul_content = '<ul class="nav navbar-nav">' + ul_content + '</ul>';
-
-            navbar_content = logo_content + ul_content;
-            navbar_content = '<div class="sidebar-wrapper">' + navbar_content + '</div>';
-
-            $off_canvas_sidebar.html(navbar_content);
-
-            $('body').append($off_canvas_sidebar);
-
-            $toggle = $('.navbar-toggle');
-
-            $off_canvas_sidebar.find('a').removeClass('btn btn-round btn-default');
-            $off_canvas_sidebar.find('button').removeClass('btn-round btn-fill btn-info btn-primary btn-success btn-danger btn-warning btn-neutral');
-            $off_canvas_sidebar.find('button').addClass('btn-simple btn-block');
-
-            $toggle.click(function () {
-                if (pd.misc.navbar_menu_visible == 1) {
-                    $('html').removeClass('nav-open');
-                    pd.misc.navbar_menu_visible = 0;
-                    $('#bodyClick').remove();
-                    setTimeout(function () {
-                        $toggle.removeClass('toggled');
-                    }, 400);
-                } else {
-                    setTimeout(function () {
-                        $toggle.addClass('toggled');
-                    }, 430);
-
-                    div = '<div id="bodyClick"></div>';
-                    $(div).appendTo("body").click(function () {
-                        $('html').removeClass('nav-open');
-                        pd.misc.navbar_menu_visible = 0;
-                        $('#bodyClick').remove();
-                        setTimeout(function () {
-                            $toggle.removeClass('toggled');
-                        }, 400);
-                    });
-
-                    $('html').addClass('nav-open');
-                    pd.misc.navbar_menu_visible = 1;
-                }
-            });
-            navbar_initialized = true;
-        }
-    }
-
-    // Returns a function, that, as long as it continues to be invoked, will not
-    // be triggered. The function will be called after it stops being called for
-    // N milliseconds. If `immediate` is passed, trigger the function on the
-    // leading edge, instead of the trailing.
-
-};function debounce(func, wait, immediate) {
-    var timeout;
-    return function () {
-        var context = this,
-            args = arguments;
-        clearTimeout(timeout);
-        timeout = setTimeout(function () {
-            timeout = null;
-            if (!immediate) func.apply(context, args);
-        }, wait);
-        if (immediate && !timeout) func.apply(context, args);
-    };
-};
-
-/***/ }),
-/* 40 */
-/***/ (function(module, exports) {
-
-$(function () {
-
-  if ($('#card-number').length > 0) {
-    // Create a Stripe client
-    var stripe = Stripe(pkeys.Stripe);
-
-    // Create an instance of Elements
-    var elements = stripe.elements();
-
-    // Custom styling can be passed to options when creating an Element.
-    // (Note that this demo uses a wider set of styles than the guide below.)
-    var style = {
-      base: {
-        color: '#32325d',
-        lineHeight: '18px',
-        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-        fontSmoothing: 'antialiased',
-        fontSize: '16px',
-        '::placeholder': {
-          color: '#aab7c4'
-        }
-      },
-      invalid: {
-        color: '#fa755a',
-        iconColor: '#fa755a'
-      }
-    };
-
-    // Create an instance of the card Element
-    var card = elements.create('card', { style: style });
-
-    // Add an instance of the card Element into the `card-element` <div>
-    card.mount('#card-number');
-
-    // Handle real-time validation errors from the card Element.
-    card.addEventListener('change', function (event) {
-      var displayError = document.getElementById('card-errors');
-      if (event.error) {
-        displayError.textContent = event.error.message;
-      } else {
-        displayError.textContent = '';
-      }
-    });
-
-    // Handle form submission
-    var form = $('[data-card-submit]');
-    form.on('submit', function (event) {
-      $('#processing').modal('show');
-      event.preventDefault();
-
-      stripe.createToken(card).then(function (result) {
-        if (result.error) {
-          // Inform the user if there was an error
-          var errorElement = document.getElementById('card-errors');
-          errorElement.textContent = result.error.message;
-          setTimeout(function () {
-            $('#processing').modal('hide');
-          }, 800);
-        } else {
-          // Send the token to your server
-          stripeTokenHandler(result.token, form);
-        }
-      });
-    });
-  } // End If for Stripe
-});
-
-function stripeTokenHandler(token, form) {
-  // Insert the token ID into the form so it gets submitted to the server
-  var hiddenInput = document.createElement('input');
-  hiddenInput.setAttribute('type', 'hidden');
-  hiddenInput.setAttribute('name', 'stripeToken');
-  hiddenInput.setAttribute('value', token.id);
-  form.append(hiddenInput);
-  form.off('submit');
-
-  // Submit the form
-  form.submit();
-}
-
-/***/ }),
-/* 41 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35286,7 +35263,7 @@ var config = api$1.config;
 
 
 /***/ }),
-/* 47 */
+/* 37 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -35773,7 +35750,7 @@ bunker(function () {
 
 
 /***/ }),
-/* 48 */
+/* 38 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -37782,6 +37759,1847 @@ bunker(function () {
 
 /* harmony default export */ __webpack_exports__["a"] = (icons$1);
 
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports) {
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+!function ($) {
+
+  /* CHECKBOX PUBLIC CLASS DEFINITION
+   * ============================== */
+
+  var Checkbox = function Checkbox(element, options) {
+    this.init(element, options);
+  };
+
+  Checkbox.prototype = {
+
+    constructor: Checkbox,
+
+    init: function init(element, options) {
+      var $el = this.$element = $(element);
+
+      this.options = $.extend({}, $.fn.checkbox.defaults, options);
+      $el.before(this.options.template);
+      this.setState();
+    },
+
+    setState: function setState() {
+      var $el = this.$element,
+          $parent = $el.closest('.checkbox');
+
+      $el.prop('disabled') && $parent.addClass('disabled');
+      $el.prop('checked') && $parent.addClass('checked');
+    },
+
+    toggle: function toggle() {
+      var ch = 'checked',
+          $el = this.$element,
+          $parent = $el.closest('.checkbox'),
+          checked = $el.prop(ch),
+          e = $.Event('toggle');
+
+      if ($el.prop('disabled') == false) {
+        $parent.toggleClass(ch) && checked ? $el.removeAttr(ch) : $el.prop(ch, ch);
+        $el.trigger(e).trigger('change');
+      }
+    },
+
+    setCheck: function setCheck(option) {
+      var d = 'disabled',
+          ch = 'checked',
+          $el = this.$element,
+          $parent = $el.closest('.checkbox'),
+          checkAction = option == 'check' ? true : false,
+          e = $.Event(option);
+
+      $parent[checkAction ? 'addClass' : 'removeClass'](ch) && checkAction ? $el.prop(ch, ch) : $el.removeAttr(ch);
+      $el.trigger(e).trigger('change');
+    }
+
+    /* CHECKBOX PLUGIN DEFINITION
+     * ======================== */
+
+  };var old = $.fn.checkbox;
+
+  $.fn.checkbox = function (option) {
+    return this.each(function () {
+      var $this = $(this),
+          data = $this.data('checkbox'),
+          options = $.extend({}, $.fn.checkbox.defaults, $this.data(), (typeof option === 'undefined' ? 'undefined' : _typeof(option)) == 'object' && option);
+      if (!data) $this.data('checkbox', data = new Checkbox(this, options));
+      if (option == 'toggle') data.toggle();
+      if (option == 'check' || option == 'uncheck') data.setCheck(option);else if (option) data.setState();
+    });
+  };
+
+  $.fn.checkbox.defaults = {
+    template: '<span class="icons"><span class="first-icon fa fa-square fa-base"></span><span class="second-icon fa fa-check-square fa-base"></span></span>'
+
+    /* CHECKBOX NO CONFLICT
+     * ================== */
+
+  };$.fn.checkbox.noConflict = function () {
+    $.fn.checkbox = old;
+    return this;
+  };
+
+  /* CHECKBOX DATA-API
+   * =============== */
+
+  $(document).on('click.checkbox.data-api', '[data-toggle^=checkbox], .checkbox', function (e) {
+    var $checkbox = $(e.target);
+    if (e.target.tagName != "A") {
+      e && e.preventDefault() && e.stopPropagation();
+      if (!$checkbox.hasClass('checkbox')) $checkbox = $checkbox.closest('.checkbox');
+      $checkbox.find(':checkbox').checkbox('toggle');
+    }
+  });
+
+  $(function () {
+    $('input[type="checkbox"]').each(function () {
+      var $checkbox = $(this);
+      $checkbox.checkbox();
+    });
+  });
+}(window.jQuery);
+
+/* =============================================================
+ * flatui-radio v0.0.3
+ * ============================================================ */
+
+!function ($) {
+
+  /* RADIO PUBLIC CLASS DEFINITION
+   * ============================== */
+
+  var Radio = function Radio(element, options) {
+    this.init(element, options);
+  };
+
+  Radio.prototype = {
+
+    constructor: Radio,
+
+    init: function init(element, options) {
+      var $el = this.$element = $(element);
+
+      this.options = $.extend({}, $.fn.radio.defaults, options);
+      $el.before(this.options.template);
+      this.setState();
+    },
+
+    setState: function setState() {
+      var $el = this.$element,
+          $parent = $el.closest('.radio');
+
+      $el.prop('disabled') && $parent.addClass('disabled');
+      $el.prop('checked') && $parent.addClass('checked');
+    },
+
+    toggle: function toggle() {
+      var d = 'disabled',
+          ch = 'checked',
+          $el = this.$element,
+          checked = $el.prop(ch),
+          $parent = $el.closest('.radio'),
+          $parentWrap = $el.closest('form').length ? $el.closest('form') : $el.closest('body'),
+          $elemGroup = $parentWrap.find(':radio[name="' + $el.attr('name') + '"]'),
+          e = $.Event('toggle');
+
+      if ($el.prop(d) == false) {
+        $elemGroup.not($el).each(function () {
+          var $el = $(this),
+              $parent = $(this).closest('.radio');
+
+          if ($el.prop(d) == false) {
+            $parent.removeClass(ch) && $el.removeAttr(ch).trigger('change');
+          }
+        });
+
+        if (checked == false) $parent.addClass(ch) && $el.prop(ch, true);
+        $el.trigger(e);
+
+        if (checked !== $el.prop(ch)) {
+          $el.trigger('change');
+        }
+      }
+    },
+
+    setCheck: function setCheck(option) {
+      var ch = 'checked',
+          $el = this.$element,
+          $parent = $el.closest('.radio'),
+          checkAction = option == 'check' ? true : false,
+          checked = $el.prop(ch),
+          $parentWrap = $el.closest('form').length ? $el.closest('form') : $el.closest('body'),
+          $elemGroup = $parentWrap.find(':radio[name="' + $el['attr']('name') + '"]'),
+          e = $.Event(option);
+
+      $elemGroup.not($el).each(function () {
+        var $el = $(this),
+            $parent = $(this).closest('.radio');
+
+        $parent.removeClass(ch) && $el.removeAttr(ch);
+      });
+
+      $parent[checkAction ? 'addClass' : 'removeClass'](ch) && checkAction ? $el.prop(ch, ch) : $el.removeAttr(ch);
+      $el.trigger(e);
+
+      if (checked !== $el.prop(ch)) {
+        $el.trigger('change');
+      }
+    }
+
+    /* RADIO PLUGIN DEFINITION
+     * ======================== */
+
+  };var old = $.fn.radio;
+
+  $.fn.radio = function (option) {
+    return this.each(function () {
+      var $this = $(this),
+          data = $this.data('radio'),
+          options = $.extend({}, $.fn.radio.defaults, $this.data(), (typeof option === 'undefined' ? 'undefined' : _typeof(option)) == 'object' && option);
+      if (!data) $this.data('radio', data = new Radio(this, options));
+      if (option == 'toggle') data.toggle();
+      if (option == 'check' || option == 'uncheck') data.setCheck(option);else if (option) data.setState();
+    });
+  };
+
+  $.fn.radio.defaults = {
+    template: '<span class="icons"><span class="first-icon fa fa-circle-o fa-base"></span><span class="second-icon fa fa-dot-circle-o fa-base"></span></span>'
+
+    /* RADIO NO CONFLICT
+     * ================== */
+
+  };$.fn.radio.noConflict = function () {
+    $.fn.radio = old;
+    return this;
+  };
+
+  /* RADIO DATA-API
+   * =============== */
+
+  $(document).on('click.radio.data-api', '[data-toggle^=radio], .radio', function (e) {
+    var $radio = $(e.target);
+    e && e.preventDefault() && e.stopPropagation();
+    if (!$radio.hasClass('radio')) $radio = $radio.closest('.radio');
+    $radio.find(':radio').radio('toggle');
+  });
+
+  $(function () {
+    $('input[type="radio"]').each(function () {
+      var $radio = $(this);
+      $radio.radio();
+    });
+  });
+}(window.jQuery);
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/*
+    
+    
+
+     Creative Tim Modifications
+     
+     Lines: 239, 240 was changed from top: 5px to top: 50% and we added margin-top: -13px. In this way the close button will be aligned vertically 
+     Line:242 - modified when the icon is set, we add the class "alert-with-icon", so there will be enough space for the icon.
+
+
+
+
+*/
+
+/*
+* Project: Bootstrap Notify = v3.1.5
+* Description: Turns standard Bootstrap alerts into "Growl-like" notifications.
+* Author: Mouse0270 aka Robert McIntosh
+* License: MIT License
+* Website: https://github.com/mouse0270/bootstrap-growl
+*/
+
+/* global define:false, require: false, jQuery:false */
+
+(function (factory) {
+	if (true) {
+		// AMD. Register as an anonymous module.
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(1)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else if ((typeof exports === 'undefined' ? 'undefined' : _typeof(exports)) === 'object') {
+		// Node/CommonJS
+		factory(require('jquery'));
+	} else {
+		// Browser globals
+		factory(jQuery);
+	}
+})(function ($) {
+	// Create the defaults once
+	var defaults = {
+		element: 'body',
+		position: null,
+		type: "info",
+		allow_dismiss: true,
+		allow_duplicates: true,
+		newest_on_top: false,
+		showProgressbar: false,
+		placement: {
+			from: "top",
+			align: "right"
+		},
+		offset: 20,
+		spacing: 10,
+		z_index: 1031,
+		delay: 5000,
+		timer: 1000,
+		url_target: '_blank',
+		mouse_over: null,
+		animate: {
+			enter: 'animated fadeInDown',
+			exit: 'animated fadeOutUp'
+		},
+		onShow: null,
+		onShown: null,
+		onClose: null,
+		onClosed: null,
+		icon_type: 'class',
+		template: '<div data-notify="container" class="col-xs-11 col-sm-4 alert alert-{0}" role="alert"><button type="button" aria-hidden="true" class="close" data-notify="dismiss">&times;</button><span data-notify="icon"></span> <span data-notify="title">{1}</span> <span data-notify="message">{2}</span><div class="progress" data-notify="progressbar"><div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div></div><a href="{3}" target="{4}" data-notify="url"></a></div>'
+	};
+
+	String.format = function () {
+		var str = arguments[0];
+		for (var i = 1; i < arguments.length; i++) {
+			str = str.replace(RegExp("\\{" + (i - 1) + "\\}", "gm"), arguments[i]);
+		}
+		return str;
+	};
+
+	function isDuplicateNotification(notification) {
+		var isDupe = false;
+
+		$('[data-notify="container"]').each(function (i, el) {
+			var $el = $(el);
+			var title = $el.find('[data-notify="title"]').text().trim();
+			var message = $el.find('[data-notify="message"]').html().trim();
+
+			// The input string might be different than the actual parsed HTML string!
+			// (<br> vs <br /> for example)
+			// So we have to force-parse this as HTML here!
+			var isSameTitle = title === $("<div>" + notification.settings.content.title + "</div>").html().trim();
+			var isSameMsg = message === $("<div>" + notification.settings.content.message + "</div>").html().trim();
+			var isSameType = $el.hasClass('alert-' + notification.settings.type);
+
+			if (isSameTitle && isSameMsg && isSameType) {
+				//we found the dupe. Set the var and stop checking.
+				isDupe = true;
+			}
+			return !isDupe;
+		});
+
+		return isDupe;
+	}
+
+	function Notify(element, content, options) {
+		// Setup Content of Notify
+		var contentObj = {
+			content: {
+				message: (typeof content === 'undefined' ? 'undefined' : _typeof(content)) === 'object' ? content.message : content,
+				title: content.title ? content.title : '',
+				icon: content.icon ? content.icon : '',
+				url: content.url ? content.url : '#',
+				target: content.target ? content.target : '-'
+			}
+		};
+
+		options = $.extend(true, {}, contentObj, options);
+		this.settings = $.extend(true, {}, defaults, options);
+		this._defaults = defaults;
+		if (this.settings.content.target === "-") {
+			this.settings.content.target = this.settings.url_target;
+		}
+		this.animations = {
+			start: 'webkitAnimationStart oanimationstart MSAnimationStart animationstart',
+			end: 'webkitAnimationEnd oanimationend MSAnimationEnd animationend'
+		};
+
+		if (typeof this.settings.offset === 'number') {
+			this.settings.offset = {
+				x: this.settings.offset,
+				y: this.settings.offset
+			};
+		}
+
+		//if duplicate messages are not allowed, then only continue if this new message is not a duplicate of one that it already showing
+		if (this.settings.allow_duplicates || !this.settings.allow_duplicates && !isDuplicateNotification(this)) {
+			this.init();
+		}
+	}
+
+	$.extend(Notify.prototype, {
+		init: function init() {
+			var self = this;
+
+			this.buildNotify();
+			if (this.settings.content.icon) {
+				this.setIcon();
+			}
+			if (this.settings.content.url != "#") {
+				this.styleURL();
+			}
+			this.styleDismiss();
+			this.placement();
+			this.bind();
+
+			this.notify = {
+				$ele: this.$ele,
+				update: function update(command, _update) {
+					var commands = {};
+					if (typeof command === "string") {
+						commands[command] = _update;
+					} else {
+						commands = command;
+					}
+					for (var cmd in commands) {
+						switch (cmd) {
+							case "type":
+								this.$ele.removeClass('alert-' + self.settings.type);
+								this.$ele.find('[data-notify="progressbar"] > .progress-bar').removeClass('progress-bar-' + self.settings.type);
+								self.settings.type = commands[cmd];
+								this.$ele.addClass('alert-' + commands[cmd]).find('[data-notify="progressbar"] > .progress-bar').addClass('progress-bar-' + commands[cmd]);
+								break;
+							case "icon":
+								var $icon = this.$ele.find('[data-notify="icon"]');
+								if (self.settings.icon_type.toLowerCase() === 'class') {
+									$icon.removeClass(self.settings.content.icon).addClass(commands[cmd]);
+								} else {
+									if (!$icon.is('img')) {
+										$icon.find('img');
+									}
+									$icon.attr('src', commands[cmd]);
+								}
+								break;
+							case "progress":
+								var newDelay = self.settings.delay - self.settings.delay * (commands[cmd] / 100);
+								this.$ele.data('notify-delay', newDelay);
+								this.$ele.find('[data-notify="progressbar"] > div').attr('aria-valuenow', commands[cmd]).css('width', commands[cmd] + '%');
+								break;
+							case "url":
+								this.$ele.find('[data-notify="url"]').attr('href', commands[cmd]);
+								break;
+							case "target":
+								this.$ele.find('[data-notify="url"]').attr('target', commands[cmd]);
+								break;
+							default:
+								this.$ele.find('[data-notify="' + cmd + '"]').html(commands[cmd]);
+						}
+					}
+					var posX = this.$ele.outerHeight() + parseInt(self.settings.spacing) + parseInt(self.settings.offset.y);
+					self.reposition(posX);
+				},
+				close: function close() {
+					self.close();
+				}
+			};
+		},
+		buildNotify: function buildNotify() {
+			var content = this.settings.content;
+			this.$ele = $(String.format(this.settings.template, this.settings.type, content.title, content.message, content.url, content.target));
+			this.$ele.attr('data-notify-position', this.settings.placement.from + '-' + this.settings.placement.align);
+			if (!this.settings.allow_dismiss) {
+				this.$ele.find('[data-notify="dismiss"]').css('display', 'none');
+			}
+			if (this.settings.delay <= 0 && !this.settings.showProgressbar || !this.settings.showProgressbar) {
+				this.$ele.find('[data-notify="progressbar"]').remove();
+			}
+		},
+		setIcon: function setIcon() {
+
+			this.$ele.addClass('alert-with-icon');
+
+			if (this.settings.icon_type.toLowerCase() === 'class') {
+				this.$ele.find('[data-notify="icon"]').addClass(this.settings.content.icon);
+			} else {
+				if (this.$ele.find('[data-notify="icon"]').is('img')) {
+					this.$ele.find('[data-notify="icon"]').attr('src', this.settings.content.icon);
+				} else {
+					this.$ele.find('[data-notify="icon"]').append('<img src="' + this.settings.content.icon + '" alt="Notify Icon" />');
+				}
+			}
+		},
+		styleDismiss: function styleDismiss() {
+			this.$ele.find('[data-notify="dismiss"]').css({
+				position: 'absolute',
+				right: '10px',
+				top: '50%',
+				marginTop: '-13px',
+				zIndex: this.settings.z_index + 2
+			});
+		},
+		styleURL: function styleURL() {
+			this.$ele.find('[data-notify="url"]').css({
+				backgroundImage: 'url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)',
+				height: '100%',
+				left: 0,
+				position: 'absolute',
+				top: 0,
+				width: '100%',
+				zIndex: this.settings.z_index + 1
+			});
+		},
+		placement: function placement() {
+			var self = this,
+			    offsetAmt = this.settings.offset.y,
+			    css = {
+				display: 'inline-block',
+				margin: '0px auto',
+				position: this.settings.position ? this.settings.position : this.settings.element === 'body' ? 'fixed' : 'absolute',
+				transition: 'all .5s ease-in-out',
+				zIndex: this.settings.z_index
+			},
+			    hasAnimation = false,
+			    settings = this.settings;
+
+			$('[data-notify-position="' + this.settings.placement.from + '-' + this.settings.placement.align + '"]:not([data-closing="true"])').each(function () {
+				offsetAmt = Math.max(offsetAmt, parseInt($(this).css(settings.placement.from)) + parseInt($(this).outerHeight()) + parseInt(settings.spacing));
+			});
+			if (this.settings.newest_on_top === true) {
+				offsetAmt = this.settings.offset.y;
+			}
+			css[this.settings.placement.from] = offsetAmt + 'px';
+
+			switch (this.settings.placement.align) {
+				case "left":
+				case "right":
+					css[this.settings.placement.align] = this.settings.offset.x + 'px';
+					break;
+				case "center":
+					css.left = 0;
+					css.right = 0;
+					break;
+			}
+			this.$ele.css(css).addClass(this.settings.animate.enter);
+			$.each(Array('webkit-', 'moz-', 'o-', 'ms-', ''), function (index, prefix) {
+				self.$ele[0].style[prefix + 'AnimationIterationCount'] = 1;
+			});
+
+			$(this.settings.element).append(this.$ele);
+
+			if (this.settings.newest_on_top === true) {
+				offsetAmt = parseInt(offsetAmt) + parseInt(this.settings.spacing) + this.$ele.outerHeight();
+				this.reposition(offsetAmt);
+			}
+
+			if ($.isFunction(self.settings.onShow)) {
+				self.settings.onShow.call(this.$ele);
+			}
+
+			this.$ele.one(this.animations.start, function () {
+				hasAnimation = true;
+			}).one(this.animations.end, function () {
+				if ($.isFunction(self.settings.onShown)) {
+					self.settings.onShown.call(this);
+				}
+			});
+
+			setTimeout(function () {
+				if (!hasAnimation) {
+					if ($.isFunction(self.settings.onShown)) {
+						self.settings.onShown.call(this);
+					}
+				}
+			}, 600);
+		},
+		bind: function bind() {
+			var self = this;
+
+			this.$ele.find('[data-notify="dismiss"]').on('click', function () {
+				self.close();
+			});
+
+			this.$ele.mouseover(function () {
+				$(this).data('data-hover', "true");
+			}).mouseout(function () {
+				$(this).data('data-hover', "false");
+			});
+			this.$ele.data('data-hover', "false");
+
+			if (this.settings.delay > 0) {
+				self.$ele.data('notify-delay', self.settings.delay);
+				var timer = setInterval(function () {
+					var delay = parseInt(self.$ele.data('notify-delay')) - self.settings.timer;
+					if (self.$ele.data('data-hover') === 'false' && self.settings.mouse_over === "pause" || self.settings.mouse_over != "pause") {
+						var percent = (self.settings.delay - delay) / self.settings.delay * 100;
+						self.$ele.data('notify-delay', delay);
+						self.$ele.find('[data-notify="progressbar"] > div').attr('aria-valuenow', percent).css('width', percent + '%');
+					}
+					if (delay <= -self.settings.timer) {
+						clearInterval(timer);
+						self.close();
+					}
+				}, self.settings.timer);
+			}
+		},
+		close: function close() {
+			var self = this,
+			    posX = parseInt(this.$ele.css(this.settings.placement.from)),
+			    hasAnimation = false;
+
+			this.$ele.data('closing', 'true').addClass(this.settings.animate.exit);
+			self.reposition(posX);
+
+			if ($.isFunction(self.settings.onClose)) {
+				self.settings.onClose.call(this.$ele);
+			}
+
+			this.$ele.one(this.animations.start, function () {
+				hasAnimation = true;
+			}).one(this.animations.end, function () {
+				$(this).remove();
+				if ($.isFunction(self.settings.onClosed)) {
+					self.settings.onClosed.call(this);
+				}
+			});
+
+			setTimeout(function () {
+				if (!hasAnimation) {
+					self.$ele.remove();
+					if (self.settings.onClosed) {
+						self.settings.onClosed(self.$ele);
+					}
+				}
+			}, 600);
+		},
+		reposition: function reposition(posX) {
+			var self = this,
+			    notifies = '[data-notify-position="' + this.settings.placement.from + '-' + this.settings.placement.align + '"]:not([data-closing="true"])',
+			    $elements = this.$ele.nextAll(notifies);
+			if (this.settings.newest_on_top === true) {
+				$elements = this.$ele.prevAll(notifies);
+			}
+			$elements.each(function () {
+				$(this).css(self.settings.placement.from, posX);
+				posX = parseInt(posX) + parseInt(self.settings.spacing) + $(this).outerHeight();
+			});
+		}
+	});
+
+	$.notify = function (content, options) {
+		var plugin = new Notify(this, content, options);
+		return plugin.notify;
+	};
+	$.notifyDefaults = function (options) {
+		defaults = $.extend(true, {}, defaults, options);
+		return defaults;
+	};
+	$.notifyClose = function (command) {
+		if (typeof command === "undefined" || command === "all") {
+			$('[data-notify]').find('[data-notify="dismiss"]').trigger('click');
+		} else {
+			$('[data-notify-position="' + command + '"]').find('[data-notify="dismiss"]').trigger('click');
+		}
+	};
+});
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/* Chartist.js 0.9.4
+ * Copyright © 2015 Gion Kunz
+ * Free to use under the WTFPL license.
+ * http://www.wtfpl.net/
+ */
+
+!function (a, b) {
+   true ? !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+    return a.Chartist = b();
+  }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : "object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) ? module.exports = b() : a.Chartist = b();
+}(this, function () {
+  var a = { version: "0.9.4" };return function (a, b, c) {
+    "use strict";
+    c.noop = function (a) {
+      return a;
+    }, c.alphaNumerate = function (a) {
+      return String.fromCharCode(97 + a % 26);
+    }, c.extend = function (a) {
+      a = a || {};var b = Array.prototype.slice.call(arguments, 1);return b.forEach(function (b) {
+        for (var d in b) {
+          "object" != _typeof(b[d]) || null === b[d] || b[d] instanceof Array ? a[d] = b[d] : a[d] = c.extend({}, a[d], b[d]);
+        }
+      }), a;
+    }, c.replaceAll = function (a, b, c) {
+      return a.replace(new RegExp(b, "g"), c);
+    }, c.stripUnit = function (a) {
+      return "string" == typeof a && (a = a.replace(/[^0-9\+-\.]/g, "")), +a;
+    }, c.ensureUnit = function (a, b) {
+      return "number" == typeof a && (a += b), a;
+    }, c.querySelector = function (a) {
+      return a instanceof Node ? a : b.querySelector(a);
+    }, c.times = function (a) {
+      return Array.apply(null, new Array(a));
+    }, c.sum = function (a, b) {
+      return a + (b ? b : 0);
+    }, c.mapMultiply = function (a) {
+      return function (b) {
+        return b * a;
+      };
+    }, c.mapAdd = function (a) {
+      return function (b) {
+        return b + a;
+      };
+    }, c.serialMap = function (a, b) {
+      var d = [],
+          e = Math.max.apply(null, a.map(function (a) {
+        return a.length;
+      }));return c.times(e).forEach(function (c, e) {
+        var f = a.map(function (a) {
+          return a[e];
+        });d[e] = b.apply(null, f);
+      }), d;
+    }, c.roundWithPrecision = function (a, b) {
+      var d = Math.pow(10, b || c.precision);return Math.round(a * d) / d;
+    }, c.precision = 8, c.escapingMap = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }, c.serialize = function (a) {
+      return null === a || void 0 === a ? a : ("number" == typeof a ? a = "" + a : "object" == (typeof a === "undefined" ? "undefined" : _typeof(a)) && (a = JSON.stringify({ data: a })), Object.keys(c.escapingMap).reduce(function (a, b) {
+        return c.replaceAll(a, b, c.escapingMap[b]);
+      }, a));
+    }, c.deserialize = function (a) {
+      if ("string" != typeof a) return a;a = Object.keys(c.escapingMap).reduce(function (a, b) {
+        return c.replaceAll(a, c.escapingMap[b], b);
+      }, a);try {
+        a = JSON.parse(a), a = void 0 !== a.data ? a.data : a;
+      } catch (b) {}return a;
+    }, c.createSvg = function (a, b, d, e) {
+      var f;return b = b || "100%", d = d || "100%", Array.prototype.slice.call(a.querySelectorAll("svg")).filter(function (a) {
+        return a.getAttributeNS("http://www.w3.org/2000/xmlns/", c.xmlNs.prefix);
+      }).forEach(function (b) {
+        a.removeChild(b);
+      }), f = new c.Svg("svg").attr({ width: b, height: d }).addClass(e).attr({ style: "width: " + b + "; height: " + d + ";" }), a.appendChild(f._node), f;
+    }, c.reverseData = function (a) {
+      a.labels.reverse(), a.series.reverse();for (var b = 0; b < a.series.length; b++) {
+        "object" == _typeof(a.series[b]) && void 0 !== a.series[b].data ? a.series[b].data.reverse() : a.series[b] instanceof Array && a.series[b].reverse();
+      }
+    }, c.getDataArray = function (a, b, d) {
+      function e(a) {
+        if (c.isFalseyButZero(a)) return void 0;if ((a.data || a) instanceof Array) return (a.data || a).map(e);if (a.hasOwnProperty("value")) return e(a.value);if (d) {
+          var b = {};return "string" == typeof d ? b[d] = c.getNumberOrUndefined(a) : b.y = c.getNumberOrUndefined(a), b.x = a.hasOwnProperty("x") ? c.getNumberOrUndefined(a.x) : b.x, b.y = a.hasOwnProperty("y") ? c.getNumberOrUndefined(a.y) : b.y, b;
+        }return c.getNumberOrUndefined(a);
+      }return (b && !a.reversed || !b && a.reversed) && (c.reverseData(a), a.reversed = !a.reversed), a.series.map(e);
+    }, c.normalizePadding = function (a, b) {
+      return b = b || 0, "number" == typeof a ? { top: a, right: a, bottom: a, left: a } : { top: "number" == typeof a.top ? a.top : b, right: "number" == typeof a.right ? a.right : b, bottom: "number" == typeof a.bottom ? a.bottom : b, left: "number" == typeof a.left ? a.left : b };
+    }, c.getMetaData = function (a, b) {
+      var d = a.data ? a.data[b] : a[b];return d ? c.serialize(d.meta) : void 0;
+    }, c.orderOfMagnitude = function (a) {
+      return Math.floor(Math.log(Math.abs(a)) / Math.LN10);
+    }, c.projectLength = function (a, b, c) {
+      return b / c.range * a;
+    }, c.getAvailableHeight = function (a, b) {
+      return Math.max((c.stripUnit(b.height) || a.height()) - (b.chartPadding.top + b.chartPadding.bottom) - b.axisX.offset, 0);
+    }, c.getHighLow = function (a, b, d) {
+      function e(a) {
+        if (void 0 === a) return void 0;if (a instanceof Array) for (var b = 0; b < a.length; b++) {
+          e(a[b]);
+        } else {
+          var c = d ? +a[d] : +a;g && c > f.high && (f.high = c), h && c < f.low && (f.low = c);
+        }
+      }b = c.extend({}, b, d ? b["axis" + d.toUpperCase()] : {});var f = { high: void 0 === b.high ? -Number.MAX_VALUE : +b.high, low: void 0 === b.low ? Number.MAX_VALUE : +b.low },
+          g = void 0 === b.high,
+          h = void 0 === b.low;return (g || h) && e(a), (b.referenceValue || 0 === b.referenceValue) && (f.high = Math.max(b.referenceValue, f.high), f.low = Math.min(b.referenceValue, f.low)), f.high <= f.low && (0 === f.low ? f.high = 1 : f.low < 0 ? f.high = 0 : f.low = 0), f;
+    }, c.isNum = function (a) {
+      return !isNaN(a) && isFinite(a);
+    }, c.isFalseyButZero = function (a) {
+      return !a && 0 !== a;
+    }, c.getNumberOrUndefined = function (a) {
+      return isNaN(+a) ? void 0 : +a;
+    }, c.getMultiValue = function (a, b) {
+      return c.isNum(a) ? +a : a ? a[b || "y"] || 0 : 0;
+    }, c.rho = function (a) {
+      function b(a, c) {
+        return a % c === 0 ? c : b(c, a % c);
+      }function c(a) {
+        return a * a + 1;
+      }if (1 === a) return a;var d,
+          e = 2,
+          f = 2;if (a % 2 === 0) return 2;do {
+        e = c(e) % a, f = c(c(f)) % a, d = b(Math.abs(e - f), a);
+      } while (1 === d);return d;
+    }, c.getBounds = function (a, b, d, e) {
+      var f,
+          g,
+          h,
+          i = 0,
+          j = { high: b.high, low: b.low };j.valueRange = j.high - j.low, j.oom = c.orderOfMagnitude(j.valueRange), j.step = Math.pow(10, j.oom), j.min = Math.floor(j.low / j.step) * j.step, j.max = Math.ceil(j.high / j.step) * j.step, j.range = j.max - j.min, j.numberOfSteps = Math.round(j.range / j.step);var k = c.projectLength(a, j.step, j),
+          l = d > k,
+          m = e ? c.rho(j.range) : 0;if (e && c.projectLength(a, 1, j) >= d) j.step = 1;else if (e && m < j.step && c.projectLength(a, m, j) >= d) j.step = m;else for (;;) {
+        if (l && c.projectLength(a, j.step, j) <= d) j.step *= 2;else {
+          if (l || !(c.projectLength(a, j.step / 2, j) >= d)) break;if (j.step /= 2, e && j.step % 1 !== 0) {
+            j.step *= 2;break;
+          }
+        }if (i++ > 1e3) throw new Error("Exceeded maximum number of iterations while optimizing scale step!");
+      }for (g = j.min, h = j.max; g + j.step <= j.low;) {
+        g += j.step;
+      }for (; h - j.step >= j.high;) {
+        h -= j.step;
+      }for (j.min = g, j.max = h, j.range = j.max - j.min, j.values = [], f = j.min; f <= j.max; f += j.step) {
+        j.values.push(c.roundWithPrecision(f));
+      }return j;
+    }, c.polarToCartesian = function (a, b, c, d) {
+      var e = (d - 90) * Math.PI / 180;return { x: a + c * Math.cos(e), y: b + c * Math.sin(e) };
+    }, c.createChartRect = function (a, b, d) {
+      var e = !(!b.axisX && !b.axisY),
+          f = e ? b.axisY.offset : 0,
+          g = e ? b.axisX.offset : 0,
+          h = a.width() || c.stripUnit(b.width) || 0,
+          i = a.height() || c.stripUnit(b.height) || 0,
+          j = c.normalizePadding(b.chartPadding, d);h = Math.max(h, f + j.left + j.right), i = Math.max(i, g + j.top + j.bottom);var k = { padding: j, width: function width() {
+          return this.x2 - this.x1;
+        }, height: function height() {
+          return this.y1 - this.y2;
+        } };return e ? ("start" === b.axisX.position ? (k.y2 = j.top + g, k.y1 = Math.max(i - j.bottom, k.y2 + 1)) : (k.y2 = j.top, k.y1 = Math.max(i - j.bottom - g, k.y2 + 1)), "start" === b.axisY.position ? (k.x1 = j.left + f, k.x2 = Math.max(h - j.right, k.x1 + 1)) : (k.x1 = j.left, k.x2 = Math.max(h - j.right - f, k.x1 + 1))) : (k.x1 = j.left, k.x2 = Math.max(h - j.right, k.x1 + 1), k.y2 = j.top, k.y1 = Math.max(i - j.bottom, k.y2 + 1)), k;
+    }, c.createGrid = function (a, b, d, e, f, g, h, i) {
+      var j = {};j[d.units.pos + "1"] = a, j[d.units.pos + "2"] = a, j[d.counterUnits.pos + "1"] = e, j[d.counterUnits.pos + "2"] = e + f;var k = g.elem("line", j, h.join(" "));i.emit("draw", c.extend({ type: "grid", axis: d, index: b, group: g, element: k }, j));
+    }, c.createLabel = function (a, b, d, e, f, g, h, i, j, k, l) {
+      var m,
+          n = {};if (n[f.units.pos] = a + h[f.units.pos], n[f.counterUnits.pos] = h[f.counterUnits.pos], n[f.units.len] = b, n[f.counterUnits.len] = g - 10, k) {
+        var o = '<span class="' + j.join(" ") + '" style="' + f.units.len + ": " + Math.round(n[f.units.len]) + "px; " + f.counterUnits.len + ": " + Math.round(n[f.counterUnits.len]) + 'px">' + e[d] + "</span>";m = i.foreignObject(o, c.extend({ style: "overflow: visible;" }, n));
+      } else m = i.elem("text", n, j.join(" ")).text(e[d]);l.emit("draw", c.extend({ type: "label", axis: f, index: d, group: i, element: m, text: e[d] }, n));
+    }, c.getSeriesOption = function (a, b, c) {
+      if (a.name && b.series && b.series[a.name]) {
+        var d = b.series[a.name];return d.hasOwnProperty(c) ? d[c] : b[c];
+      }return b[c];
+    }, c.optionsProvider = function (b, d, e) {
+      function f(b) {
+        var f = h;if (h = c.extend({}, j), d) for (i = 0; i < d.length; i++) {
+          var g = a.matchMedia(d[i][0]);g.matches && (h = c.extend(h, d[i][1]));
+        }e && !b && e.emit("optionsChanged", { previousOptions: f, currentOptions: h });
+      }function g() {
+        k.forEach(function (a) {
+          a.removeListener(f);
+        });
+      }var h,
+          i,
+          j = c.extend({}, b),
+          k = [];if (!a.matchMedia) throw "window.matchMedia not found! Make sure you're using a polyfill.";if (d) for (i = 0; i < d.length; i++) {
+        var l = a.matchMedia(d[i][0]);l.addListener(f), k.push(l);
+      }return f(!0), { removeMediaQueryListeners: g, getCurrentOptions: function getCurrentOptions() {
+          return c.extend({}, h);
+        } };
+    };
+  }(window, document, a), function (a, b, c) {
+    "use strict";
+    c.Interpolation = {}, c.Interpolation.none = function () {
+      return function (a, b) {
+        for (var d = new c.Svg.Path(), e = !0, f = 1; f < a.length; f += 2) {
+          var g = b[(f - 1) / 2];void 0 === g.value ? e = !0 : e ? (d.move(a[f - 1], a[f], !1, g), e = !1) : d.line(a[f - 1], a[f], !1, g);
+        }return d;
+      };
+    }, c.Interpolation.simple = function (a) {
+      var b = { divisor: 2 };a = c.extend({}, b, a);var d = 1 / Math.max(1, a.divisor);return function (a, b) {
+        for (var e = new c.Svg.Path(), f = !0, g = 2; g < a.length; g += 2) {
+          var h = a[g - 2],
+              i = a[g - 1],
+              j = a[g],
+              k = a[g + 1],
+              l = (j - h) * d,
+              m = b[g / 2 - 1],
+              n = b[g / 2];void 0 === m.value ? f = !0 : (f && e.move(h, i, !1, m), void 0 !== n.value && (e.curve(h + l, i, j - l, k, j, k, !1, n), f = !1));
+        }return e;
+      };
+    }, c.Interpolation.cardinal = function (a) {
+      function b(a, b) {
+        for (var c = [], d = !0, e = 0; e < a.length; e += 2) {
+          void 0 === b[e / 2].value ? d = !0 : (d && (c.push({ pathCoordinates: [], valueData: [] }), d = !1), c[c.length - 1].pathCoordinates.push(a[e], a[e + 1]), c[c.length - 1].valueData.push(b[e / 2]));
+        }return c;
+      }var d = { tension: 1 };a = c.extend({}, d, a);var e = Math.min(1, Math.max(0, a.tension)),
+          f = 1 - e;return function g(a, d) {
+        var h = b(a, d);if (h.length > 1) {
+          var i = [];return h.forEach(function (a) {
+            i.push(g(a.pathCoordinates, a.valueData));
+          }), c.Svg.Path.join(i);
+        }if (a = h[0].pathCoordinates, d = h[0].valueData, a.length <= 4) return c.Interpolation.none()(a, d);for (var j, k = new c.Svg.Path().move(a[0], a[1], !1, d[0]), l = 0, m = a.length; m - 2 * !j > l; l += 2) {
+          var n = [{ x: +a[l - 2], y: +a[l - 1] }, { x: +a[l], y: +a[l + 1] }, { x: +a[l + 2], y: +a[l + 3] }, { x: +a[l + 4], y: +a[l + 5] }];j ? l ? m - 4 === l ? n[3] = { x: +a[0], y: +a[1] } : m - 2 === l && (n[2] = { x: +a[0], y: +a[1] }, n[3] = { x: +a[2], y: +a[3] }) : n[0] = { x: +a[m - 2], y: +a[m - 1] } : m - 4 === l ? n[3] = n[2] : l || (n[0] = { x: +a[l], y: +a[l + 1] }), k.curve(e * (-n[0].x + 6 * n[1].x + n[2].x) / 6 + f * n[2].x, e * (-n[0].y + 6 * n[1].y + n[2].y) / 6 + f * n[2].y, e * (n[1].x + 6 * n[2].x - n[3].x) / 6 + f * n[2].x, e * (n[1].y + 6 * n[2].y - n[3].y) / 6 + f * n[2].y, n[2].x, n[2].y, !1, d[(l + 2) / 2]);
+        }return k;
+      };
+    }, c.Interpolation.step = function (a) {
+      var b = { postpone: !0 };return a = c.extend({}, b, a), function (b, d) {
+        for (var e = new c.Svg.Path(), f = !0, g = 2; g < b.length; g += 2) {
+          var h = b[g - 2],
+              i = b[g - 1],
+              j = b[g],
+              k = b[g + 1],
+              l = d[g / 2 - 1],
+              m = d[g / 2];void 0 === l.value ? f = !0 : (f && e.move(h, i, !1, l), void 0 !== m.value && (a.postpone ? e.line(j, i, !1, l) : e.line(h, k, !1, m), e.line(j, k, !1, m), f = !1));
+        }return e;
+      };
+    };
+  }(window, document, a), function (a, b, c) {
+    "use strict";
+    c.EventEmitter = function () {
+      function a(a, b) {
+        d[a] = d[a] || [], d[a].push(b);
+      }function b(a, b) {
+        d[a] && (b ? (d[a].splice(d[a].indexOf(b), 1), 0 === d[a].length && delete d[a]) : delete d[a]);
+      }function c(a, b) {
+        d[a] && d[a].forEach(function (a) {
+          a(b);
+        }), d["*"] && d["*"].forEach(function (c) {
+          c(a, b);
+        });
+      }var d = [];return { addEventHandler: a, removeEventHandler: b, emit: c };
+    };
+  }(window, document, a), function (a, b, c) {
+    "use strict";
+    function d(a) {
+      var b = [];if (a.length) for (var c = 0; c < a.length; c++) {
+        b.push(a[c]);
+      }return b;
+    }function e(a, b) {
+      var d = b || this.prototype || c.Class,
+          e = Object.create(d);c.Class.cloneDefinitions(e, a);var f = function f() {
+        var a,
+            b = e.constructor || function () {};return a = this === c ? Object.create(e) : this, b.apply(a, Array.prototype.slice.call(arguments, 0)), a;
+      };return f.prototype = e, f["super"] = d, f.extend = this.extend, f;
+    }function f() {
+      var a = d(arguments),
+          b = a[0];return a.splice(1, a.length - 1).forEach(function (a) {
+        Object.getOwnPropertyNames(a).forEach(function (c) {
+          delete b[c], Object.defineProperty(b, c, Object.getOwnPropertyDescriptor(a, c));
+        });
+      }), b;
+    }c.Class = { extend: e, cloneDefinitions: f };
+  }(window, document, a), function (a, b, c) {
+    "use strict";
+    function d(a, b, d) {
+      return a && (this.data = a, this.eventEmitter.emit("data", { type: "update", data: this.data })), b && (this.options = c.extend({}, d ? this.options : this.defaultOptions, b), this.initializeTimeoutId || (this.optionsProvider.removeMediaQueryListeners(), this.optionsProvider = c.optionsProvider(this.options, this.responsiveOptions, this.eventEmitter))), this.initializeTimeoutId || this.createChart(this.optionsProvider.getCurrentOptions()), this;
+    }function e() {
+      return this.initializeTimeoutId ? a.clearTimeout(this.initializeTimeoutId) : (a.removeEventListener("resize", this.resizeListener), this.optionsProvider.removeMediaQueryListeners()), this;
+    }function f(a, b) {
+      return this.eventEmitter.addEventHandler(a, b), this;
+    }function g(a, b) {
+      return this.eventEmitter.removeEventHandler(a, b), this;
+    }function h() {
+      a.addEventListener("resize", this.resizeListener), this.optionsProvider = c.optionsProvider(this.options, this.responsiveOptions, this.eventEmitter), this.eventEmitter.addEventHandler("optionsChanged", function () {
+        this.update();
+      }.bind(this)), this.options.plugins && this.options.plugins.forEach(function (a) {
+        a instanceof Array ? a[0](this, a[1]) : a(this);
+      }.bind(this)), this.eventEmitter.emit("data", { type: "initial", data: this.data }), this.createChart(this.optionsProvider.getCurrentOptions()), this.initializeTimeoutId = void 0;
+    }function i(a, b, d, e, f) {
+      this.container = c.querySelector(a), this.data = b, this.defaultOptions = d, this.options = e, this.responsiveOptions = f, this.eventEmitter = c.EventEmitter(), this.supportsForeignObject = c.Svg.isSupported("Extensibility"), this.supportsAnimations = c.Svg.isSupported("AnimationEventsAttribute"), this.resizeListener = function () {
+        this.update();
+      }.bind(this), this.container && (this.container.__chartist__ && this.container.__chartist__.detach(), this.container.__chartist__ = this), this.initializeTimeoutId = setTimeout(h.bind(this), 0);
+    }c.Base = c.Class.extend({ constructor: i, optionsProvider: void 0, container: void 0, svg: void 0, eventEmitter: void 0, createChart: function createChart() {
+        throw new Error("Base chart type can't be instantiated!");
+      }, update: d, detach: e, on: f, off: g, version: c.version, supportsForeignObject: !1 });
+  }(window, document, a), function (a, b, c) {
+    "use strict";
+    function d(a, d, e, f, g) {
+      a instanceof Element ? this._node = a : (this._node = b.createElementNS(z, a), "svg" === a && this._node.setAttributeNS(A, c.xmlNs.qualifiedName, c.xmlNs.uri)), d && this.attr(d), e && this.addClass(e), f && (g && f._node.firstChild ? f._node.insertBefore(this._node, f._node.firstChild) : f._node.appendChild(this._node));
+    }function e(a, b) {
+      return "string" == typeof a ? b ? this._node.getAttributeNS(b, a) : this._node.getAttribute(a) : (Object.keys(a).forEach(function (d) {
+        void 0 !== a[d] && (b ? this._node.setAttributeNS(b, [c.xmlNs.prefix, ":", d].join(""), a[d]) : this._node.setAttribute(d, a[d]));
+      }.bind(this)), this);
+    }function f(a, b, d, e) {
+      return new c.Svg(a, b, d, this, e);
+    }function g() {
+      return this._node.parentNode instanceof SVGElement ? new c.Svg(this._node.parentNode) : null;
+    }function h() {
+      for (var a = this._node; "svg" !== a.nodeName;) {
+        a = a.parentNode;
+      }return new c.Svg(a);
+    }function i(a) {
+      var b = this._node.querySelector(a);return b ? new c.Svg(b) : null;
+    }function j(a) {
+      var b = this._node.querySelectorAll(a);return b.length ? new c.Svg.List(b) : null;
+    }function k(a, c, d, e) {
+      if ("string" == typeof a) {
+        var f = b.createElement("div");f.innerHTML = a, a = f.firstChild;
+      }a.setAttribute("xmlns", B);var g = this.elem("foreignObject", c, d, e);return g._node.appendChild(a), g;
+    }function l(a) {
+      return this._node.appendChild(b.createTextNode(a)), this;
+    }function m() {
+      for (; this._node.firstChild;) {
+        this._node.removeChild(this._node.firstChild);
+      }return this;
+    }function n() {
+      return this._node.parentNode.removeChild(this._node), this.parent();
+    }function o(a) {
+      return this._node.parentNode.replaceChild(a._node, this._node), a;
+    }function p(a, b) {
+      return b && this._node.firstChild ? this._node.insertBefore(a._node, this._node.firstChild) : this._node.appendChild(a._node), this;
+    }function q() {
+      return this._node.getAttribute("class") ? this._node.getAttribute("class").trim().split(/\s+/) : [];
+    }function r(a) {
+      return this._node.setAttribute("class", this.classes(this._node).concat(a.trim().split(/\s+/)).filter(function (a, b, c) {
+        return c.indexOf(a) === b;
+      }).join(" ")), this;
+    }function s(a) {
+      var b = a.trim().split(/\s+/);return this._node.setAttribute("class", this.classes(this._node).filter(function (a) {
+        return -1 === b.indexOf(a);
+      }).join(" ")), this;
+    }function t() {
+      return this._node.setAttribute("class", ""), this;
+    }function u(a, b) {
+      try {
+        return a.getBBox()[b];
+      } catch (c) {}return 0;
+    }function v() {
+      return this._node.clientHeight || Math.round(u(this._node, "height")) || this._node.parentNode.clientHeight;
+    }function w() {
+      return this._node.clientWidth || Math.round(u(this._node, "width")) || this._node.parentNode.clientWidth;
+    }function x(a, b, d) {
+      return void 0 === b && (b = !0), Object.keys(a).forEach(function (e) {
+        function f(a, b) {
+          var f,
+              g,
+              h,
+              i = {};a.easing && (h = a.easing instanceof Array ? a.easing : c.Svg.Easing[a.easing], delete a.easing), a.begin = c.ensureUnit(a.begin, "ms"), a.dur = c.ensureUnit(a.dur, "ms"), h && (a.calcMode = "spline", a.keySplines = h.join(" "), a.keyTimes = "0;1"), b && (a.fill = "freeze", i[e] = a.from, this.attr(i), g = c.stripUnit(a.begin || 0), a.begin = "indefinite"), f = this.elem("animate", c.extend({ attributeName: e }, a)), b && setTimeout(function () {
+            try {
+              f._node.beginElement();
+            } catch (b) {
+              i[e] = a.to, this.attr(i), f.remove();
+            }
+          }.bind(this), g), d && f._node.addEventListener("beginEvent", function () {
+            d.emit("animationBegin", { element: this, animate: f._node, params: a });
+          }.bind(this)), f._node.addEventListener("endEvent", function () {
+            d && d.emit("animationEnd", { element: this, animate: f._node, params: a }), b && (i[e] = a.to, this.attr(i), f.remove());
+          }.bind(this));
+        }a[e] instanceof Array ? a[e].forEach(function (a) {
+          f.bind(this)(a, !1);
+        }.bind(this)) : f.bind(this)(a[e], b);
+      }.bind(this)), this;
+    }function y(a) {
+      var b = this;this.svgElements = [];for (var d = 0; d < a.length; d++) {
+        this.svgElements.push(new c.Svg(a[d]));
+      }Object.keys(c.Svg.prototype).filter(function (a) {
+        return -1 === ["constructor", "parent", "querySelector", "querySelectorAll", "replace", "append", "classes", "height", "width"].indexOf(a);
+      }).forEach(function (a) {
+        b[a] = function () {
+          var d = Array.prototype.slice.call(arguments, 0);return b.svgElements.forEach(function (b) {
+            c.Svg.prototype[a].apply(b, d);
+          }), b;
+        };
+      });
+    }var z = "http://www.w3.org/2000/svg",
+        A = "http://www.w3.org/2000/xmlns/",
+        B = "http://www.w3.org/1999/xhtml";c.xmlNs = { qualifiedName: "xmlns:ct", prefix: "ct", uri: "http://gionkunz.github.com/chartist-js/ct" }, c.Svg = c.Class.extend({ constructor: d, attr: e, elem: f, parent: g, root: h, querySelector: i, querySelectorAll: j, foreignObject: k, text: l, empty: m, remove: n, replace: o, append: p, classes: q, addClass: r, removeClass: s, removeAllClasses: t, height: v, width: w, animate: x }), c.Svg.isSupported = function (a) {
+      return b.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#" + a, "1.1");
+    };var C = { easeInSine: [.47, 0, .745, .715], easeOutSine: [.39, .575, .565, 1], easeInOutSine: [.445, .05, .55, .95], easeInQuad: [.55, .085, .68, .53], easeOutQuad: [.25, .46, .45, .94], easeInOutQuad: [.455, .03, .515, .955], easeInCubic: [.55, .055, .675, .19], easeOutCubic: [.215, .61, .355, 1], easeInOutCubic: [.645, .045, .355, 1], easeInQuart: [.895, .03, .685, .22], easeOutQuart: [.165, .84, .44, 1], easeInOutQuart: [.77, 0, .175, 1], easeInQuint: [.755, .05, .855, .06], easeOutQuint: [.23, 1, .32, 1], easeInOutQuint: [.86, 0, .07, 1], easeInExpo: [.95, .05, .795, .035], easeOutExpo: [.19, 1, .22, 1], easeInOutExpo: [1, 0, 0, 1], easeInCirc: [.6, .04, .98, .335], easeOutCirc: [.075, .82, .165, 1], easeInOutCirc: [.785, .135, .15, .86], easeInBack: [.6, -.28, .735, .045], easeOutBack: [.175, .885, .32, 1.275], easeInOutBack: [.68, -.55, .265, 1.55] };c.Svg.Easing = C, c.Svg.List = c.Class.extend({ constructor: y });
+  }(window, document, a), function (a, b, c) {
+    "use strict";
+    function d(a, b, d, e, f, g) {
+      var h = c.extend({ command: f ? a.toLowerCase() : a.toUpperCase() }, b, g ? { data: g } : {});d.splice(e, 0, h);
+    }function e(a, b) {
+      a.forEach(function (c, d) {
+        u[c.command.toLowerCase()].forEach(function (e, f) {
+          b(c, e, d, f, a);
+        });
+      });
+    }function f(a, b) {
+      this.pathElements = [], this.pos = 0, this.close = a, this.options = c.extend({}, v, b);
+    }function g(a) {
+      return void 0 !== a ? (this.pos = Math.max(0, Math.min(this.pathElements.length, a)), this) : this.pos;
+    }function h(a) {
+      return this.pathElements.splice(this.pos, a), this;
+    }function i(a, b, c, e) {
+      return d("M", { x: +a, y: +b }, this.pathElements, this.pos++, c, e), this;
+    }function j(a, b, c, e) {
+      return d("L", { x: +a, y: +b }, this.pathElements, this.pos++, c, e), this;
+    }function k(a, b, c, e, f, g, h, i) {
+      return d("C", { x1: +a, y1: +b, x2: +c, y2: +e, x: +f, y: +g }, this.pathElements, this.pos++, h, i), this;
+    }function l(a, b, c, e, f, g, h, i, j) {
+      return d("A", { rx: +a, ry: +b, xAr: +c, lAf: +e, sf: +f, x: +g, y: +h }, this.pathElements, this.pos++, i, j), this;
+    }function m(a) {
+      var b = a.replace(/([A-Za-z])([0-9])/g, "$1 $2").replace(/([0-9])([A-Za-z])/g, "$1 $2").split(/[\s,]+/).reduce(function (a, b) {
+        return b.match(/[A-Za-z]/) && a.push([]), a[a.length - 1].push(b), a;
+      }, []);"Z" === b[b.length - 1][0].toUpperCase() && b.pop();var d = b.map(function (a) {
+        var b = a.shift(),
+            d = u[b.toLowerCase()];return c.extend({ command: b }, d.reduce(function (b, c, d) {
+          return b[c] = +a[d], b;
+        }, {}));
+      }),
+          e = [this.pos, 0];return Array.prototype.push.apply(e, d), Array.prototype.splice.apply(this.pathElements, e), this.pos += d.length, this;
+    }function n() {
+      var a = Math.pow(10, this.options.accuracy);return this.pathElements.reduce(function (b, c) {
+        var d = u[c.command.toLowerCase()].map(function (b) {
+          return this.options.accuracy ? Math.round(c[b] * a) / a : c[b];
+        }.bind(this));return b + c.command + d.join(",");
+      }.bind(this), "") + (this.close ? "Z" : "");
+    }function o(a, b) {
+      return e(this.pathElements, function (c, d) {
+        c[d] *= "x" === d[0] ? a : b;
+      }), this;
+    }function p(a, b) {
+      return e(this.pathElements, function (c, d) {
+        c[d] += "x" === d[0] ? a : b;
+      }), this;
+    }function q(a) {
+      return e(this.pathElements, function (b, c, d, e, f) {
+        var g = a(b, c, d, e, f);(g || 0 === g) && (b[c] = g);
+      }), this;
+    }function r(a) {
+      var b = new c.Svg.Path(a || this.close);return b.pos = this.pos, b.pathElements = this.pathElements.slice().map(function (a) {
+        return c.extend({}, a);
+      }), b.options = c.extend({}, this.options), b;
+    }function s(a) {
+      var b = [new c.Svg.Path()];return this.pathElements.forEach(function (d) {
+        d.command === a.toUpperCase() && 0 !== b[b.length - 1].pathElements.length && b.push(new c.Svg.Path()), b[b.length - 1].pathElements.push(d);
+      }), b;
+    }function t(a, b, d) {
+      for (var e = new c.Svg.Path(b, d), f = 0; f < a.length; f++) {
+        for (var g = a[f], h = 0; h < g.pathElements.length; h++) {
+          e.pathElements.push(g.pathElements[h]);
+        }
+      }return e;
+    }var u = { m: ["x", "y"], l: ["x", "y"], c: ["x1", "y1", "x2", "y2", "x", "y"], a: ["rx", "ry", "xAr", "lAf", "sf", "x", "y"] },
+        v = { accuracy: 3 };c.Svg.Path = c.Class.extend({ constructor: f, position: g, remove: h, move: i, line: j, curve: k, arc: l, scale: o, translate: p, transform: q, parse: m, stringify: n, clone: r, splitByCommand: s }), c.Svg.Path.elementDescriptions = u, c.Svg.Path.join = t;
+  }(window, document, a), function (a, b, c) {
+    "use strict";
+    function d(a, b, c, d) {
+      this.units = a, this.counterUnits = a === f.x ? f.y : f.x, this.chartRect = b, this.axisLength = b[a.rectEnd] - b[a.rectStart], this.gridOffset = b[a.rectOffset], this.ticks = c, this.options = d;
+    }function e(a, b, d, e, f) {
+      var g = e["axis" + this.units.pos.toUpperCase()],
+          h = this.ticks.map(this.projectValue.bind(this)),
+          i = this.ticks.map(g.labelInterpolationFnc);h.forEach(function (j, k) {
+        var l,
+            m = { x: 0, y: 0 };l = h[k + 1] ? h[k + 1] - j : Math.max(this.axisLength - j, 30), (i[k] || 0 === i[k]) && ("x" === this.units.pos ? (j = this.chartRect.x1 + j, m.x = e.axisX.labelOffset.x, "start" === e.axisX.position ? m.y = this.chartRect.padding.top + e.axisX.labelOffset.y + (d ? 5 : 20) : m.y = this.chartRect.y1 + e.axisX.labelOffset.y + (d ? 5 : 20)) : (j = this.chartRect.y1 - j, m.y = e.axisY.labelOffset.y - (d ? l : 0), "start" === e.axisY.position ? m.x = d ? this.chartRect.padding.left + e.axisY.labelOffset.x : this.chartRect.x1 - 10 : m.x = this.chartRect.x2 + e.axisY.labelOffset.x + 10), g.showGrid && c.createGrid(j, k, this, this.gridOffset, this.chartRect[this.counterUnits.len](), a, [e.classNames.grid, e.classNames[this.units.dir]], f), g.showLabel && c.createLabel(j, l, k, i, this, g.offset, m, b, [e.classNames.label, e.classNames[this.units.dir], e.classNames[g.position]], d, f));
+      }.bind(this));
+    }var f = { x: { pos: "x", len: "width", dir: "horizontal", rectStart: "x1", rectEnd: "x2", rectOffset: "y2" }, y: { pos: "y", len: "height", dir: "vertical", rectStart: "y2", rectEnd: "y1", rectOffset: "x1" } };c.Axis = c.Class.extend({ constructor: d, createGridAndLabels: e, projectValue: function projectValue(a, b, c) {
+        throw new Error("Base axis can't be instantiated!");
+      } }), c.Axis.units = f;
+  }(window, document, a), function (a, b, c) {
+    "use strict";
+    function d(a, b, d, e) {
+      var f = e.highLow || c.getHighLow(b.normalized, e, a.pos);this.bounds = c.getBounds(d[a.rectEnd] - d[a.rectStart], f, e.scaleMinSpace || 20, e.onlyInteger), this.range = { min: this.bounds.min, max: this.bounds.max }, c.AutoScaleAxis["super"].constructor.call(this, a, d, this.bounds.values, e);
+    }function e(a) {
+      return this.axisLength * (+c.getMultiValue(a, this.units.pos) - this.bounds.min) / this.bounds.range;
+    }c.AutoScaleAxis = c.Axis.extend({ constructor: d, projectValue: e });
+  }(window, document, a), function (a, b, c) {
+    "use strict";
+    function d(a, b, d, e) {
+      var f = e.highLow || c.getHighLow(b.normalized, e, a.pos);this.divisor = e.divisor || 1, this.ticks = e.ticks || c.times(this.divisor).map(function (a, b) {
+        return f.low + (f.high - f.low) / this.divisor * b;
+      }.bind(this)), this.range = { min: f.low, max: f.high }, c.FixedScaleAxis["super"].constructor.call(this, a, d, this.ticks, e), this.stepLength = this.axisLength / this.divisor;
+    }function e(a) {
+      return this.axisLength * (+c.getMultiValue(a, this.units.pos) - this.range.min) / (this.range.max - this.range.min);
+    }c.FixedScaleAxis = c.Axis.extend({ constructor: d, projectValue: e });
+  }(window, document, a), function (a, b, c) {
+    "use strict";
+    function d(a, b, d, e) {
+      c.StepAxis["super"].constructor.call(this, a, d, e.ticks, e), this.stepLength = this.axisLength / (e.ticks.length - (e.stretch ? 1 : 0));
+    }function e(a, b) {
+      return this.stepLength * b;
+    }c.StepAxis = c.Axis.extend({ constructor: d, projectValue: e });
+  }(window, document, a), function (a, b, c) {
+    "use strict";
+    function d(a) {
+      var b = { raw: this.data, normalized: c.getDataArray(this.data, a.reverseData, !0) };this.svg = c.createSvg(this.container, a.width, a.height, a.classNames.chart);var d,
+          e,
+          g = this.svg.elem("g").addClass(a.classNames.gridGroup),
+          h = this.svg.elem("g"),
+          i = this.svg.elem("g").addClass(a.classNames.labelGroup),
+          j = c.createChartRect(this.svg, a, f.padding);d = void 0 === a.axisX.type ? new c.StepAxis(c.Axis.units.x, b, j, c.extend({}, a.axisX, { ticks: b.raw.labels, stretch: a.fullWidth })) : a.axisX.type.call(c, c.Axis.units.x, b, j, a.axisX), e = void 0 === a.axisY.type ? new c.AutoScaleAxis(c.Axis.units.y, b, j, c.extend({}, a.axisY, { high: c.isNum(a.high) ? a.high : a.axisY.high, low: c.isNum(a.low) ? a.low : a.axisY.low })) : a.axisY.type.call(c, c.Axis.units.y, b, j, a.axisY), d.createGridAndLabels(g, i, this.supportsForeignObject, a, this.eventEmitter), e.createGridAndLabels(g, i, this.supportsForeignObject, a, this.eventEmitter), b.raw.series.forEach(function (f, g) {
+        var i = h.elem("g");i.attr({ "series-name": f.name, meta: c.serialize(f.meta) }, c.xmlNs.uri), i.addClass([a.classNames.series, f.className || a.classNames.series + "-" + c.alphaNumerate(g)].join(" "));var k = [],
+            l = [];b.normalized[g].forEach(function (a, h) {
+          var i = { x: j.x1 + d.projectValue(a, h, b.normalized[g]), y: j.y1 - e.projectValue(a, h, b.normalized[g]) };k.push(i.x, i.y), l.push({ value: a, valueIndex: h, meta: c.getMetaData(f, h) });
+        }.bind(this));var m = { lineSmooth: c.getSeriesOption(f, a, "lineSmooth"), showPoint: c.getSeriesOption(f, a, "showPoint"), showLine: c.getSeriesOption(f, a, "showLine"), showArea: c.getSeriesOption(f, a, "showArea"), areaBase: c.getSeriesOption(f, a, "areaBase") },
+            n = "function" == typeof m.lineSmooth ? m.lineSmooth : m.lineSmooth ? c.Interpolation.cardinal() : c.Interpolation.none(),
+            o = n(k, l);if (m.showPoint && o.pathElements.forEach(function (b) {
+          var h = i.elem("line", { x1: b.x, y1: b.y, x2: b.x + .01, y2: b.y }, a.classNames.point).attr({ value: [b.data.value.x, b.data.value.y].filter(function (a) {
+              return a;
+            }).join(","), meta: b.data.meta }, c.xmlNs.uri);this.eventEmitter.emit("draw", { type: "point", value: b.data.value, index: b.data.valueIndex, meta: b.data.meta, series: f, seriesIndex: g, axisX: d, axisY: e, group: i, element: h, x: b.x, y: b.y });
+        }.bind(this)), m.showLine) {
+          var p = i.elem("path", { d: o.stringify() }, a.classNames.line, !0);this.eventEmitter.emit("draw", { type: "line", values: b.normalized[g], path: o.clone(), chartRect: j, index: g, series: f, seriesIndex: g, axisX: d, axisY: e, group: i, element: p });
+        }if (m.showArea && e.range) {
+          var q = Math.max(Math.min(m.areaBase, e.range.max), e.range.min),
+              r = j.y1 - e.projectValue(q);o.splitByCommand("M").filter(function (a) {
+            return a.pathElements.length > 1;
+          }).map(function (a) {
+            var b = a.pathElements[0],
+                c = a.pathElements[a.pathElements.length - 1];return a.clone(!0).position(0).remove(1).move(b.x, r).line(b.x, b.y).position(a.pathElements.length + 1).line(c.x, r);
+          }).forEach(function (h) {
+            var k = i.elem("path", { d: h.stringify() }, a.classNames.area, !0).attr({ values: b.normalized[g] }, c.xmlNs.uri);this.eventEmitter.emit("draw", { type: "area", values: b.normalized[g], path: h.clone(), series: f, seriesIndex: g, axisX: d, axisY: e, chartRect: j, index: g, group: i, element: k });
+          }.bind(this));
+        }
+      }.bind(this)), this.eventEmitter.emit("created", { bounds: e.bounds, chartRect: j, axisX: d, axisY: e, svg: this.svg, options: a });
+    }function e(a, b, d, e) {
+      c.Line["super"].constructor.call(this, a, b, f, c.extend({}, f, d), e);
+    }var f = { axisX: { offset: 30, position: "end", labelOffset: { x: 0, y: 0 }, showLabel: !0, showGrid: !0, labelInterpolationFnc: c.noop, type: void 0 }, axisY: { offset: 40, position: "start", labelOffset: { x: 0, y: 0 }, showLabel: !0, showGrid: !0, labelInterpolationFnc: c.noop, type: void 0, scaleMinSpace: 20, onlyInteger: !1 }, width: void 0, height: void 0, showLine: !0, showPoint: !0, showArea: !1, areaBase: 0, lineSmooth: !0, low: void 0, high: void 0, chartPadding: { top: 15, right: 15, bottom: 5, left: 10 }, fullWidth: !1, reverseData: !1, classNames: { chart: "ct-chart-line", label: "ct-label", labelGroup: "ct-labels", series: "ct-series", line: "ct-line", point: "ct-point", area: "ct-area", grid: "ct-grid", gridGroup: "ct-grids", vertical: "ct-vertical", horizontal: "ct-horizontal", start: "ct-start", end: "ct-end" } };c.Line = c.Base.extend({ constructor: e, createChart: d });
+  }(window, document, a), function (a, b, c) {
+    "use strict";
+    function d(a) {
+      var b,
+          d = { raw: this.data, normalized: a.distributeSeries ? c.getDataArray(this.data, a.reverseData, a.horizontalBars ? "x" : "y").map(function (a) {
+          return [a];
+        }) : c.getDataArray(this.data, a.reverseData, a.horizontalBars ? "x" : "y") };this.svg = c.createSvg(this.container, a.width, a.height, a.classNames.chart + (a.horizontalBars ? " " + a.classNames.horizontalBars : ""));var e = this.svg.elem("g").addClass(a.classNames.gridGroup),
+          g = this.svg.elem("g"),
+          h = this.svg.elem("g").addClass(a.classNames.labelGroup);if (a.stackBars) {
+        var i = c.serialMap(d.normalized, function () {
+          return Array.prototype.slice.call(arguments).map(function (a) {
+            return a;
+          }).reduce(function (a, b) {
+            return { x: a.x + b.x || 0, y: a.y + b.y || 0 };
+          }, { x: 0, y: 0 });
+        });b = c.getHighLow([i], c.extend({}, a, { referenceValue: 0 }), a.horizontalBars ? "x" : "y");
+      } else b = c.getHighLow(d.normalized, c.extend({}, a, { referenceValue: 0 }), a.horizontalBars ? "x" : "y");b.high = +a.high || (0 === a.high ? 0 : b.high), b.low = +a.low || (0 === a.low ? 0 : b.low);var j,
+          k,
+          l,
+          m,
+          n,
+          o = c.createChartRect(this.svg, a, f.padding);k = a.distributeSeries && a.stackBars ? d.raw.labels.slice(0, 1) : d.raw.labels, a.horizontalBars ? (j = m = void 0 === a.axisX.type ? new c.AutoScaleAxis(c.Axis.units.x, d, o, c.extend({}, a.axisX, { highLow: b, referenceValue: 0 })) : a.axisX.type.call(c, c.Axis.units.x, d, o, c.extend({}, a.axisX, { highLow: b, referenceValue: 0 })), l = n = void 0 === a.axisY.type ? new c.StepAxis(c.Axis.units.y, d, o, { ticks: k }) : a.axisY.type.call(c, c.Axis.units.y, d, o, a.axisY)) : (l = m = void 0 === a.axisX.type ? new c.StepAxis(c.Axis.units.x, d, o, { ticks: k }) : a.axisX.type.call(c, c.Axis.units.x, d, o, a.axisX), j = n = void 0 === a.axisY.type ? new c.AutoScaleAxis(c.Axis.units.y, d, o, c.extend({}, a.axisY, { highLow: b, referenceValue: 0 })) : a.axisY.type.call(c, c.Axis.units.y, d, o, c.extend({}, a.axisY, { highLow: b, referenceValue: 0 })));var p = a.horizontalBars ? o.x1 + j.projectValue(0) : o.y1 - j.projectValue(0),
+          q = [];l.createGridAndLabels(e, h, this.supportsForeignObject, a, this.eventEmitter), j.createGridAndLabels(e, h, this.supportsForeignObject, a, this.eventEmitter), d.raw.series.forEach(function (b, e) {
+        var f,
+            h,
+            i = e - (d.raw.series.length - 1) / 2;f = a.distributeSeries && !a.stackBars ? l.axisLength / d.normalized.length / 2 : a.distributeSeries && a.stackBars ? l.axisLength / 2 : l.axisLength / d.normalized[e].length / 2, h = g.elem("g"), h.attr({ "series-name": b.name, meta: c.serialize(b.meta) }, c.xmlNs.uri), h.addClass([a.classNames.series, b.className || a.classNames.series + "-" + c.alphaNumerate(e)].join(" ")), d.normalized[e].forEach(function (g, k) {
+          var r, s, t, u;if (u = a.distributeSeries && !a.stackBars ? e : a.distributeSeries && a.stackBars ? 0 : k, r = a.horizontalBars ? { x: o.x1 + j.projectValue(g && g.x ? g.x : 0, k, d.normalized[e]), y: o.y1 - l.projectValue(g && g.y ? g.y : 0, u, d.normalized[e]) } : { x: o.x1 + l.projectValue(g && g.x ? g.x : 0, u, d.normalized[e]), y: o.y1 - j.projectValue(g && g.y ? g.y : 0, k, d.normalized[e]) }, l instanceof c.StepAxis && (l.options.stretch || (r[l.units.pos] += f * (a.horizontalBars ? -1 : 1)), r[l.units.pos] += a.stackBars || a.distributeSeries ? 0 : i * a.seriesBarDistance * (a.horizontalBars ? -1 : 1)), t = q[k] || p, q[k] = t - (p - r[l.counterUnits.pos]), void 0 !== g) {
+            var v = {};v[l.units.pos + "1"] = r[l.units.pos], v[l.units.pos + "2"] = r[l.units.pos], v[l.counterUnits.pos + "1"] = a.stackBars ? t : p, v[l.counterUnits.pos + "2"] = a.stackBars ? q[k] : r[l.counterUnits.pos], v.x1 = Math.min(Math.max(v.x1, o.x1), o.x2), v.x2 = Math.min(Math.max(v.x2, o.x1), o.x2), v.y1 = Math.min(Math.max(v.y1, o.y2), o.y1), v.y2 = Math.min(Math.max(v.y2, o.y2), o.y1), s = h.elem("line", v, a.classNames.bar).attr({ value: [g.x, g.y].filter(function (a) {
+                return a;
+              }).join(","), meta: c.getMetaData(b, k) }, c.xmlNs.uri), this.eventEmitter.emit("draw", c.extend({ type: "bar", value: g, index: k, meta: c.getMetaData(b, k), series: b, seriesIndex: e, axisX: m, axisY: n, chartRect: o, group: h, element: s }, v));
+          }
+        }.bind(this));
+      }.bind(this)), this.eventEmitter.emit("created", { bounds: j.bounds, chartRect: o, axisX: m, axisY: n, svg: this.svg, options: a });
+    }function e(a, b, d, e) {
+      c.Bar["super"].constructor.call(this, a, b, f, c.extend({}, f, d), e);
+    }var f = { axisX: { offset: 30, position: "end", labelOffset: { x: 0, y: 0 }, showLabel: !0, showGrid: !0, labelInterpolationFnc: c.noop, scaleMinSpace: 30, onlyInteger: !1 }, axisY: { offset: 40, position: "start", labelOffset: { x: 0, y: 0 }, showLabel: !0, showGrid: !0, labelInterpolationFnc: c.noop, scaleMinSpace: 20, onlyInteger: !1 }, width: void 0, height: void 0, high: void 0, low: void 0, onlyInteger: !1, chartPadding: { top: 15, right: 15, bottom: 5, left: 10 }, seriesBarDistance: 15, stackBars: !1, horizontalBars: !1, distributeSeries: !1, reverseData: !1, classNames: { chart: "ct-chart-bar", horizontalBars: "ct-horizontal-bars", label: "ct-label", labelGroup: "ct-labels", series: "ct-series", bar: "ct-bar", grid: "ct-grid", gridGroup: "ct-grids", vertical: "ct-vertical", horizontal: "ct-horizontal", start: "ct-start", end: "ct-end" } };c.Bar = c.Base.extend({ constructor: e, createChart: d });
+  }(window, document, a), function (a, b, c) {
+    "use strict";
+    function d(a, b, c) {
+      var d = b.x > a.x;return d && "explode" === c || !d && "implode" === c ? "start" : d && "implode" === c || !d && "explode" === c ? "end" : "middle";
+    }function e(a) {
+      var b,
+          e,
+          f,
+          h,
+          i,
+          j = [],
+          k = a.startAngle,
+          l = c.getDataArray(this.data, a.reverseData);this.svg = c.createSvg(this.container, a.width, a.height, a.donut ? a.classNames.chartDonut : a.classNames.chartPie), e = c.createChartRect(this.svg, a, g.padding), f = Math.min(e.width() / 2, e.height() / 2), i = a.total || l.reduce(function (a, b) {
+        return a + b;
+      }, 0), f -= a.donut ? a.donutWidth / 2 : 0, h = "outside" === a.labelPosition || a.donut ? f : "center" === a.labelPosition ? 0 : f / 2, h += a.labelOffset;var m = { x: e.x1 + e.width() / 2, y: e.y2 + e.height() / 2 },
+          n = 1 === this.data.series.filter(function (a) {
+        return a.hasOwnProperty("value") ? 0 !== a.value : 0 !== a;
+      }).length;a.showLabel && (b = this.svg.elem("g", null, null, !0));for (var o = 0; o < this.data.series.length; o++) {
+        var p = this.data.series[o];j[o] = this.svg.elem("g", null, null, !0), j[o].attr({ "series-name": p.name }, c.xmlNs.uri), j[o].addClass([a.classNames.series, p.className || a.classNames.series + "-" + c.alphaNumerate(o)].join(" "));var q = k + l[o] / i * 360;q - k === 360 && (q -= .01);var r = c.polarToCartesian(m.x, m.y, f, k - (0 === o || n ? 0 : .2)),
+            s = c.polarToCartesian(m.x, m.y, f, q),
+            t = new c.Svg.Path(!a.donut).move(s.x, s.y).arc(f, f, 0, q - k > 180, 0, r.x, r.y);a.donut || t.line(m.x, m.y);var u = j[o].elem("path", { d: t.stringify() }, a.donut ? a.classNames.sliceDonut : a.classNames.slicePie);if (u.attr({ value: l[o], meta: c.serialize(p.meta) }, c.xmlNs.uri), a.donut && u.attr({ style: "stroke-width: " + +a.donutWidth + "px" }), this.eventEmitter.emit("draw", { type: "slice", value: l[o], totalDataSum: i, index: o, meta: p.meta, series: p, group: j[o], element: u, path: t.clone(), center: m, radius: f, startAngle: k, endAngle: q }), a.showLabel) {
+          var v = c.polarToCartesian(m.x, m.y, h, k + (q - k) / 2),
+              w = a.labelInterpolationFnc(this.data.labels ? this.data.labels[o] : l[o], o);if (w || 0 === w) {
+            var x = b.elem("text", { dx: v.x, dy: v.y, "text-anchor": d(m, v, a.labelDirection) }, a.classNames.label).text("" + w);this.eventEmitter.emit("draw", { type: "label", index: o, group: b, element: x, text: "" + w, x: v.x, y: v.y });
+          }
+        }k = q;
+      }this.eventEmitter.emit("created", { chartRect: e, svg: this.svg, options: a });
+    }function f(a, b, d, e) {
+      c.Pie["super"].constructor.call(this, a, b, g, c.extend({}, g, d), e);
+    }var g = { width: void 0, height: void 0, chartPadding: 5, classNames: { chartPie: "ct-chart-pie", chartDonut: "ct-chart-donut", series: "ct-series", slicePie: "ct-slice-pie", sliceDonut: "ct-slice-donut", label: "ct-label" }, startAngle: 0, total: void 0, donut: !1, donutWidth: 60, showLabel: !0, labelOffset: 0, labelPosition: "inside", labelInterpolationFnc: c.noop, labelDirection: "neutral", reverseData: !1 };c.Pie = c.Base.extend({ constructor: f, createChart: e, determineAnchorPosition: d });
+  }(window, document, a), a;
+});
+//# sourceMappingURL=chartist.min.js.map
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports) {
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+type = ['', 'info', 'success', 'warning', 'danger'];
+
+demo = {
+  initPickColor: function initPickColor() {
+    $('.pick-class-label').click(function () {
+      var new_class = $(this).attr('new-class');
+      var old_class = $('#display-buttons').attr('data-class');
+      var display_div = $('#display-buttons');
+      if (display_div.length) {
+        var display_buttons = display_div.find('.btn');
+        display_buttons.removeClass(old_class);
+        display_buttons.addClass(new_class);
+        display_div.attr('data-class', new_class);
+      }
+    });
+  },
+
+  initChartist: function initChartist() {
+    var _optionsSales;
+
+    var dataSales = {
+      labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM', '3:00AM', '6:00AM'],
+      series: [[287, 385, 490, 562, 594, 626, 698, 895, 952], [67, 152, 193, 240, 387, 435, 535, 642, 744], [23, 113, 67, 108, 190, 239, 307, 410, 410]]
+    };
+
+    var optionsSales = (_optionsSales = {
+      lineSmooth: false,
+      low: 0,
+      high: 1000,
+      showArea: true,
+      height: "245px",
+      axisX: {
+        showGrid: false
+      }
+    }, _defineProperty(_optionsSales, 'lineSmooth', Chartist.Interpolation.simple({
+      divisor: 3
+    })), _defineProperty(_optionsSales, 'showLine', true), _defineProperty(_optionsSales, 'showPoint', false), _optionsSales);
+
+    var responsiveSales = [['screen and (max-width: 640px)', {
+      axisX: {
+        labelInterpolationFnc: function labelInterpolationFnc(value) {
+          return value[0];
+        }
+      }
+    }]];
+
+    Chartist.Line('#chartHours', dataSales, optionsSales, responsiveSales);
+
+    var data = {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      series: [[542, 543, 520, 680, 653, 753, 326, 434, 568, 610, 756, 895], [230, 293, 380, 480, 503, 553, 600, 664, 698, 710, 736, 795]]
+    };
+
+    var options = {
+      seriesBarDistance: 10,
+      axisX: {
+        showGrid: false
+      },
+      height: "245px"
+    };
+
+    var responsiveOptions = [['screen and (max-width: 640px)', {
+      seriesBarDistance: 5,
+      axisX: {
+        labelInterpolationFnc: function labelInterpolationFnc(value) {
+          return value[0];
+        }
+      }
+    }]];
+
+    Chartist.Line('#chartActivity', data, options, responsiveOptions);
+
+    var dataPreferences = {
+      series: [[25, 30, 20, 25]]
+    };
+
+    var optionsPreferences = {
+      donut: true,
+      donutWidth: 40,
+      startAngle: 0,
+      total: 100,
+      showLabel: false,
+      axisX: {
+        showGrid: false
+      }
+    };
+
+    Chartist.Pie('#chartPreferences', dataPreferences, optionsPreferences);
+
+    Chartist.Pie('#chartPreferences', {
+      labels: ['62%', '32%', '6%'],
+      series: [62, 32, 6]
+    });
+  },
+
+  initGoogleMaps: function initGoogleMaps() {
+    var myLatlng = new google.maps.LatLng(40.748817, -73.985428);
+    var mapOptions = {
+      zoom: 13,
+      center: myLatlng,
+      scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
+      styles: [{ "featureType": "water", "stylers": [{ "saturation": 43 }, { "lightness": -11 }, { "hue": "#0088ff" }] }, { "featureType": "road", "elementType": "geometry.fill", "stylers": [{ "hue": "#ff0000" }, { "saturation": -100 }, { "lightness": 99 }] }, { "featureType": "road", "elementType": "geometry.stroke", "stylers": [{ "color": "#808080" }, { "lightness": 54 }] }, { "featureType": "landscape.man_made", "elementType": "geometry.fill", "stylers": [{ "color": "#ece2d9" }] }, { "featureType": "poi.park", "elementType": "geometry.fill", "stylers": [{ "color": "#ccdca1" }] }, { "featureType": "road", "elementType": "labels.text.fill", "stylers": [{ "color": "#767676" }] }, { "featureType": "road", "elementType": "labels.text.stroke", "stylers": [{ "color": "#ffffff" }] }, { "featureType": "poi", "stylers": [{ "visibility": "off" }] }, { "featureType": "landscape.natural", "elementType": "geometry.fill", "stylers": [{ "visibility": "on" }, { "color": "#b8cb93" }] }, { "featureType": "poi.park", "stylers": [{ "visibility": "on" }] }, { "featureType": "poi.sports_complex", "stylers": [{ "visibility": "on" }] }, { "featureType": "poi.medical", "stylers": [{ "visibility": "on" }] }, { "featureType": "poi.business", "stylers": [{ "visibility": "simplified" }] }]
+
+    };
+    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+    var marker = new google.maps.Marker({
+      position: myLatlng,
+      title: "Hello World!"
+    });
+
+    // To add the marker to the map, call setMap();
+    marker.setMap(map);
+  },
+
+  showNotification: function showNotification(from, align) {
+    color = Math.floor(Math.random() * 4 + 1);
+
+    $.notify({
+      icon: "ti-gift",
+      message: "Welcome to <b>Paper Dashboard</b> - a beautiful freebie for every web developer."
+
+    }, {
+      type: type[color],
+      timer: 4000,
+      placement: {
+        from: from,
+        align: align
+      }
+    });
+  },
+  initDocumentationCharts: function initDocumentationCharts() {
+    var _optionsStock, _optionsSales2;
+
+    //     	init single simple line chart
+    var dataPerformance = {
+      labels: ['6pm', '9pm', '11pm', '2am', '4am', '8am', '2pm', '5pm', '8pm', '11pm', '4am'],
+      series: [[1, 6, 8, 7, 4, 7, 8, 12, 16, 17, 14, 13]]
+    };
+
+    var optionsPerformance = _defineProperty({
+      showPoint: false,
+      lineSmooth: true,
+      height: "200px",
+      axisX: {
+        showGrid: false,
+        showLabel: true
+      },
+      axisY: {
+        offset: 40
+      },
+      low: 0,
+      high: 16
+    }, 'height', "250px");
+
+    Chartist.Line('#chartPerformance', dataPerformance, optionsPerformance);
+
+    //     init single line with points chart
+    var dataStock = {
+      labels: ['\'07', '\'08', '\'09', '\'10', '\'11', '\'12', '\'13', '\'14', '\'15'],
+      series: [[22.20, 34.90, 42.28, 51.93, 62.21, 80.23, 62.21, 82.12, 102.50, 107.23]]
+    };
+
+    var optionsStock = (_optionsStock = {
+      lineSmooth: false,
+      height: "200px",
+      axisY: {
+        offset: 40,
+        labelInterpolationFnc: function labelInterpolationFnc(value) {
+          return '$' + value;
+        }
+
+      },
+      low: 10
+    }, _defineProperty(_optionsStock, 'height', "250px"), _defineProperty(_optionsStock, 'high', 110), _defineProperty(_optionsStock, 'classNames', {
+      point: 'ct-point ct-green',
+      line: 'ct-line ct-green'
+    }), _optionsStock);
+
+    Chartist.Line('#chartStock', dataStock, optionsStock);
+
+    //      init multiple lines chart
+    var dataSales = {
+      labels: ['9:00AM', '12:00AM', '3:00PM', '6:00PM', '9:00PM', '12:00PM', '3:00AM', '6:00AM'],
+      series: [[287, 385, 490, 562, 594, 626, 698, 895, 952], [67, 152, 193, 240, 387, 435, 535, 642, 744], [23, 113, 67, 108, 190, 239, 307, 410, 410]]
+    };
+
+    var optionsSales = (_optionsSales2 = {
+      lineSmooth: false,
+      low: 0,
+      high: 1000,
+      showArea: true,
+      height: "245px",
+      axisX: {
+        showGrid: false
+      }
+    }, _defineProperty(_optionsSales2, 'lineSmooth', Chartist.Interpolation.simple({
+      divisor: 3
+    })), _defineProperty(_optionsSales2, 'showLine', true), _defineProperty(_optionsSales2, 'showPoint', false), _optionsSales2);
+
+    var responsiveSales = [['screen and (max-width: 640px)', {
+      axisX: {
+        labelInterpolationFnc: function labelInterpolationFnc(value) {
+          return value[0];
+        }
+      }
+    }]];
+
+    Chartist.Line('#chartHours', dataSales, optionsSales, responsiveSales);
+
+    //      pie chart
+    Chartist.Pie('#chartPreferences', {
+      labels: ['62%', '32%', '6%'],
+      series: [62, 32, 6]
+    });
+
+    //      bar chart
+    var dataViews = {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      series: [[542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]]
+    };
+
+    var optionsViews = {
+      seriesBarDistance: 10,
+      classNames: {
+        bar: 'ct-bar'
+      },
+      axisX: {
+        showGrid: false
+
+      },
+      height: "250px"
+
+    };
+
+    var responsiveOptionsViews = [['screen and (max-width: 640px)', {
+      seriesBarDistance: 5,
+      axisX: {
+        labelInterpolationFnc: function labelInterpolationFnc(value) {
+          return value[0];
+        }
+      }
+    }]];
+
+    Chartist.Bar('#chartViews', dataViews, optionsViews, responsiveOptionsViews);
+
+    //     multiple bars chart
+    var data = {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      series: [[542, 543, 520, 680, 653, 753, 326, 434, 568, 610, 756, 895], [230, 293, 380, 480, 503, 553, 600, 664, 698, 710, 736, 795]]
+    };
+
+    var options = {
+      seriesBarDistance: 10,
+      axisX: {
+        showGrid: false
+      },
+      height: "245px"
+    };
+
+    var responsiveOptions = [['screen and (max-width: 640px)', {
+      seriesBarDistance: 5,
+      axisX: {
+        labelInterpolationFnc: function labelInterpolationFnc(value) {
+          return value[0];
+        }
+      }
+    }]];
+
+    Chartist.Line('#chartActivity', data, options, responsiveOptions);
+  }
+
+};
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports) {
+
+/*!
+    
+ =========================================================
+ * Paper Dashboard - v1.1.2
+ =========================================================
+ 
+ * Product Page: http://www.creative-tim.com/product/paper-dashboard
+ * Copyright 2017 Creative Tim (http://www.creative-tim.com)
+ * Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard/blob/master/LICENSE.md)
+ 
+ =========================================================
+ 
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ 
+ */
+
+var fixedTop = false;
+var transparent = true;
+var navbar_initialized = false;
+
+$(document).ready(function () {
+    window_width = $(window).width();
+
+    // Init navigation toggle for small screens
+    if (window_width <= 991) {
+        pd.initRightMenu();
+    }
+
+    //  Activate the tooltips
+    $('[rel="tooltip"]').tooltip();
+});
+
+// activate collapse right menu when the windows is resized
+$(window).resize(function () {
+    if ($(window).width() <= 991) {
+        pd.initRightMenu();
+    }
+});
+
+pd = {
+    misc: {
+        navbar_menu_visible: 0
+    },
+    checkScrollForTransparentNavbar: debounce(function () {
+        if ($(document).scrollTop() > 381) {
+            if (transparent) {
+                transparent = false;
+                $('.navbar-color-on-scroll').removeClass('navbar-transparent');
+                $('.navbar-title').removeClass('hidden');
+            }
+        } else {
+            if (!transparent) {
+                transparent = true;
+                $('.navbar-color-on-scroll').addClass('navbar-transparent');
+                $('.navbar-title').addClass('hidden');
+            }
+        }
+    }),
+    initRightMenu: function initRightMenu() {
+        if (!navbar_initialized) {
+            $off_canvas_sidebar = $('nav').find('.navbar-collapse').first().clone(true);
+
+            $sidebar = $('.sidebar');
+            sidebar_bg_color = $sidebar.data('background-color');
+            sidebar_active_color = $sidebar.data('active-color');
+
+            $logo = $sidebar.find('.logo').first();
+            logo_content = $logo[0].outerHTML;
+
+            ul_content = '';
+
+            // set the bg color and active color from the default sidebar to the off canvas sidebar;
+            $off_canvas_sidebar.attr('data-background-color', sidebar_bg_color);
+            $off_canvas_sidebar.attr('data-active-color', sidebar_active_color);
+
+            $off_canvas_sidebar.addClass('off-canvas-sidebar');
+
+            //add the content from the regular header to the right menu
+            $off_canvas_sidebar.children('ul').each(function () {
+                content_buff = $(this).html();
+                ul_content = ul_content + content_buff;
+            });
+
+            // add the content from the sidebar to the right menu
+            content_buff = $sidebar.find('.nav').html();
+            ul_content = ul_content + '<li class="divider"></li>' + content_buff;
+
+            ul_content = '<ul class="nav navbar-nav">' + ul_content + '</ul>';
+
+            navbar_content = logo_content + ul_content;
+            navbar_content = '<div class="sidebar-wrapper">' + navbar_content + '</div>';
+
+            $off_canvas_sidebar.html(navbar_content);
+
+            $('body').append($off_canvas_sidebar);
+
+            $toggle = $('.navbar-toggle');
+
+            $off_canvas_sidebar.find('a').removeClass('btn btn-round btn-default');
+            $off_canvas_sidebar.find('button').removeClass('btn-round btn-fill btn-info btn-primary btn-success btn-danger btn-warning btn-neutral');
+            $off_canvas_sidebar.find('button').addClass('btn-simple btn-block');
+
+            $toggle.click(function () {
+                if (pd.misc.navbar_menu_visible == 1) {
+                    $('html').removeClass('nav-open');
+                    pd.misc.navbar_menu_visible = 0;
+                    $('#bodyClick').remove();
+                    setTimeout(function () {
+                        $toggle.removeClass('toggled');
+                    }, 400);
+                } else {
+                    setTimeout(function () {
+                        $toggle.addClass('toggled');
+                    }, 430);
+
+                    div = '<div id="bodyClick"></div>';
+                    $(div).appendTo("body").click(function () {
+                        $('html').removeClass('nav-open');
+                        pd.misc.navbar_menu_visible = 0;
+                        $('#bodyClick').remove();
+                        setTimeout(function () {
+                            $toggle.removeClass('toggled');
+                        }, 400);
+                    });
+
+                    $('html').addClass('nav-open');
+                    pd.misc.navbar_menu_visible = 1;
+                }
+            });
+            navbar_initialized = true;
+        }
+    }
+
+    // Returns a function, that, as long as it continues to be invoked, will not
+    // be triggered. The function will be called after it stops being called for
+    // N milliseconds. If `immediate` is passed, trigger the function on the
+    // leading edge, instead of the trailing.
+
+};function debounce(func, wait, immediate) {
+    var timeout;
+    return function () {
+        var context = this,
+            args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        }, wait);
+        if (immediate && !timeout) func.apply(context, args);
+    };
+};
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports) {
+
+$(function () {
+
+  if ($('#card-number').length > 0) {
+    // Create a Stripe client
+    var stripe = Stripe(pkeys.Stripe);
+
+    // Create an instance of Elements
+    var elements = stripe.elements();
+
+    // Custom styling can be passed to options when creating an Element.
+    // (Note that this demo uses a wider set of styles than the guide below.)
+    var style = {
+      base: {
+        color: '#32325d',
+        lineHeight: '18px',
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSmoothing: 'antialiased',
+        fontSize: '16px',
+        '::placeholder': {
+          color: '#aab7c4'
+        }
+      },
+      invalid: {
+        color: '#fa755a',
+        iconColor: '#fa755a'
+      }
+    };
+
+    // Create an instance of the card Element
+    var card = elements.create('card', { style: style });
+
+    // Add an instance of the card Element into the `card-element` <div>
+    card.mount('#card-number');
+
+    // Handle real-time validation errors from the card Element.
+    card.addEventListener('change', function (event) {
+      var displayError = document.getElementById('card-errors');
+      if (event.error) {
+        displayError.textContent = event.error.message;
+      } else {
+        displayError.textContent = '';
+      }
+    });
+
+    // Handle form submission
+    var form = $('[data-card-submit]');
+    form.on('submit', function (event) {
+      $('#processing').modal('show');
+      event.preventDefault();
+
+      stripe.createToken(card).then(function (result) {
+        if (result.error) {
+          // Inform the user if there was an error
+          var errorElement = document.getElementById('card-errors');
+          errorElement.textContent = result.error.message;
+          setTimeout(function () {
+            $('#processing').modal('hide');
+          }, 800);
+        } else {
+          // Send the token to your server
+          stripeTokenHandler(result.token, form);
+        }
+      });
+    });
+  } // End If for Stripe
+});
+
+function stripeTokenHandler(token, form) {
+  // Insert the token ID into the form so it gets submitted to the server
+  var hiddenInput = document.createElement('input');
+  hiddenInput.setAttribute('type', 'hidden');
+  hiddenInput.setAttribute('name', 'stripeToken');
+  hiddenInput.setAttribute('value', token.id);
+  form.append(hiddenInput);
+  form.off('submit');
+
+  // Submit the form
+  form.submit();
+}
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */
+/***/ (function(module, exports) {
+
+$(function () {
+    if (window.view === "profile") {
+
+        $('input[type=file]').change(function () {
+            $(this).simpleUpload("/profile/upload/letterhead", {
+
+                beforeSend: function beforeSend(jqXHR, settings) {
+                    //attach csrf token manually
+                    jqXHR.setRequestHeader('X-CSRF-TOKEN', window.csrf_token);
+                },
+
+                start: function start(file) {
+                    //upload started
+                    $('#filename').html(file.name);
+                    $('#progress').html("");
+                    $('#progressBar').width(0);
+                },
+
+                progress: function progress(_progress) {
+                    //received progress
+                    $('#progress').html("Progress: " + Math.round(_progress) + "%");
+                    $('#progressBar').width(_progress + "%");
+                },
+
+                success: function success(data) {
+                    //upload successful
+                    var data_decoded = JSON.parse(data);
+                    $('#filename,#progress,#progressBar').empty();
+                    if (data_decoded.Status == 'Success') {
+                        Notify(data_decoded.Message, 'success');
+                        $("[data-letterhead-well]").empty();
+                        $("[data-letterhead-well]").append("<img class='letterhead-img' src='" + data_decoded.Data + "' />");
+                    } else {
+                        Notify(data_decoded.Message, 'danger');
+                    }
+                },
+
+                error: function error(_error) {
+                    //upload failed
+                    $('#progress').html("Failure!<br>" + _error.name + ": " + _error.message);
+                }
+            });
+        });
+    }
+}); //end windowif
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports) {
+
+Notify = function Notify(text, level) {
+  $.notify({
+    // options
+    message: text
+  }, {
+    // settings
+    type: level
+  });
+};
 
 /***/ })
 /******/ ]);

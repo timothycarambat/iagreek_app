@@ -12,7 +12,7 @@
                     </div>
                     <div class="content">
                         <div class="author">
-                          <img class="avatar border-outline" src="{{Storage::url('avatars/mATjj5N2gkjJ.png')}}" alt="..."/>
+                          <img class="avatar border-outline" src="{{Auth::user()->avatar}}" alt="..."/>
                           <h4 class="title">{{Auth::user()->name}}<br />
                              <a href="#"><small>{{Auth::user()->email}}</small></a>
                           </h4>
@@ -133,17 +133,41 @@
                                 </div>
                             </div>
 
+														<hr>
                             <div class="row">
-                              <div class="col-md-4">
-                                <div class="text-center">
-                                    <a href='#' class="btn btn-default btn-wd">Manage Members</a>
+                                <div class="col-md-6">
+																	<h3 class="subsection-title">Document Settings</h3>
+                                    <div class="form-group">
+                                        <label>Document Letterhead</label>
+																				<div class="custom-file">
+																					@if( empty(Auth::user()->letterhead) )
+																					<div class="well" data-letterhead-well>
+																						<label>No Letterhead Image Set <br>
+																							Accepted Filetypes: .png, jpeg, jpg
+																						</label><br>
+																						<label id="filename"></label>
+																						<label id="progress"></label>
+																						<label id="progressBar"></label>
+																					</div>
+																						<span class="btn btn-primary btn-file">
+																						    Upload <input id='fileupload' type='file' name='letterhead' class="custom-file-input">
+																						</span>
+																					@else
+																					<div class="well" data-letterhead-well>
+																						<img class='letterhead-img' src='{{Auth::user()->letterhead}}'/>
+																						<label id="filename"></label>
+																						<label id="progress"></label>
+																						<label id="progressBar"></label>
+																					</div>
+																						<span class="btn btn-primary btn-file">
+																								Upload New <input id='fileupload' type='file' name='letterhead' class="custom-file-input">
+																						</span>
+																					@endif
+																				</div>
+                                    </div>
                                 </div>
-                              </div>
-                              <div class="col-md-4">
 
-                              </div>
                             </div>
-
 
                             <div class="text-center">
                                 <button type="submit" class="btn btn-info btn-fill btn-wd">Update Profile</button>

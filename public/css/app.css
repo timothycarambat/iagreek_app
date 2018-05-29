@@ -14351,3 +14351,37 @@ div.counter {
   font-weight: 600;
   border: 1px solid #ff9e9e;
 }
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+}
+
+.letterhead-img {
+  -webkit-box-shadow: 1px 1px 10px black;
+          box-shadow: 1px 1px 10px black;
+  width: 100%;
+  max-width: 400px;
+}
+
+.subsection-title {
+  margin: 0;
+  color: #252422;
+  font-weight: 300;
+}
