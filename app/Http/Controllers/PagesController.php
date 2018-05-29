@@ -22,4 +22,12 @@ class PagesController extends Controller
       ]);
     }
 
+    public function profile(){
+      return view('app.profile',
+      [
+        'title'=>'Profile',
+        'view'=>'profile'
+      ]);
+    }
+
 }

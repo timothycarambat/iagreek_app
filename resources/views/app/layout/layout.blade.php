@@ -21,6 +21,24 @@
 </head>
 <body>
 
+@if ($errors->any())
+  @foreach ($errors->all() as $error)
+      <input type='hidden' data-error value='{{ $error }}'/>
+  @endforeach
+@endif
+
+@if(session('error'))
+	<input type='hidden' data-error value='{{ session('error') }}'/>
+@endif
+
+@if(session('success'))
+	<input type='hidden' data-success value='{{ session('success') }}'/>
+@endif
+
+@if(session('info'))
+	<input type='hidden' data-info value='{{ session('info') }}'/>
+@endif
+
 <div class="wrapper">
         @include('app.layout.sidebar')
 
