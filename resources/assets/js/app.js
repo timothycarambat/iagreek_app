@@ -21,4 +21,5 @@ require('./includes/notify');
 window.view = $('meta[name=view]').attr("content");
 window.csrf_token = $('meta[name="csrf-token"]').attr('content');
 
+require('./disp_errors');
 require('./profile');

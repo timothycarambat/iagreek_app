@@ -4,7 +4,6 @@
 	<div class="content">
 			<div class="container-fluid">
 
-
         <div class="row">
             <div class="col-lg-4 col-md-5">
                 <div class="card card-user">
@@ -77,33 +76,39 @@
                         <h4 class="title">Edit Profile</h4>
                     </div>
                     <div class="content">
-                        <form>
+                        {!!Form::open(['url'=>'/profile/update'])!!}
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Organization</label>
-                                        <input type="text" class="form-control border-input" disabled placeholder="Organization" value="{{Auth::user()->org_name}}">
+																				{{Form::text('org_name',Auth::user()->org_name,['placeholder'=>'Organization', 'class'=>'form-control border-input','disabled'=>'disabled','required'=>'required'])}}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Email address</label>
-                                        <input type="email" class="form-control border-input" placeholder="Email" value="{{Auth::user()->email}}">
+                                        <label>Email address</label>
+																				{{Form::email('email',Auth::user()->email,['placeholder'=>'Email', 'class'=>'form-control border-input','required'=>'required'])}}
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>First Name</label>
-                                        <input type="text" class="form-control border-input" placeholder="First Name" value="{{explode(' ', Auth::user()->name)[0]}}">
+																				{{Form::text('first_name',explode(' ', Auth::user()->name)[0],['placeholder'=>'First Name', 'class'=>'form-control border-input','required'=>'required'])}}
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Last Name</label>
-                                        <input type="text" class="form-control border-input" placeholder="Last Name" value="{{explode(' ', Auth::user()->name)[1]}}">
+																				{{Form::text('last_name',explode(' ', Auth::user()->name)[1],['placeholder'=>'Last Name', 'class'=>'form-control border-input','required'=>'required'])}}
+                                    </div>
+                                </div>
+																<div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Phone</label>
+																				{{Form::text('phone',App\User::formatPhone(Auth::user()->phone),['placeholder'=>'(555) 123-4567', 'class'=>'form-control border-input','required'=>'required'])}}
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +117,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Billing Address</label>
-                                        <input type="text" class="form-control border-input" placeholder="Billing Address" value="{{Auth::user()->billing_address}}">
+																				{{Form::text('address',Auth::user()->billing_address,['placeholder'=>'Billing Address', 'class'=>'form-control border-input','required'=>'required'])}}
                                     </div>
                                 </div>
                             </div>
@@ -121,22 +126,28 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Billing City</label>
-                                        <input type="text" class="form-control border-input" placeholder="Billing City" value="{{Auth::user()->billing_city}}">
+																				{{Form::text('city',Auth::user()->billing_city,['placeholder'=>'Billing City', 'class'=>'form-control border-input','required'=>'required'])}}
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Billing State</label>
-                                        <input type="text" class="form-control border-input" placeholder="State" value="{{Auth::user()->billing_state}}">
+																				{{Form::select('state', App\States::makeStateSelection(), Auth::user()->billing_state,['class'=>'form-control border-input','required'=>'required'])}}
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Billing Zip Code</label>
-                                        <input type="number" class="form-control border-input" placeholder="ZIP Code" value="{{Auth::user()->billing_zip}}">
+																				{{Form::number('zip',Auth::user()->billing_zip,['placeholder'=>'ZIP Code', 'class'=>'form-control border-input','required'=>'required'])}}
                                     </div>
                                 </div>
                             </div>
+
+														<div class="text-center">
+																<button type="submit" class="btn btn-info btn-fill btn-wd">Update Profile</button>
+														</div>
+														<div class="clearfix"></div>
+												{!!Form::close()!!}
 
 														<hr>
                             <div class="row">
@@ -174,11 +185,6 @@
 
                             </div>
 
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-info btn-fill btn-wd">Update Profile</button>
-                            </div>
-                            <div class="clearfix"></div>
-                        </form>
                     </div>
                 </div>
             </div>

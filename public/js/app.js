@@ -12787,6 +12787,7 @@ __webpack_require__(52);
 window.view = $('meta[name=view]').attr("content");
 window.csrf_token = $('meta[name="csrf-token"]').attr('content');
 
+__webpack_require__(53);
 __webpack_require__(51);
 
 /***/ }),
@@ -39645,6 +39646,30 @@ Notify = function Notify(text, level) {
     type: level
   });
 };
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports) {
+
+$(function () {
+  var errors = $('input[data-error]');
+  errors.each(function (_, el) {
+    var msg = $(el).val();
+    Notify(msg, 'danger');
+  });
+
+  var success = $('input[data-success]');
+  success.each(function (_, el) {
+    var msg = $(el).val();
+    Notify(msg, 'success');
+  });
+
+  var info = $('input[data-info]');
+  info.each(function (_, el) {
+    var msg = $(el).val();
+    Notify(msg, 'info');
+  });
+});
 
 /***/ })
 /******/ ]);

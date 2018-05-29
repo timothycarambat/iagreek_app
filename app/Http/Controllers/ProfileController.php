@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Storage;
+use Illuminate\Support\Facades\Validator;
+use Session;
+use Redirect;
+
 use App\User;
 
 class ProfileController extends Controller
@@ -65,5 +69,41 @@ class ProfileController extends Controller
         $res['Message'] = "Your Avatar could not be updated. Make sure the file is correct";
       }
       return json_encode($res);
+    }
+
+    public static function updateInfo(Request $request){
+      $validatedData = Validator::validate($request->all(),[
+        'email' => 'required|email|max:255',
+        'first_name' => 'required|string',
+        'last_name' => 'required|string',
+        'address' => 'required|string',
+        'city' => 'required|string',
+        'state' => 'required|string|size:2',
+        'zip' => 'required|string|size:5',
+      ]);
+
+      if(is_null($validatedData)){
+        $update_user = User::where('id', Auth::user()->id)->update([
+          'email' => $request->email,
+          'name' => $request->first_name." ".$request->last_name,
+          'phone' =>  preg_replace('/\D+/', '', $request->phone),
+          'address' => $request->address,
+          'city' => $request->city,
+          'state' => $request->state,
+          'zip' => $request->zip,
+          'billing_name' => $request->first_name." ".$request->last_name,
+          'billing_phone' => preg_replace('/\D+/', '', $request->phone),
+          'billing_address' => $request->address,
+          'billing_city' => $request->city,
+          'billing_state' => $request->state,
+          'billing_zip' => $request->zip,
+        ]);
+      }
+      if( $update_user ){
+        Session::flash('success','Account details updated!');
+      }else{
+        Session::flash('failure','Account details were not updated!');
+      }
+      return Redirect::to('/profile');
     }
 }

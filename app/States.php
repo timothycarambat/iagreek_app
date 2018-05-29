@@ -12,4 +12,8 @@ class States extends Model
   public static function getStatesAll(){
   return States::orderBy('name')->get();
   }
+
+  public static function makeStateSelection(){
+    return States::getStatesAll()->pluck('name','code');
+  }
 }

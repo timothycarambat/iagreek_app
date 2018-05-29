@@ -55,7 +55,9 @@ class User extends Authenticatable
       });
     }
 
-
+    public static function formatPhone($phone){
+      return '('.substr($phone, 0, 3).') '.substr($phone, 3, 3).'-'.substr($phone,6);
+    }
 
 
     # make identicon for new users stored in avatars/
