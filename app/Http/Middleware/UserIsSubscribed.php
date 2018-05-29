@@ -6,12 +6,16 @@ use Closure;
 use Auth;
 use Session;
 
+use App\Subscription;
+
 class UserIsSubscribed
 {
 
     public function handle($request, Closure $next)
     {
-      if ($request->user() && ! $request->user()->subscribed('main')) {
+      $sub_name = Subscription::getSubName($request->user()->id);
+      
+      if ($request->user() && !$request->user()->subscribed($sub_name) ) {
         // This user is not a paying customer...
         $support_email = $_ENV['SUPPORT_EMAIL'];
         Session::flash('failure', "This Acccount's subscription has been suspended or cancelled.
