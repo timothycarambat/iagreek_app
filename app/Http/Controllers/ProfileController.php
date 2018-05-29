@@ -37,4 +37,33 @@ class ProfileController extends Controller
       }
       return json_encode($res);
     }
+
+    public static function updateAvatar(Request $request){
+      $res =[
+        'Status' => null,
+        'Message' => null,
+        'Data' => null
+      ];
+
+      $image = $request->avatar;
+      $extension = strtolower($request->avatar->extension());
+      $validExts = ['png','jpg','jpeg'];
+
+      if( $image->isValid() && in_array($extension, $validExts) ){
+        # get file and upload to S3 and get that URL back
+        $filename = str_random(12).'.'.$extension;
+        $uploadS3 = $image->storeAs('avatars', $filename, $_ENV['FILESYSTEM_DRIVER'],'public');
+        $letterheadURL = Storage::url("avatars/$filename");
+        User::where('id', Auth::user()->id)->update(['avatar' => $letterheadURL]);
+
+        # craft response object
+        $res['Status'] = 'Success';
+        $res['Message'] = "Your Avatar has been updated!";
+        $res['Data'] = $letterheadURL;
+      }else{
+        $res['Status'] = 'Failure';
+        $res['Message'] = "Your Avatar could not be updated. Make sure the file is correct";
+      }
+      return json_encode($res);
+    }
 }

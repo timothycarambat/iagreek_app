@@ -1,4 +1,8 @@
-.letterhead-img{
+.modal-backdrop{
+  display: none;
+}
+
+.letterhead-img, .avatar-img{
   box-shadow: 1px 1px 10px black;
   width: 100%;
   max-width: 400px;
@@ -8,4 +12,16 @@
   margin: 0;
   color: #252422;
   font-weight: 300;
+}
+
+.profile-upload{
+  position: sticky;
+  width: 20px !important;
+  height: 20px;
+  background-color: #6868ff;
+  color: white;
+  border-radius: 50%;
+  margin-left: -8%;
+  margin-bottom: -8%;
+  cursor: pointer;
 }

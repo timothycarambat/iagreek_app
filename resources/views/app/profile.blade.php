@@ -12,7 +12,12 @@
                     </div>
                     <div class="content">
                         <div class="author">
-                          <img class="avatar border-outline" src="{{Auth::user()->avatar}}" alt="..."/>
+													<div class="">
+														<img class="avatar border-outline" src="{{Auth::user()->avatar}}" alt="..."/>
+														<a data-toggle="modal" data-target="#profileModal">
+															<i class='profile-upload fas fa-plus'></i>
+														</a>
+													</div>
                           <h4 class="title">{{Auth::user()->name}}<br />
                              <a href="#"><small>{{Auth::user()->email}}</small></a>
                           </h4>
@@ -181,4 +186,29 @@
 
 			</div>
 	</div>
+
+	<!-- User Profile image Modal -->
+<div style='position:fixed' class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" >Upload a New Profile Image</h5>
+      </div>
+      <div class="modal-body">
+					<div class="well" data-avatar-well>
+						<img class='avatar-img' src='{{Auth::user()->avatar}}'/>
+						<label id="filename"></label>
+						<label id="progress"></label>
+						<label id="progressBar"></label>
+					</div>
+						<span class="btn btn-primary btn-file">
+								Upload New <input id='fileupload' type='file' name='avatar' class="custom-file-input">
+						</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Done</button>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection

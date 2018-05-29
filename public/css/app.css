@@ -14373,7 +14373,11 @@ div.counter {
   display: block;
 }
 
-.letterhead-img {
+.modal-backdrop {
+  display: none;
+}
+
+.letterhead-img, .avatar-img {
   -webkit-box-shadow: 1px 1px 10px black;
           box-shadow: 1px 1px 10px black;
   width: 100%;
@@ -14384,4 +14388,17 @@ div.counter {
   margin: 0;
   color: #252422;
   font-weight: 300;
+}
+
+.profile-upload {
+  position: -webkit-sticky;
+  position: sticky;
+  width: 20px !important;
+  height: 20px;
+  background-color: #6868ff;
+  color: white;
+  border-radius: 50%;
+  margin-left: -8%;
+  margin-bottom: -8%;
+  cursor: pointer;
 }
