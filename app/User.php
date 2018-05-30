@@ -63,6 +63,12 @@ class User extends Authenticatable
     }
 
 
+
+    public function members() {
+       return $this->hasMany('App\Member', 'org_admin_id');
+   }
+
+
     # make identicon for new users stored in avatars/
     private static function makeIdenticon($org_name){
       $icon = new \Jdenticon\Identicon(array(

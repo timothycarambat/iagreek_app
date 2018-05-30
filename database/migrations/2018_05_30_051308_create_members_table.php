@@ -21,7 +21,10 @@ class CreateMembersTable extends Migration
         $table->string('password');
         $table->string('position');
         $table->string('status');
-      }
+        $table->string('org_admin_id');
+
+        $table->timestamps();
+      });
     }
 
     /**
