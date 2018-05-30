@@ -30,4 +30,12 @@ class PagesController extends Controller
       ]);
     }
 
+    public function members(){
+      return view('app.members',
+      [
+        'title'=>'Organizaiton Members',
+        'view'=>'members'
+      ]);
+    }
+
 }

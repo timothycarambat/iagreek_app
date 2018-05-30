@@ -10,6 +10,19 @@ window._ = require('lodash');
 try {
     window.$ = window.jQuery = require('jquery');
 
+    // require datatables
+    var dt = require("datatables.net")(window,   window.$);
+    require('datatables.net-autofill')();
+    require('datatables.net-buttons')();
+    require('datatables.net-colreorder')();
+    require('datatables.net-fixedcolumns')();
+    require('datatables.net-fixedheader')();
+    require('datatables.net-responsive')();
+    require('datatables.net-rowgroup')();
+    require('datatables.net-rowreorder')();
+    require('datatables.net-scroller')();
+    require('datatables.net-select')();
+
     require('bootstrap-sass');
 } catch (e) {}
 

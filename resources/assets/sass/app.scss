@@ -5,6 +5,28 @@
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+// DataTables
+@import "node_modules/datatables.net-dt/css/jquery.dataTables";
+@import "node_modules/datatables.net-autofill-dt/css/autofill.dataTables.min";
+@import "node_modules/datatables.net-buttons-dt/css/buttons.dataTables.min";
+@import "node_modules/datatables.net-colreorder-dt/css/colreorder.dataTables.min";
+@import "node_modules/datatables.net-fixedcolumns-dt/css/fixedcolumns.dataTables.min";
+@import "node_modules/datatables.net-fixedheader-dt/css/fixedheader.dataTables.min";
+@import "node_modules/datatables.net-responsive-dt/css/responsive.dataTables.min";
+@import "node_modules/datatables.net-rowgroup-dt/css/rowgroup.dataTables.min";
+@import "node_modules/datatables.net-rowreorder-dt/css/rowreorder.dataTables.min";
+@import "node_modules/datatables.net-scroller-dt/css/scroller.dataTables.min";
+@import "node_modules/datatables.net-select-dt/css/select.dataTables.min";
+
+
+
+
+
+
+
+
+
+
 @import "theme/animate.min";
 @import "theme/demo";
 @import "theme/paper-dashboard";
