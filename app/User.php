@@ -62,12 +62,9 @@ class User extends Authenticatable
       return $user->subscription($sub_name)->cancelNow();
     }
 
-
-
-    public function members() {
-       return $this->hasMany('App\Member', 'org_admin_id');
-   }
-
+    public function org_size() {
+      return count($this->members()->get());
+    }
 
     # make identicon for new users stored in avatars/
     private static function makeIdenticon($org_name){
@@ -78,5 +75,11 @@ class User extends Authenticatable
       $img_name = str_random(12).".png";
       Storage::disk($_ENV['FILESYSTEM_DRIVER'])->put("avatars/".$img_name, file_get_contents($icon->getImageDataUri('png')) );
       return Storage::url("avatars/$img_name");
+    }
+
+
+    //realationships
+    public function members() {
+       return $this->hasMany('App\Member', 'org_admin_id','id');
     }
 }

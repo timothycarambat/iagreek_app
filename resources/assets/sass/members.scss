@@ -1,0 +1,11 @@
+.member-table {
+  & > thead > tr > th{
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+
+.tablesorter-header-inner{
+  pointer-events: none;
+}
