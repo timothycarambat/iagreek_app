@@ -4,7 +4,7 @@
   </div>
 
   <div class="col-md-12">
-    <h5><b>Step Two:</b> Fill out the template with your roster. Please keep the columns in the same order as you downloaded it or else it will be rejected :(.
+    <h5><b>Step Two:</b> Fill out the template with your roster. Please keep the columns in the same order as you downloaded it or else it will be rejected 😢.
       Once you upload we will process it. If there's any problems we will let you know - we will handle the rest!</h5>
 
       <span class="btn btn-primary btn-file">

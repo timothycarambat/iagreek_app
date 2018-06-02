@@ -23,7 +23,7 @@ class Member extends Model
     public static function boot() {
       parent::boot();
       self::creating(function($model) {
-        //send email when creating new Member
+        //send email when creating new Member!
       });
     }
 
