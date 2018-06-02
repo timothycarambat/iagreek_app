@@ -48,7 +48,7 @@ class UsersTableSeeder extends Seeder
           )
         ));
 
-       $main_user->newSubscription('main','iag_med')->create($token['id'],['email'=>$main_user->email]);
+       $main_user->newSubscription('main','iag_small')->create($token['id'],['email'=>$main_user->email]);
 
 
     }

@@ -36023,12 +36023,12 @@ bunker(function () {
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 /*
-    
-    
+
+
 
      Creative Tim Modifications
-     
-     Lines: 239, 240 was changed from top: 5px to top: 50% and we added margin-top: -13px. In this way the close button will be aligned vertically 
+
+     Lines: 239, 240 was changed from top: 5px to top: 50% and we added margin-top: -13px. In this way the close button will be aligned vertically
      Line:242 - modified when the icon is set, we add the class "alert-with-icon", so there will be enough space for the icon.
 
 
@@ -36077,7 +36077,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		offset: 20,
 		spacing: 10,
 		z_index: 1031,
-		delay: 5000,
+		delay: 8000,
 		timer: 1000,
 		url_target: '_blank',
 		mouse_over: null,
@@ -39437,6 +39437,7 @@ $(function () {
         evalHeaders();
       }, 100);
     });
+    initRosterSubmission();
   }
 }); //end windowif
 
@@ -39455,6 +39456,43 @@ function evalHeaders() {
 
   dscSort.each(function (i, el) {
     $(el).children().eq(0).children().eq(0).addClass('fa-sort-down').removeClass('fa-sort fa-sort-up');
+  });
+}
+
+function initRosterSubmission() {
+  //upload new letterhead image
+  $('input[name=roster]').change(function () {
+    $(this).simpleUpload("/members/upload/roster", {
+
+      beforeSend: function beforeSend(jqXHR, settings) {
+        //attach csrf token manually
+        jqXHR.setRequestHeader('X-CSRF-TOKEN', window.csrf_token);
+      },
+
+      start: function start(file) {
+        console.log(file.name);
+      },
+
+      progress: function progress(_progress) {
+        console.log(_progress);
+      },
+
+      success: function success(data) {
+        //upload successful
+        var data_decoded = JSON.parse(data);
+        if (data_decoded.Status == 'Success') {
+          Notify(data_decoded.Message, 'success');
+        } else {
+          Notify(data_decoded.Message, 'info');
+        }
+      },
+
+      error: function error(_error) {
+        //upload failed
+        console.log(_error.name + " - " + _error.message);
+        $('#progress').html("Failure!<br>" + _error.name + ": " + _error.message);
+      }
+    });
   });
 }
 

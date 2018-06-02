@@ -66,6 +66,10 @@ class User extends Authenticatable
       return count($this->members()->get());
     }
 
+    public function active_org_size() {
+      return count($this->members()->where('status','!=','inactive')->get());
+    }
+
     # make identicon for new users stored in avatars/
     private static function makeIdenticon($org_name){
       $icon = new \Jdenticon\Identicon(array(

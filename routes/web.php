@@ -25,4 +25,7 @@ Route::post('/profile/upload/letterhead', 'ProfileController@updateLetterhead')-
 Route::post('/profile/upload/avatar', 'ProfileController@updateAvatar')->middleware('auth');
 Route::post('/profile/update', 'ProfileController@updateInfo')->middleware('auth');
 Route::post('/profile/update/notify', 'ProfileController@updateNotifs')->middleware('auth');
+
+Route::post('/members/upload/roster', 'MemberController@updateRoster')->middleware('auth');
+
 Route::post('/user/{user_id}/unsubscribe', 'UserController@cancelAccount')->middleware('auth');

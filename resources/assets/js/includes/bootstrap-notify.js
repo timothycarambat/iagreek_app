@@ -1,10 +1,10 @@
 /*
-    
-    
+
+
 
      Creative Tim Modifications
-     
-     Lines: 239, 240 was changed from top: 5px to top: 50% and we added margin-top: -13px. In this way the close button will be aligned vertically 
+
+     Lines: 239, 240 was changed from top: 5px to top: 50% and we added margin-top: -13px. In this way the close button will be aligned vertically
      Line:242 - modified when the icon is set, we add the class "alert-with-icon", so there will be enough space for the icon.
 
 
@@ -51,7 +51,7 @@
 		offset: 20,
 		spacing: 10,
 		z_index: 1031,
-		delay: 5000,
+		delay: 8000,
 		timer: 1000,
 		url_target: '_blank',
 		mouse_over: null,
@@ -135,7 +135,7 @@
 			this.init();
 		}
 	}
-	
+
 	$.extend(Notify.prototype, {
 		init: function () {
 			var self = this;
@@ -215,9 +215,9 @@
 			}
 		},
 		setIcon: function () {
-    		
+
     		this.$ele.addClass('alert-with-icon');
-    		
+
 			if (this.settings.icon_type.toLowerCase() === 'class') {
 				this.$ele.find('[data-notify="icon"]').addClass(this.settings.content.icon);
 			} else {
