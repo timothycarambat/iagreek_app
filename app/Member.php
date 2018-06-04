@@ -24,6 +24,7 @@ class Member extends Model
       parent::boot();
       self::creating(function($model) {
         //send email when creating new Member!
+        Member::sendSignUpEmail($model);
       });
     }
 
@@ -101,6 +102,17 @@ class Member extends Model
         'Message'=>"<strong>You're Good!</strong> The list was used to $text to your organization. Refresh to view changes."
       ];
       return $res;
+    }
+
+    public static function sendSignUpEmail($model){
+      $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
+      $beautymail->send('emails.member_signup',
+        ['model'=>$model, 'org_name'=>Auth::user()->org_name],
+        function($message) use($model) {
+          $message
+              ->to($model->email)
+              ->subject("You've been invited to sign into IAGREEK!");
+      });
     }
 
 

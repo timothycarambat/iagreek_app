@@ -28,7 +28,7 @@ function evalHeaders(){
 
 function initRosterSubmission(){
   //upload new letterhead image
-  $('input[name=roster]').change(function(){
+  $('input[name=roster]').change(function(e){
       $(this).simpleUpload("/members/upload/roster", {
 
           beforeSend: function(jqXHR, settings) { //attach csrf token manually
@@ -36,11 +36,11 @@ function initRosterSubmission(){
           },
 
           start: function(file){
-              console.log(file.name)
+              $('.upload-btn').html(`Uploading Roster <i class='fas fa-spinner fa-spin'></i>`);
           },
 
           progress: function(progress){
-              console.log(progress);
+              // console.log(progress);
           },
 
           success: function(data){
@@ -48,8 +48,10 @@ function initRosterSubmission(){
               let data_decoded = JSON.parse(data);
               if( data_decoded.Status == 'Success'){
                 Notify(data_decoded.Message , 'success');
+                $('.upload-btn').html(`Uploading Roster <i class='fas fa-check'></i>`);
               }else{
                 Notify(data_decoded.Message , 'info');
+                $('.upload-btn').html(`Uploading Roster <i class='fas fa-times'></i>`);
               }
           },
 
