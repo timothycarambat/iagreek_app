@@ -87,7 +87,7 @@
 	        </div>
 
 	        <div class="tab-pane" id="addByForm">
-
+						@include('app.components.addByForm')
 	        </div>
       	</div>
 

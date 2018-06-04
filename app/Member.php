@@ -104,6 +104,10 @@ class Member extends Model
       return $res;
     }
 
+    public static function addNewMember($new_member){
+      return Member::create($new_member);
+    }
+
     public static function sendSignUpEmail($model){
       $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
       $beautymail->send('emails.member_signup',
