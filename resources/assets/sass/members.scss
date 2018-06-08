@@ -9,3 +9,9 @@
 .tablesorter-header-inner{
   pointer-events: none;
 }
+
+[data-remove-member],[data-edit-member],[data-add-tags]{
+  & > *{
+    pointer-events: none;
+  }
+}

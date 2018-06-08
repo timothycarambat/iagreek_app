@@ -45513,8 +45513,9 @@ $(function () {
 
 /***/ }),
 /* 48 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__) {
 
+"use strict";
 $(function () {
   if (window.view === "members") {
     $('table').tablesorter();
@@ -45525,6 +45526,16 @@ $(function () {
       }, 100);
     });
     initRosterSubmission();
+
+    $('[data-remove-member]').click(function (e) {
+      var member = getMemberDetails($(e.target));
+      makeRemoveModal(member);
+    });
+
+    $('[data-edit-member]').click(function (e) {
+      var member = getMemberDetails($(e.target));
+      makeEditModal(member);
+    });
   }
 }); //end windowif
 
@@ -45584,6 +45595,59 @@ function initRosterSubmission() {
     });
   });
 }
+
+function getMemberDetails($target) {
+  var id = $target.data('member');
+  var name = $target.parent().siblings().eq(0).text();
+  var email = $target.parent().siblings().eq(1).text();
+  var status = $target.parent().siblings().eq(2).text();
+  var position = $target.parent().siblings().eq(3).text();
+  var tags = $target.parent().siblings().eq(4).text();
+
+  return {
+    id: id,
+    name: name,
+    email: email,
+    status: status,
+    position: position,
+    tags: tags
+  };
+}
+
+function makeRemoveModal(member) {
+  var modal = '\n  <div class="modal fade" id="removeMember' + member.id + '" tabindex="-1" role="dialog">\n    <div class="modal-dialog" role="document">\n      <div class="modal-content">\n        <div class="modal-header">\n          <h4 class="modal-title text-center">Remove ' + member.name + '?</h4>\n        </div>\n        <div class="modal-body">\n          <b> Please be aware that once you cant undo this action! If you sign them back up they will have to\n          create a password again - as if they had never had an account in the first place!</b>\n        </div>\n        <div class="modal-footer">\n          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>\n          <button type="button" onclick=\'removeMember(' + member.id + ')\' class="btn btn-danger">Remove Member</button>\n        </div>\n      </div>\n    </div>\n  </div>\n  ';
+  $('body').append(modal);
+  $('#removeMember' + member.id).modal('show');
+}
+
+function makeEditModal(member) {
+  var modal = '\n  <div class="modal fade" id="editMember' + member.id + '" tabindex="-1" role="dialog">\n    <div class="modal-dialog" role="document">\n      <div class="modal-content">\n        <div class="modal-header">\n          <h4 class="modal-title text-center">Editing ' + member.name + '?</h4>\n        </div>\n        <div class="modal-body">\n          <div class="row">\n            <form class=\'col-md-12\' action=\'/members/editMember\' method=\'POST\'>\n              <input type="hidden" name="_token" value="' + window.csrf_token + '">\n              <input type="hidden" name="id" value="' + member.id + '">\n              <div class="col-md-12">\n                  <div class="form-group">\n                      <label>Name</label>\n                      <input class=\'form-control\' type=\'text\' name=\'name\' placeholder=\'Member Name\' value=\'' + member.name + '\' />\n                  </div>\n              </div>\n\n              <div class="col-md-12">\n                  <div class="form-group">\n                      <label>Email</label>\n                      <input class=\'form-control\' type=\'email\' disabled placeholder=\'Member Email\' value=\'' + member.email + '\' />\n                      <p><i>You cant edit this field, but you can remove and re-add them with the correct email!</i></p>\n                  </div>\n              </div>\n\n              <div class="col-md-12">\n                  <div class="form-group">\n                      <label>Position</label>\n                      <input class=\'form-control\' type=\'text\' name=\'position\' placeholder=\'Member Name\' value=\'' + member.position + '\' />\n                  </div>\n              </div>\n\n              <div class="col-md-12">\n                  <div class="form-group">\n                      <label>Status</label>\n                      <input class=\'form-control\' type=\'text\' name=\'status\' placeholder=\'Member Name\' value=\'' + member.status + '\' />\n                  </div>\n              </div>\n\n              <button type="submit" class="btn btn-info">Submit Edits</button>\n\n            </form>\n          </div>\n        </div>\n        <div class="modal-footer">\n          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>\n        </div>\n      </div>\n    </div>\n  </div>\n  ';
+  $('body').append(modal);
+  $('#editMember' + member.id).modal('show');
+}
+
+window.removeMember = function (id) {
+  //remove generated modal
+  $('#removeMember' + id).modal('hide').remove();
+
+  $.ajax({
+    url: "/members/removeMember",
+    type: "POST",
+    data: { id: id },
+    beforeSend: function beforeSend(request) {
+      request.setRequestHeader('X-CSRF-TOKEN', window.csrf_token);
+    },
+    success: function success(res) {
+      var result = JSON.parse(res);
+      if (result.Status === 'Success') {
+        Notify(result.Message, 'success');
+        $('[data-remove-member][data-member=' + id + ']').parents().closest('tr').remove();
+      } else {
+        Notify(result.Message, 'failure');
+      }
+    }
+  });
+};
 
 /***/ }),
 /* 49 */

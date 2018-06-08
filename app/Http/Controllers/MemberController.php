@@ -46,7 +46,48 @@ class MemberController extends Controller
       }else{
         Session::flash('failure','The Member could not be added!');
       }
-      return Redirect::to('/members');
 
+      return Redirect::to('/members');
+    }
+
+    public static function removeMember(Request $request){
+      $res = [
+        'Status' => null,
+        'Message' => null,
+      ];
+      $remove_member = Member::find($request->id)->delete();
+      if($remove_member){
+        $res['Status'] = 'Success';
+        $res['Message'] = "The Member was removed!";
+      }else{
+        $res['Status'] = 'Failure';
+        $res['Message'] = "The Member could not be removed.";
+      }
+
+      return json_encode($res);
+    }
+
+    public static function editMember(Request $request){
+      $validatedData = Validator::validate($request->all(),[
+        'name' => 'required|string',
+        'position' => 'required|string',
+        'status' => 'required|string',
+      ]);
+
+      if(is_null($validatedData)){
+        $update_member = Member::find($request->id)->update([
+          'name' => $request->name,
+          'position' => $request->position,
+          'status' => $request->status,
+        ]);
+      }
+
+      if( $update_member ){
+        Session::flash('success',"The Member's information was updated!");
+      }else{
+        Session::flash('failure','The Member could not be updated!');
+      }
+
+      return Redirect::to('/members');
     }
 }

@@ -33,9 +33,9 @@
 							@foreach($members as $member)
 								<tr>
 									<td style="width:6%">
-											<a data-toggle='modal' data-target='' data-member='{{$member->id}}' style='cursor:pointer' title="Add Tags to Member"><i style='color:#3c763d' class="fa-fw fas fa-tags"></i></a>
-											<a data-toggle='modal' data-target='' data-member='{{$member->id}}' style='cursor:pointer' title="Edit Member Info"><i style='color:#31708f' class="fa-fw fas fa-user-edit"></i></a>
-											<a data-toggle='modal' data-target='' data-member='{{$member->id}}' style='cursor:pointer' title="Delete Member"><i style='color:#a94442' class="fa-fw fas fa-trash-alt"></i></a>
+											<a data-toggle='modal' data-target='' data-add-tags data-member='{{$member->id}}' style='cursor:pointer' title="Add Tags to Member"><i style='color:#3c763d' class="fa-fw fas fa-tags"></i></a>
+											<a data-toggle='modal' data-target='' data-edit-member data-member='{{$member->id}}' style='cursor:pointer' title="Edit Member Info"><i style='color:#31708f' class="fa-fw fas fa-user-edit"></i></a>
+											<a data-toggle='modal' data-target='' data-remove-member data-member='{{$member->id}}' style='cursor:pointer' title="Delete Member"><i style='color:#a94442' class="fa-fw fas fa-trash-alt"></i></a>
 									</td>
 									<td class="text-center">{{$member->name}}</td>
 									<td class="text-center">{{$member->email}}</td>
