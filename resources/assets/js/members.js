@@ -15,6 +15,12 @@ $(function(){ if(window.view === "members"){
     let member = getMemberDetails($(e.target));
     makeEditModal(member);
   })
+
+  $('[data-add-tags]').click(function(e){
+    let member = getMemberDetails($(e.target));
+    makeTagModal(member);
+  })
+
 }}); //end windowif
 
 
@@ -114,6 +120,9 @@ function makeRemoveModal(member){
   `
   $('body').append(modal);
   $(`#removeMember${member.id}`).modal('show');
+  $(`#removeMember${member.id}`).on("hidden.bs.modal", function () {
+      $(`#removeMember${member.id}`).remove();
+  });
 }
 
 function makeEditModal(member){
@@ -172,6 +181,9 @@ function makeEditModal(member){
   `
   $('body').append(modal);
   $(`#editMember${member.id}`).modal('show');
+  $(`#editMember${member.id}`).on("hidden.bs.modal", function () {
+      $(`#editMember${member.id}`).remove();
+  });
 }
 
 window.removeMember = function(id){
@@ -195,4 +207,48 @@ window.removeMember = function(id){
       }
     }
   })
+}
+
+function makeTagModal(member){
+  let tags = member.tags === "--" ? '' : member.tags
+  let modal = `
+  <div class="modal fade" id="tagMember${member.id}" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title text-center">Changing Tags for ${member.name}</h4>
+        </div>
+        <div class="modal-body">
+        <form action='/members/submitTags' method='POST'>
+          <input type="hidden" name="_token" value="${window.csrf_token}">
+          <input type="hidden" name="id" value="${member.id}">
+          <textarea name='memberTags'>${tags}</textarea>
+          <p id='TagCount${member.id}' style='color:#aeaeae;'><e>0/10</e> Tags set</p>
+          <button type="submit" class="btn btn-info">Submit Changes</button>
+        </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  `
+  $('body').append(modal);
+  $(`#tagMember${member.id}`).modal('show');
+  $('textarea').tagEditor({
+    maxTags: 10,
+    maxLength: 25,
+    placeholder: "Insert Some Tags To Quickly Group Members!",
+    removeDuplicates: true,
+    onChange: function(field, editor, tags) {
+      $(`#TagCount${member.id} > e`).text(`${tags.length}/10`);
+    },
+  });
+
+  $(`#TagCount${member.id} > e`).text(`${$('textarea').tagEditor('getTags')[0].tags.length}/10`);
+
+  $(`#tagMember${member.id}`).on("hidden.bs.modal", function () {
+      $(`#tagMember${member.id}`).remove();
+  });
 }

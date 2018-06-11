@@ -41,7 +41,14 @@
 									<td class="text-center">{{$member->email}}</td>
 									<td class="text-center">{{$member->status}}</td>
 									<td class="text-center">{{$member->position}}</td>
-									<td class="text-center">N/A</td>
+									<?php
+										$tags = [];
+										foreach($member->tags as $tag) {
+											$tags[] = $tag->name;
+										}
+										$tags = implode(',',$tags);
+									?>
+									<td class="text-center">{{ empty($tags)? "--" : $tags }}</td>
 								</tr>
 							@endforeach
 						@else

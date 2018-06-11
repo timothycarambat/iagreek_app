@@ -30,6 +30,8 @@ Route::post('/members/upload/roster', 'MemberController@updateRoster')->middlewa
 Route::post('/members/submit/newmember', 'MemberController@addNewMember')->middleware('auth');
 Route::post('/members/removeMember', 'MemberController@removeMember')->middleware('auth');
 Route::post('/members/editMember', 'MemberController@editMember')->middleware('auth');
+Route::post('/members/submitTags', 'MemberController@editTags')->middleware('auth');
+
 
 
 Route::post('/user/{user_id}/unsubscribe', 'UserController@cancelAccount')->middleware('auth');

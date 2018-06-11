@@ -90,4 +90,18 @@ class MemberController extends Controller
 
       return Redirect::to('/members');
     }
+
+    public static function editTags(Request $request){
+      $member = Member::with('tagged')->find($request->id);
+      if( empty( trim($request->memberTags)) ){
+        // if tag field empty then empty the tags instead of parsing
+        $tags = [];
+      }else{
+        $tags = explode(',',$request->memberTags);
+      }
+      $member->retag($tags);
+      Session::flash('success',"<b>$member->name</b>'s tags were updated!");
+
+      return Redirect::to('/members');
+    }
 }

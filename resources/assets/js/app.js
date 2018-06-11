@@ -17,6 +17,8 @@ require('./includes/demo');
 require('./includes/paper-dashboard');
 require('./stripe_helper');
 require('./includes/notify');
+require('./includes/jquery.caret.min');
+require('./includes/jquery.tag-editor.min');
 
 
 window.view = $('meta[name=view]').attr("content");

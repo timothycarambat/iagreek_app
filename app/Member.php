@@ -10,6 +10,7 @@ use Auth;
 
 class Member extends Model
 {
+    use \Conner\Tagging\Taggable;
     protected $table = "members";
     protected $fillable = [
       "email" ,
@@ -42,7 +43,7 @@ class Member extends Model
           $cellIterator->setIterateOnlyExistingCells(false);
           $rowdata = [];
           $column = 0;
-          $column_names = ['name','email','position','status'];
+          $column_names = ['name','email','position','status','tags'];
           foreach ($cellIterator as $cell) {
               if (!is_null($cell)) {
                   $value = $cell->getCalculatedValue();
@@ -79,13 +80,23 @@ class Member extends Model
       }
 
       foreach($roster as $member){
+        if( empty(trim($member['tags'])) ){
+          // if tag field empty then empty the tags instead of parsing
+          $tags = [];
+        }else{
+          $tags = explode(',',$member['tags']);
+        }
+
+        // assign writable fields
         $member = Member::updateOrCreate(['email' => $member['email'] ],
         ['name' => $member['name'],
         'password'=> bcrypt(str_random(24)),
-        'position' => $member['position'],
-        'status' => $member['status'],
+        'position' => ucfirst($member['position']),
+        'status' => strtolower($member['status']),
         'org_admin_id' => Auth::user()->id
         ]);
+        // retag member if necessary
+        $member->retag($tags);
       }
 
       //make smart text for updated and created members

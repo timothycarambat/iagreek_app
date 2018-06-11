@@ -180,7 +180,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Laravel\Cashier\CashierServiceProvider::class,
         Snowfire\Beautymail\BeautymailServiceProvider::class,
-
+        \Conner\Tagging\Providers\TaggingServiceProvider::class,
     ],
 
     /*
