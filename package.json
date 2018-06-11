@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "bootstrap-select": "^1.13.1",
-    "jquery-simple-upload": "^1.1.0"
+    "jquery-simple-upload": "^1.1.0",
+    "tablesorter": "^2.30.5"
   }
 }

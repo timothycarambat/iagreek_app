@@ -14,6 +14,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('subscriptions')->truncate();
+        DB::table('members')->truncate();
         DB::table('users')->truncate();
 
         //Make Admin
@@ -47,7 +48,7 @@ class UsersTableSeeder extends Seeder
           )
         ));
 
-       $main_user->newSubscription('main','iag_med')->create($token['id'],['email'=>$main_user->email]);
+       $main_user->newSubscription('main','iag_small')->create($token['id'],['email'=>$main_user->email]);
 
 
     }
