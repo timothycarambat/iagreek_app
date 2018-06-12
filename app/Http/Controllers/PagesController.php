@@ -47,4 +47,13 @@ class PagesController extends Controller
       ]);
     }
 
+    public function documents(Request $request){
+      return view('app.documents',
+      [
+        'title'=>'Organization Documents',
+        'view'=>'documents',
+        'documents'=>Auth::user()->documents()->orderBy('updated_at','ASC')->get(),
+      ]);
+    }
+
 }

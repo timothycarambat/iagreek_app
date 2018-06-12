@@ -14629,3 +14629,16 @@ input:checked + .slider:before {
 [data-remove-member] > *, [data-edit-member] > *, [data-add-tags] > * {
   pointer-events: none;
 }
+
+.card-holder:hover > .card {
+  background-color: #68b3c8;
+  color: white;
+}
+
+.card-holder:hover > .card > .content > .footer > div {
+  color: white;
+}
+
+.card-holder:hover > .card > .content > .row > div > div {
+  color: white;
+}

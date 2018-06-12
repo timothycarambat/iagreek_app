@@ -1,0 +1,16 @@
+.card-holder:hover{
+  & > .card{
+    background-color: #68b3c8;
+    color: white;
+    & > .content{
+      & > .footer > div{
+        color: white;
+      }
+      & > .row{
+        & > div > div{
+          color: white;
+        }
+      }
+    }
+  }
+}

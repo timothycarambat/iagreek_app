@@ -86,4 +86,8 @@ class User extends Authenticatable
     public function members() {
        return $this->hasMany('App\Member', 'org_admin_id','id');
     }
+
+    public function documents() {
+       return $this->hasMany('App\Document', 'org_admin_id','id');
+    }
 }
