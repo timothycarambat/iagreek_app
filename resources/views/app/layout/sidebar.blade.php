@@ -34,7 +34,7 @@ Tip 2: you can change the color of the active button using the data-active-color
                     <p>Members</p>
                 </a>
             </li>
-            <li class="{{ Request::is('documents') ? 'active':null }}">
+            <li class="{{ (Request::is('documents') || Request::is('documents/edit/*') ) ? 'active':null }}">
                 <a href="/documents">
                     <i class="fas fa-file-alt"></i>
                     <p>Documents</p>
