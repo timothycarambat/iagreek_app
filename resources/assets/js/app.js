@@ -9,6 +9,7 @@ fontawesome.library.add(solid)
 
 require('jquery-simple-upload');
 require('tablesorter');
+window.Quill = require('quill');
 
 // require('./includes/bootstrap-checkbox-radio');
 require('./includes/bootstrap-notify');
@@ -27,3 +28,4 @@ window.csrf_token = $('meta[name="csrf-token"]').attr('content');
 require('./disp_errors');
 require('./profile');
 require('./members');
+require('./document_edit');

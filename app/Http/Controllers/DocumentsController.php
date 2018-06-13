@@ -34,4 +34,16 @@ class DocumentsController extends Controller
       }
       Redirect::to('/documents')->send();
     }
+
+    public static function saveDocument(Request $request, $doc_id){
+      $document = Document::find($doc_id);
+      $res = ['saved' => false];
+      if( $document->org_admin->id === Auth::user()->id ){
+        $res = $document->update([
+          'content'=>$request->content
+        ]);
+      }
+      return json_encode($res);
+    }
+
 }

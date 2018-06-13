@@ -20,6 +20,8 @@ Route::get('/dashboard', 'PagesController@dashboard')->middleware(['auth','subsc
 Route::get('/profile', 'PagesController@profile')->middleware(['auth','subscribed']);
 Route::get('/members', 'PagesController@members')->middleware(['auth','subscribed']);
 Route::get('/documents', 'PagesController@documents')->middleware(['auth','subscribed']);
+Route::get('/documents/edit/{doc_id}', 'PagesController@document_edit')->middleware(['auth','subscribed','ownsDocument']);
+
 
 
 
@@ -36,6 +38,8 @@ Route::post('/members/submitTags', 'MemberController@editTags')->middleware('aut
 
 Route::post('/documents/new_document', 'DocumentsController@newDocument')->middleware('auth');
 Route::get('/documents/remove_document/{doc_id}', 'DocumentsController@removeDocument')->middleware('auth');
+Route::post('/documents/edit/{doc_id}/save', 'DocumentsController@saveDocument')->middleware(['auth']);
+
 
 
 

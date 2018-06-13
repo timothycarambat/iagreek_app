@@ -4,6 +4,8 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "node_modules/quill/dist/quill.core";
+@import "node_modules/quill/dist/quill.snow";
 
 @import "theme/animate.min";
 @import "theme/demo";
@@ -14,3 +16,4 @@
 @import "profile";
 @import "members";
 @import "documents";
+@import "document_edit";
