@@ -8,7 +8,7 @@
         <div class="col-md-12">
           <a data-target='#newDocumentModal' data-toggle='modal'>
             <div class="col-md-2 btn btn-wd btn-info">
-              <i class="fas fa-plus fa-fw"></i>Add Document
+              <i class="fas fa-plus fa-fw"></i>Create Document
             </div>
           </a>
         </div>
