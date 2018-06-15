@@ -73,7 +73,7 @@ class PagesController extends Controller
       [
         'title'=>'Organization Campaigns',
         'view'=>'campaigns',
-        'campaigns'=>Auth::user()->campaigns()->orderBy('updated_at','ASC')->get(),
+        'campaigns'=>Auth::user()->campaigns()->where('archived',false)->orderBy('updated_at','ASC')->get(),
       ]);
     }
 

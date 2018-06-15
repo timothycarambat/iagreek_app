@@ -18,6 +18,14 @@
                     <label>Name</label>
                     {{Form::text('name',null,['placeholder'=>'Campaign Title', 'class'=>'form-control border-input','required'=>'required'])}}
                 </div>
+
+                <div class="form-group">
+                    <label>Document</label>
+                    {{Form::select('document',
+                    App\Document::where('org_admin_id',Auth::user()->id)->orderBy('updated_at','ASC')->pluck('name','id')
+                    ,"",
+                    ['placeholder'=>'Select A Document Template', 'class'=>'form-control border-input','required'=>'required'])}}
+                </div>
             </div>
             {{Form::submit('Create Campaign',['class'=>'btn btn-wd btn-info'])}}
             {!!Form::close()!!}
