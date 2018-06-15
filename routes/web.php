@@ -19,6 +19,10 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/dashboard', 'PagesController@dashboard')->middleware(['auth','subscribed']);
 Route::get('/profile', 'PagesController@profile')->middleware(['auth','subscribed']);
 Route::get('/members', 'PagesController@members')->middleware(['auth','subscribed']);
+Route::get('/documents', 'PagesController@documents')->middleware(['auth','subscribed']);
+Route::get('/documents/edit/{doc_id}', 'PagesController@document_edit')->middleware(['auth','subscribed','ownsDocument']);
+
+
 
 
 Route::post('/profile/upload/letterhead', 'ProfileController@updateLetterhead')->middleware('auth');
@@ -31,6 +35,15 @@ Route::post('/members/submit/newmember', 'MemberController@addNewMember')->middl
 Route::post('/members/removeMember', 'MemberController@removeMember')->middleware('auth');
 Route::post('/members/editMember', 'MemberController@editMember')->middleware('auth');
 Route::post('/members/submitTags', 'MemberController@editTags')->middleware('auth');
+
+Route::post('/documents/new_document', 'DocumentsController@newDocument')->middleware('auth');
+Route::get('/documents/remove_document/{doc_id}', 'DocumentsController@removeDocument')->middleware('auth');
+Route::post('/documents/edit/{doc_id}/save', 'DocumentsController@saveDocument')->middleware(['auth']);
+
+
+
+
+
 
 
 

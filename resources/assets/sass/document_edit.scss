@@ -1,0 +1,12 @@
+.editor{
+  height:800px;
+}
+.ql-name,.ql-date{
+  width: 50px !important;
+}
+.ql-name:after{
+  content: "NAME";
+}
+.ql-date:after{
+  content: "DATE";
+}
