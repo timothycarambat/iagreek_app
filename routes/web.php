@@ -21,6 +21,8 @@ Route::get('/profile', 'PagesController@profile')->middleware(['auth','subscribe
 Route::get('/members', 'PagesController@members')->middleware(['auth','subscribed']);
 Route::get('/documents', 'PagesController@documents')->middleware(['auth','subscribed']);
 Route::get('/documents/edit/{doc_id}', 'PagesController@document_edit')->middleware(['auth','subscribed','ownsDocument']);
+Route::get('/campaigns', 'PagesController@campaigns')->middleware(['auth','subscribed']);
+
 
 
 

@@ -68,4 +68,13 @@ class PagesController extends Controller
       ]);
     }
 
+    public function campaigns(Request $request){
+      return view('app.campaigns',
+      [
+        'title'=>'Organization Campaigns',
+        'view'=>'campaigns',
+        'campaigns'=>Auth::user()->campaigns()->orderBy('updated_at','ASC')->get(),
+      ]);
+    }
+
 }

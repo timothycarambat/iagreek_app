@@ -134,4 +134,9 @@ class Member extends Model
     public function org_admin() {
        return $this->belongsTo('App\User', 'org_admin_id', 'id');
     }
+
+    public function campaigns() {
+       return $this->belongsToMany('App\Campaign');
+    }
+
 }

@@ -90,4 +90,8 @@ class User extends Authenticatable
     public function documents() {
        return $this->hasMany('App\Document', 'org_admin_id','id');
     }
+
+    public function campaigns() {
+       return $this->hasMany('App\Campaign', 'org_admin_id','id');
+    }
 }
