@@ -23,6 +23,7 @@ class Campaign extends Model
 
   public static function createCampaign($data){
     $member_list = Campaign::getUniqueMemberList($data->select_by_tags, $data->select_by_position, $data->select_by_member);
+    $additionals = Campaign::compileAdditionals($data->second_signer,$data->third_signer,$data->fourth_signer);
     $campaign = Campaign::create([
       'name' => $data->name,
       'document_id' => $data->document,
@@ -30,8 +31,8 @@ class Campaign extends Model
       'expiry' => date("Y-m-d H:i:s", strtotime($data->expiry)),
     ]);
 
-    $campaign->sendMailouts($member_list);
-    $campaign->createSignRequests($member_list);
+    // $campaign->sendMailouts($member_list);
+    $campaign->createSignRequests($member_list,$additionals);
     Session::flash('success','<b>Congratulations!</b> Your Campaign was launched, the mailouts were made and now you can track its progress.');
     Redirect::to('/campaigns')->send();
   }
@@ -61,6 +62,25 @@ class Campaign extends Model
     return $members->unique();
   }
 
+  //this function will put the signers in order. If they put a 3rd signer, but no second
+  //it will auto sort the keys so a document does not hang waiting for null signer
+  private static function compileAdditionals($second,$third,$fourth){
+    if( empty($second) && empty($third) && empty($fourth) ){
+      //no additionals set so return false
+      return false;
+    }else{
+      $keys = ["one","two","three"];
+      //filter out null values and then re-index array
+      $values = array_values(array_filter([$second,$third,$fourth]));
+      $additionals = [];
+
+      foreach($keys as $i => $key){
+       $additionals[$key] = isset($values[$i])? (integer)$values[$i] : null;
+      }
+      return $additionals;
+    }
+  }
+
   private static function sendMailouts($member_list){
     foreach($member_list as $member){
       $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
@@ -75,13 +95,20 @@ class Campaign extends Model
     }
   }
 
-  private function createSignRequests($member_list){
+  private function createSignRequests($member_list,$additionals){
     foreach ($member_list as $member) {
-      SignRequest::create([
-        'campaign_id' => $this->id,
-        'member_id' => $member->id,
-        //add addtionals information if present
-      ]);
+      //do it this way so we can use default value for additionals
+      $input = (count($additionals) > 1)?
+      ['campaign_id' => $this->id,
+      'member_id' => $member->id,
+      'additional_required' => true,
+      'additionals' => json_encode($additionals)]
+      :
+      ['campaign_id' => $this->id,
+      'member_id' => $member->id,
+      'additional_required' => false];
+
+      SignRequest::create($input);
     }
   }
 

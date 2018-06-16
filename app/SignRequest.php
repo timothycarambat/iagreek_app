@@ -12,7 +12,7 @@ class SignRequest extends Model
       'member_id',
       'status',
       'additional_required',
-      'addtionals',
+      'additionals',
       'file_link',
     ];
 }
