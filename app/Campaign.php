@@ -31,7 +31,7 @@ class Campaign extends Model
       'expiry' => date("Y-m-d H:i:s", strtotime($data->expiry)),
     ]);
 
-    // $campaign->sendMailouts($member_list);
+    $campaign->sendMailouts($member_list);
     $campaign->createSignRequests($member_list,$additionals);
     Session::flash('success','<b>Congratulations!</b> Your Campaign was launched, the mailouts were made and now you can track its progress.');
     Redirect::to('/campaigns')->send();
