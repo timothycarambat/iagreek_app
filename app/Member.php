@@ -119,6 +119,15 @@ class Member extends Model
       return Member::create($new_member);
     }
 
+    public static function getOrgPositions($id){
+      $positions = Member::where('org_admin_id',$id)->pluck('position');
+      $fixed_positions = [];
+      foreach($positions as $position){
+        $fixed_positions[$position] = $position;
+      }
+      return array_unique($fixed_positions);
+    }
+
     public static function sendSignUpEmail($model){
       $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
       $beautymail->send('emails.member_signup',
@@ -137,6 +146,10 @@ class Member extends Model
 
     public function campaigns() {
        return $this->belongsToMany('App\Campaign');
+    }
+
+    public function sign_requests() {
+      return $this->hasMany('App\SignRequest', 'member_id', 'id');
     }
 
 }

@@ -29,3 +29,4 @@ require('./disp_errors');
 require('./profile');
 require('./members');
 require('./document_edit');
+require('./campaigns');

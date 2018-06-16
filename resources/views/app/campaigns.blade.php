@@ -55,5 +55,6 @@
 </div>
 
 @include('app.components.campaigns.newCampaignModal')
+@include('app.components.campaigns.submitModal')
 
 @endsection

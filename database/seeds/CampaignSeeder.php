@@ -21,13 +21,5 @@ class CampaignSeeder extends Seeder
           'document_id' => Document::first()->id,
           'org_admin_id' => User::first()->id,
         ]);
-
-        // add some members
-        $members = Member::limit(10)->get();
-        $mem_ids = [];
-        foreach($members as $member){
-          $mem_ids[] = $member->id;
-        }
-        $campaign->members()->attach($mem_ids);
     }
 }

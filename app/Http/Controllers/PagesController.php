@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 
 use App\Document;
+use App\Member;
 
 class PagesController extends Controller
 {

@@ -12,23 +12,38 @@
 
       <div class="row">
         <div class="col-md-12">
-          {!!Form::open(['url' => '/campaigns/new_campaign'])!!}
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label>Name</label>
-                    {{Form::text('name',null,['placeholder'=>'Campaign Title', 'class'=>'form-control border-input','required'=>'required'])}}
-                </div>
 
-                <div class="form-group">
-                    <label>Document</label>
-                    {{Form::select('document',
-                    App\Document::where('org_admin_id',Auth::user()->id)->orderBy('updated_at','ASC')->pluck('name','id')
-                    ,"",
-                    ['placeholder'=>'Select A Document Template', 'class'=>'form-control border-input','required'=>'required'])}}
-                </div>
+          <ul class="nav nav-tabs">
+            <li class="nav-item active">
+              <a class="nav-link active" href="#nameCampaign" data-toggle="tab">Campaign Info</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#signers" data-toggle="tab">Who Is Signing?</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#Multisigners" data-toggle="tab">Anyone Else?</a>
+            </li>
+          </ul>
+
+          {!!Form::open(['url' => '/campaigns/new_campaign','id'=>'newCampaignForm'])!!}
+            <div class="tab-content">
+
+              <div class="tab-pane active" id="nameCampaign">
+                @include('app.components.campaigns.newCampaign_info')
+              </div>
+
+              <div class="tab-pane" id="signers">
+                @include('app.components.campaigns.newCampaign_signers')
+              </div>
+
+              <div class="tab-pane" id="Multisigners">
+                @include('app.components.campaigns.newCampaign_Multisigners')
+              </div>
+
             </div>
-            {{Form::submit('Create Campaign',['class'=>'btn btn-wd btn-info'])}}
-            {!!Form::close()!!}
+            {{Form::submit('Launch Campaign',['class'=>'btn btn-wd btn-primary pull-right'])}}
+          {!!Form::close()!!}
+
         </div>
       </div>
 

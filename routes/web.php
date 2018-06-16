@@ -42,6 +42,8 @@ Route::post('/documents/new_document', 'DocumentsController@newDocument')->middl
 Route::get('/documents/remove_document/{doc_id}', 'DocumentsController@removeDocument')->middleware('auth');
 Route::post('/documents/edit/{doc_id}/save', 'DocumentsController@saveDocument')->middleware(['auth']);
 
+Route::post('/campaigns/new_campaign', 'CampaignController@createCampaign')->middleware('auth');
+
 
 
 
