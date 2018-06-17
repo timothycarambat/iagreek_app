@@ -58,5 +58,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'subscribed' => \App\Http\Middleware\UserIsSubscribed::class,
         'ownsDocument' => \App\Http\Middleware\UserOwnsDocument::class,
+        'ownsCampaign' => \App\Http\Middleware\UserOwnsCampaign::class,
     ];
 }

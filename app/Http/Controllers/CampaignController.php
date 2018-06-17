@@ -13,7 +13,6 @@ use App\Campaign;
 class CampaignController extends Controller
 {
     public static function createCampaign(Request $request){
-
       //check if arrays from form are submitted empty. If they are set them to null so its easier to check
       if( is_null($request->select_by_tags[0]) ){
         $request['select_by_tags'] = null;
@@ -43,5 +42,15 @@ class CampaignController extends Controller
         Campaign::createCampaign($request);
       }
 
+    }
+
+    public static function removeCampaign($campaign_id){
+      $remove_campaign = Campaign::removeCampaign($campaign_id);
+      if($remove_campaign){
+        Session::flash('success','The Campaign was sucessfully archived');
+      }else{
+        Session::flash('failure','The Campaign could not be archived');
+      }
+      Redirect::to('/campaigns')->send();
     }
 }

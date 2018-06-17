@@ -7,6 +7,7 @@ use Auth;
 
 use App\Document;
 use App\Member;
+use App\Campaign;
 
 class PagesController extends Controller
 {
@@ -75,6 +76,16 @@ class PagesController extends Controller
         'title'=>'Organization Campaigns',
         'view'=>'campaigns',
         'campaigns'=>Auth::user()->campaigns()->where('archived',false)->orderBy('updated_at','ASC')->get(),
+      ]);
+    }
+
+    public function campaign_edit(Request $request, $campaign_id){
+      $campaign = Campaign::find($campaign_id)->get()[0];
+      return view('app.campaign_edit',
+      [
+        'title'=>$campaign->name." :: Track",
+        'view'=>'campaign_edit',
+        'campaign'=>$campaign,
       ]);
     }
 

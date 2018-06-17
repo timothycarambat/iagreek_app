@@ -22,8 +22,7 @@ Route::get('/members', 'PagesController@members')->middleware(['auth','subscribe
 Route::get('/documents', 'PagesController@documents')->middleware(['auth','subscribed']);
 Route::get('/documents/edit/{doc_id}', 'PagesController@document_edit')->middleware(['auth','subscribed','ownsDocument']);
 Route::get('/campaigns', 'PagesController@campaigns')->middleware(['auth','subscribed']);
-
-
+Route::get('/campaign/edit/{campaign_id}', 'PagesController@campaign_edit')->middleware(['auth','subscribed','ownsCampaign']);
 
 
 
@@ -40,9 +39,11 @@ Route::post('/members/submitTags', 'MemberController@editTags')->middleware('aut
 
 Route::post('/documents/new_document', 'DocumentsController@newDocument')->middleware('auth');
 Route::get('/documents/remove_document/{doc_id}', 'DocumentsController@removeDocument')->middleware('auth');
-Route::post('/documents/edit/{doc_id}/save', 'DocumentsController@saveDocument')->middleware(['auth']);
+Route::post('/documents/edit/{doc_id}/save', 'DocumentsController@saveDocument')->middleware('auth');
 
 Route::post('/campaigns/new_campaign', 'CampaignController@createCampaign')->middleware('auth');
+Route::get('/campaigns/remove_campaign/{campaign_id}', 'CampaignController@removeCampaign')->middleware('auth');
+
 
 
 

@@ -11033,7 +11033,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(10);
-module.exports = __webpack_require__(58);
+module.exports = __webpack_require__(57);
 
 
 /***/ }),
@@ -11075,7 +11075,7 @@ __webpack_require__(53);
 __webpack_require__(54);
 __webpack_require__(55);
 __webpack_require__(56);
-__webpack_require__(57);
+__webpack_require__(62);
 
 /***/ }),
 /* 11 */
@@ -59462,6 +59462,16 @@ function saveDocument(quill) {
 /* 57 */
 /***/ (function(module, exports) {
 
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */
+/***/ (function(module, exports) {
+
 $(function () {
   if (window.view === "campaigns") {
     $('#newCampaignForm').submit(function (e) {
@@ -59469,12 +59479,6 @@ $(function () {
     });
   }
 }); //end windowif
-
-/***/ }),
-/* 58 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

@@ -37,6 +37,12 @@ class Campaign extends Model
     Redirect::to('/campaigns')->send();
   }
 
+  public static function removeCampaign($id){
+    $campaign = Campaign::find((integer)$id);
+    $campaign->sign_requests()->update(['status'=>true]);
+    return $campaign->update(['archived'=>true]);
+  }
+
   //This function will look through all three qualifying parameters and
   //then will filter out the duplicates
   private static function getUniqueMemberList($tags,$positions,$member_ids){

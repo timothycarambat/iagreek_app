@@ -7,7 +7,7 @@
       <div class="row" style="margin-bottom:10px;">
         <div class="col-md-12">
           <a data-target='#newCampaignModal' data-toggle='modal'>
-            <div class="col-md-2 btn btn-wd btn-info">
+            <div class="col-md-3 btn btn-wd btn-info">
               <i class="fas fa-plus fa-fw"></i>Start New Campaign
             </div>
           </a>
@@ -40,7 +40,7 @@
                             <hr />
                             <div class="stats" style="width:100%">
                                 <i class="fas fa-bolt"></i> Last Updated: {{date('n/j/y g:ia',strtotime($campaign->updated_at))}}
-                                <a href="/campaign/remove_campaign/{{$campaign->id}}" style='color:#daa0a0' class="pull-right"><i class="fas fa-trash"></i></a>
+                                <a href="/campaigns/remove_campaign/{{$campaign->id}}" style='color:#daa0a0' class="pull-right"><i class="fas fa-trash"></i></a>
                             </div>
                         </div>
                     </div>
