@@ -83,7 +83,7 @@ class PagesController extends Controller
       $campaign = Campaign::find($campaign_id)->get()[0];
       return view('app.campaign_edit',
       [
-        'title'=>$campaign->name." :: Track",
+        'title'=>$campaign->name." :: Overview",
         'view'=>'campaign_edit',
         'campaign'=>$campaign,
       ]);

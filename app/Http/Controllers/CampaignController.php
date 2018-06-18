@@ -53,4 +53,49 @@ class CampaignController extends Controller
       }
       Redirect::to('/campaigns')->send();
     }
+
+    public static function responseStatus($campaign_id){
+      $campaign = Campaign::find((integer)$campaign_id);
+      $sign_requests = $campaign->sign_requests;
+      $res = [
+        'data' => [0,0,0]//completed,additonals required, no signs
+      ];
+
+      foreach($sign_requests as $request){
+        //if marked completed and requires no addtional signatures then mark and move on
+        if($request->status && !$request->additional_required) {
+          $res['data'][0]++;
+          continue;
+        }
+        //if request demands additional signatures
+        if($request->additional_required){
+          //get additionals and decode json. Then pop off last key b/c it is the completed key.
+          //This holds id of members who have/need to additionally sign.
+          $additonals = (array)json_decode($request->additionals);
+          $additonals = array_values($additonals);
+          $completed = (array)array_pop($additonals);
+          //if completed is an empty array then this this needs additional signatures
+          if(empty($completed)){
+            $res['data'][2]++;
+          }else{
+            //filter out members that are null positions. Then sort that array and the completed array
+            $additonals = array_filter($additonals);
+            sort($additonals);
+            sort($completed);
+            //if addtionals are not equal to the completed array -> needs additional signatures
+            //otherwise it is actually complete!
+            if( $additonals != $completed){
+              $res['data'][1]++;
+            }else{
+              $res['data'][0]++;
+            }
+          }
+        }else{ //this just means the main signed has not attempted to sign yet.
+          $res['data'][2]++;
+        }
+      }
+
+      return json_encode($res);
+    }
+
 }

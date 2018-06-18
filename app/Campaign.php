@@ -83,6 +83,7 @@ class Campaign extends Model
       foreach($keys as $i => $key){
        $additionals[$key] = isset($values[$i])? (integer)$values[$i] : null;
       }
+      $additionals['completed'] = [];
       return $additionals;
     }
   }
