@@ -10,9 +10,9 @@
         <div id="completedSignRequests" class=" hidden ct-chart ct-minor-second"></div>
         <div class="footer">
             <div class="chart-legend">
-                <i class="fa fa-circle text-info"></i> Completed
-                <i class="fa fa-circle text-warning"></i> Require Additional Signatures
-                <i class="fa fa-circle text-danger"></i> Unsigned
+                <i class="fa fa-circle text-info"></i> Completed<br>
+                <i class="fa fa-circle text-warning"></i> Require Additional Signatures<br>
+                <i class="fa fa-circle text-danger"></i> Unsigned<br>
             </div>
             <hr>
             <div class="stats">

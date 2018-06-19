@@ -15,4 +15,13 @@ class SignRequest extends Model
       'additionals',
       'file_link',
     ];
+
+
+    public function campaign() {
+       return $this->belongsTo('App\Campaign', 'campaign_id', 'id');
+    }
+
+    public function member() {
+       return $this->belongsTo('App\Member', 'member_id', 'id');
+    }
 }
