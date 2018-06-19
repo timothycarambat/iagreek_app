@@ -61,7 +61,7 @@ class PagesController extends Controller
     }
 
     public function document_edit(Request $request, $doc_id){
-      $document = Document::find($doc_id)->get()[0];
+      $document = Document::where('id', $doc_id)->get()[0];
       return view('app.document_edit',
       [
         'title'=> $document->name." :: Edit",
@@ -80,7 +80,7 @@ class PagesController extends Controller
     }
 
     public function campaign_edit(Request $request, $campaign_id){
-      $campaign = Campaign::find($campaign_id)->get()[0];
+      $campaign = Campaign::where('id', (integer)$campaign_id)->get()[0];
       return view('app.campaign_edit',
       [
         'title'=>$campaign->name." :: Overview",

@@ -31,7 +31,7 @@
             </td>
 
             @if($req->additional_required)
-              <td></td>
+              <td class="text-center">{{$req->getAdditionalProgress()}}</td>
             @endif
 
             <td>

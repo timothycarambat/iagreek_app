@@ -38,7 +38,7 @@ class Campaign extends Model
   }
 
   public static function removeCampaign($id){
-    $campaign = Campaign::find((integer)$id);
+    $campaign = Campaign::where('id',(integer)$id)->get()[0];
     $campaign->sign_requests()->update(['status'=>true]);
     return $campaign->update(['archived'=>true]);
   }
