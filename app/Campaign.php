@@ -43,6 +43,32 @@ class Campaign extends Model
     return $campaign->update(['archived'=>true]);
   }
 
+  public function sendReminders(){ //generate list of members to send reminders to
+    $member_list = collect([]);
+    $incomplete_reqs = $this->sign_requests->where('completed',false);
+
+    foreach($incomplete_reqs as $req){
+      $member = $req->member;
+      //we need to determine why member is not complete
+      if( !$req->status ){ //primary member has not signed
+        $member_list[] = $member;
+      }elseif ($req->additional_required) {//member has signed, but additional hasnt
+        $additionals = (array)json_decode($req->additionals);
+        $completed = (array)array_pop($additionals);
+        $additionals = array_filter(array_values($additionals));
+        $diff = array_diff($additionals,$completed);
+        if(count($diff) > 0){
+          $next_member = Member::where('id', $diff[0])->get()[0];
+          $member_list[] = $next_member;
+        }
+      }
+    }
+
+    $this->sendReminderMailers($member_list);
+    Session::flash('success','Reminder mailers were sent out to <b>'.count($member_list).'</b> members');
+    Redirect::to('/campaign/edit/'.$this->id)->send();
+  }
+
   //This function will look through all three qualifying parameters and
   //then will filter out the duplicates
   private static function getUniqueMemberList($tags,$positions,$member_ids){
@@ -50,18 +76,21 @@ class Campaign extends Model
 
     if(!is_null($tags)){
       $members_with_tags = Member::where('org_admin_id', Auth::user()->id)
+      ->where('status','active')
       ->withAnyTag($tags)->get();
       $members = $members->concat($members_with_tags);
     }
 
     if(!is_null($positions)){
       $members_with_position = Member::where('org_admin_id', Auth::user()->id)
+      ->where('status','active')
       ->whereIn('position',$positions)->get();
       $members = $members->concat($members_with_position);
     }
 
     if(!is_null($member_ids)){
       $members_with_id = Member::where('org_admin_id', Auth::user()->id)
+      ->where('status','active')
       ->whereIn('id',$member_ids)->get();
       $members = $members->concat($members_with_id);
     }
@@ -102,6 +131,20 @@ class Campaign extends Model
     }
   }
 
+  private static function sendReminderMailers($member_list){
+    foreach($member_list as $member){
+      $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
+      $beautymail->send('emails.signature_reminder',
+        ['model'=>$member, 'org_name'=>Auth::user()->org_name],
+        function($message) use($member) {
+          $message
+              ->to($member->email)
+              ->subject("Reminder! You've Got A Document Waiting To Be Signed");
+      });
+      sleep(2);//have to do this so mailer doesnt block us
+    }
+  }
+
   private function createSignRequests($member_list,$additionals){
     foreach ($member_list as $member) {
       //do it this way so we can use default value for additionals
@@ -122,6 +165,10 @@ class Campaign extends Model
   // relationships
   public function org_admin() {
      return $this->belongsTo('App\User', 'org_admin_id', 'id');
+  }
+
+  public function document() {
+    return $this->hasOne('App\Document', 'id', 'document_id');
   }
 
   public function members() {

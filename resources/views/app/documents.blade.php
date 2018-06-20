@@ -39,14 +39,15 @@
                         <div class="footer">
                             <hr />
                             <div class="stats" style="width:100%">
-                                <i class="fas fa-bolt"></i> Last Updated: {{date('n/j/y g:ia',strtotime($document->updated_at))}}
-                                <a href="/documents/remove_document/{{$document->id}}" style='color:#daa0a0' class="pull-right"><i class="fas fa-trash"></i></a>
+                                <i class="fas fa-bolt"></i> Last Updated: {{$document->updated_at->diffForHumans()}}
+                                <a data-toggle='modal' data-target='#removeDocumentModal{{$document->id}}' style='cursor:pointer;color:#daa0a0' class="pull-right"><i class="fas fa-trash"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
               </a>
             </div>
+            @include('app.components.documents.removeDocumentModal')
           @endforeach
         @endif
       </div>

@@ -31,7 +31,7 @@
     <div class="form-group">
         <label>Specific Members (can select multiple)</label>
         {{Form::select('select_by_member',
-        App\Member::where('org_admin_id',Auth::user()->id)->pluck('name','id')
+        App\Member::where('org_admin_id',Auth::user()->id)->where('status','active')->pluck('name','id')
         ,"",
         ['placeholder'=>'Select By Member',
         'class'=>'form-control border-input',

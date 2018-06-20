@@ -59479,6 +59479,10 @@ $(function () {
   if (window.view === "campaign_edit") {
     var campaignId = window.location.pathname.split('/').reverse()[0];
     loadResponseChart(campaignId);
+
+    $('[data-send-reminders]').click(function () {
+      $('#submitModal').modal('show');
+    });
   }
 }); //end windowif
 

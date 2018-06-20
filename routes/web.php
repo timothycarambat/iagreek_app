@@ -44,6 +44,10 @@ Route::post('/documents/edit/{doc_id}/save', 'DocumentsController@saveDocument')
 Route::post('/campaigns/new_campaign', 'CampaignController@createCampaign')->middleware('auth');
 Route::get('/campaigns/remove_campaign/{campaign_id}', 'CampaignController@removeCampaign')->middleware('auth');
 Route::get('campaign/response_status/{id}', 'CampaignController@responseStatus')->middleware('auth');
+Route::get('/campaigns/end_campaign/{campaign_id}', 'CampaignController@removeCampaign')->middleware('auth');
+Route::get('/campaigns/send_reminders/{campaign_id}', 'CampaignController@sendReminders')->middleware('auth');
+
+
 
 
 

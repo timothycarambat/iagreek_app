@@ -63,11 +63,12 @@ class CampaignController extends Controller
 
       foreach($sign_requests as $request){
         //if marked completed and requires no addtional signatures then mark and move on
-        if($request->status && !$request->additional_required) {
+        if($request->completed && !$request->additional_required) {
           $res['data'][0]++;
           continue;
         }
         //if request demands additional signatures
+
         if($request->additional_required){
           //get additionals and decode json. Then pop off last key b/c it is the completed key.
           //This holds id of members who have/need to additionally sign.
@@ -76,7 +77,7 @@ class CampaignController extends Controller
           $completed = (array)array_pop($additonals);
           //if completed is an empty array then this this needs additional signatures
           if(empty($completed)){
-            $res['data'][2]++;
+            $res['data'][1]++;
           }else{
             //filter out members that are null positions. Then sort that array and the completed array
             $additonals = array_filter($additonals);
@@ -96,6 +97,11 @@ class CampaignController extends Controller
       }
 
       return json_encode($res);
+    }
+
+    public static function sendReminders($campaign_id){
+      $campaign = Campaign::where('id', (integer)$campaign_id)->get()[0];
+      $campaign->sendReminders();
     }
 
 }

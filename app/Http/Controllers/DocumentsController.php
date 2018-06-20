@@ -27,6 +27,7 @@ class DocumentsController extends Controller
       $document = Document::find($doc_id);
       // only delete documents user owns
       if( $document->org_admin->id === Auth::user()->id ){
+        $document->endCampaigns();
         $document->delete();
         Session::flash('success',"Document deleted!");
       }else{

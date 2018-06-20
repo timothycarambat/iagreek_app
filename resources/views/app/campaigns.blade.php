@@ -20,9 +20,9 @@
         @if(count($campaigns) > 0 )
           @foreach($campaigns as $campaign)
             <div class="col-lg-3 col-sm-6">
-              <a class='card-holder' href="/campaign/edit/{{$campaign->id}}">
                 <div class="card">
                     <div class="content">
+                      <a class='card-holder' href="/campaign/edit/{{$campaign->id}}">
                         <div class="row">
                             <div class="col-xs-3">
                                 <div class="icon-big icon-info text-center">
@@ -36,16 +36,19 @@
                                 </div>
                             </div>
                         </div>
+                      </a>
                         <div class="footer">
                             <hr />
                             <div class="stats" style="width:100%">
-                                <i class="fas fa-bolt"></i> Last Updated: {{date('n/j/y g:ia',strtotime($campaign->updated_at))}}
+                                <i class="fas fa-file"></i> Document: <a href="/documents/edit/{{$campaign->document_id}}">{{$campaign->document->name}}</a>
+                            </div>
+                            <div class="stats" style="width:100%">
+                                <i class="fas fa-bolt"></i> Last Updated: {{ $campaign->updated_at->diffForHumans() }}
                                 <a href="/campaigns/remove_campaign/{{$campaign->id}}" style='color:#daa0a0' class="pull-right"><i class="fas fa-trash"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
-              </a>
             </div>
           @endforeach
         @endif

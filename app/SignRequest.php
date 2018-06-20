@@ -11,6 +11,7 @@ class SignRequest extends Model
       'campaign_id',
       'member_id',
       'status',
+      'completed',
       'additional_required',
       'additionals',
       'file_link',

@@ -86,7 +86,7 @@ class PagesController extends Controller
         'title'=>$campaign->name." :: Overview",
         'view'=>'campaign_edit',
         'campaign'=>$campaign,
-        'sign_requests' => $campaign->sign_requests()->orderBy('status','DESC')->get(),
+        'sign_requests' => $campaign->sign_requests()->orderBy('status','DESC')->paginate(10),
       ]);
     }
 
