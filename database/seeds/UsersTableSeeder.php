@@ -14,8 +14,8 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('subscriptions')->truncate();
-        DB::table('members')->truncate();
         DB::table('users')->truncate();
+        DB::table('documents')->truncate();
 
         //Make Admin
       $main_user = User::create([

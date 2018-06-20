@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Auth;
 
 use App\Document;
+use App\Member;
+use App\Campaign;
 
 class PagesController extends Controller
 {
@@ -59,12 +61,32 @@ class PagesController extends Controller
     }
 
     public function document_edit(Request $request, $doc_id){
-      $document = Document::find($doc_id)->get()[0];
+      $document = Document::where('id', $doc_id)->get()[0];
       return view('app.document_edit',
       [
         'title'=> $document->name." :: Edit",
         'view'=>'document_edit',
         'document'=> $document,
+      ]);
+    }
+
+    public function campaigns(Request $request){
+      return view('app.campaigns',
+      [
+        'title'=>'Organization Campaigns',
+        'view'=>'campaigns',
+        'campaigns'=>Auth::user()->campaigns()->where('archived',false)->orderBy('updated_at','ASC')->get(),
+      ]);
+    }
+
+    public function campaign_edit(Request $request, $campaign_id){
+      $campaign = Campaign::where('id', (integer)$campaign_id)->get()[0];
+      return view('app.campaign_edit',
+      [
+        'title'=>$campaign->name." :: Overview",
+        'view'=>'campaign_edit',
+        'campaign'=>$campaign,
+        'sign_requests' => $campaign->sign_requests()->orderBy('status','DESC')->paginate(10),
       ]);
     }
 

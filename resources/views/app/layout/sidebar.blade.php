@@ -40,7 +40,7 @@ Tip 2: you can change the color of the active button using the data-active-color
                     <p>Documents</p>
                 </a>
             </li>
-            <li class="{{ Request::is('campaigns') ? 'active':null }}">
+            <li class="{{ (Request::is('campaigns') || Request::is('campaign/edit/*')) ? 'active':null }}">
                 <a href="/campaigns">
                     <i class="fas fa-bullhorn"></i>
                     <p>Campaigns</p>

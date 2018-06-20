@@ -6,9 +6,9 @@
 
       <div class="row" style="margin-bottom:10px;">
         <div class="col-md-12">
-          <a data-target='#newDocumentModal' data-toggle='modal'>
-            <div class="col-md-2 btn btn-wd btn-info">
-              <i class="fas fa-plus fa-fw"></i>Create Document
+          <a data-target='#newCampaignModal' data-toggle='modal'>
+            <div class="col-md-3 btn btn-wd btn-info">
+              <i class="fas fa-plus fa-fw"></i>Start New Campaign
             </div>
           </a>
         </div>
@@ -17,12 +17,12 @@
 
 
       <div class="row">
-        @if(count($documents) > 0 )
-          @foreach($documents as $document)
+        @if(count($campaigns) > 0 )
+          @foreach($campaigns as $campaign)
             <div class="col-lg-3 col-sm-6">
-              <a class='card-holder' href="/documents/edit/{{$document->id}}">
                 <div class="card">
                     <div class="content">
+                      <a class='card-holder' href="/campaign/edit/{{$campaign->id}}">
                         <div class="row">
                             <div class="col-xs-3">
                                 <div class="icon-big icon-info text-center">
@@ -31,23 +31,25 @@
                             </div>
                             <div class="col-xs-9">
                                 <div class="numbers">
-                                    <p>Document</p>
-                                    {{$document->name}}
+                                    <p>Campaign</p>
+                                    {{$campaign->name}}
                                 </div>
                             </div>
                         </div>
+                      </a>
                         <div class="footer">
                             <hr />
                             <div class="stats" style="width:100%">
-                                <i class="fas fa-bolt"></i> Last Updated: {{$document->updated_at->diffForHumans()}}
-                                <a data-toggle='modal' data-target='#removeDocumentModal{{$document->id}}' style='cursor:pointer;color:#daa0a0' class="pull-right"><i class="fas fa-trash"></i></a>
+                                <i class="fas fa-file"></i> Document: <a href="/documents/edit/{{$campaign->document_id}}">{{$campaign->document->name}}</a>
+                            </div>
+                            <div class="stats" style="width:100%">
+                                <i class="fas fa-bolt"></i> Last Updated: {{ $campaign->updated_at->diffForHumans() }}
+                                <a href="/campaigns/remove_campaign/{{$campaign->id}}" style='color:#daa0a0' class="pull-right"><i class="fas fa-trash"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
-              </a>
             </div>
-            @include('app.components.documents.removeDocumentModal')
           @endforeach
         @endif
       </div>
@@ -55,6 +57,7 @@
     </div>
 </div>
 
-@include('app.components.documents.newDocumentModal')
+@include('app.components.campaigns.newCampaignModal')
+@include('app.components.campaigns.submitModal')
 
 @endsection
