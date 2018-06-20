@@ -69,7 +69,7 @@ class CampaignController extends Controller
         }
         //if request demands additional signatures
 
-        if($request->additional_required){
+        if($request->additional_required && $request->status){
           //get additionals and decode json. Then pop off last key b/c it is the completed key.
           //This holds id of members who have/need to additionally sign.
           $additonals = (array)json_decode($request->additionals);
