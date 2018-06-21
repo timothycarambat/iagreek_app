@@ -31,3 +31,4 @@ require('./members');
 require('./document_edit');
 require('./campaigns');
 require('./campaign_edit');
+require('./archive_edit');

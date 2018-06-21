@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Auth;
 use Session;
 use Redirect;
+use Storage;
 
 use App\Member;
 use App\SignRequest;
@@ -19,17 +20,22 @@ class Campaign extends Model
     "expiry",
     "archived",
     "org_admin_id",
+    "dir",
   ];
 
   public static function createCampaign($data){
     $member_list = Campaign::getUniqueMemberList($data->select_by_tags, $data->select_by_position, $data->select_by_member);
     $additionals = Campaign::compileAdditionals($data->second_signer,$data->third_signer,$data->fourth_signer);
+    $dir = md5((string)\Carbon\Carbon::now().str_random(24));
     $campaign = Campaign::create([
       'name' => $data->name,
       'document_id' => $data->document,
       'org_admin_id' => Auth::user()->id,
       'expiry' => date("Y-m-d H:i:s", strtotime($data->expiry)),
+      'dir' => $dir,
     ]);
+    //make directory in file system
+    Storage::makeDirectory("/campaigns/$dir");
 
     $campaign->sendMailouts($member_list);
     $campaign->createSignRequests($member_list,$additionals);
