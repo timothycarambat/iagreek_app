@@ -11077,6 +11077,7 @@ __webpack_require__(55);
 __webpack_require__(56);
 __webpack_require__(57);
 __webpack_require__(58);
+__webpack_require__(64);
 
 /***/ }),
 /* 11 */
@@ -59517,6 +59518,47 @@ function loadResponseChart(id) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */
+/***/ (function(module, exports) {
+
+$(function () {
+  if (window.view === "archive_edit") {
+    var campaignId = window.location.pathname.split('/').reverse()[0];
+    loadResponseChart(campaignId);
+  }
+}); //end windowif
+
+function loadResponseChart(id) {
+  $.ajax({
+    url: '/campaign/response_status/' + id,
+    type: 'GET',
+    beforeSend: function beforeSend(jqXHR, settings) {
+      //attach csrf token manually
+      jqXHR.setRequestHeader('X-CSRF-TOKEN', window.csrf_token);
+    },
+    success: function success(res) {
+      var results = JSON.parse(res);
+      var data = { series: results.data };
+      var sum = function sum(a, b) {
+        return a + b;
+      };
+
+      new Chartist.Pie('#completedSignRequests', data, {
+        labelInterpolationFnc: function labelInterpolationFnc(value) {
+          return value > 0 ? Math.round(value / data.series.reduce(sum) * 100) + '%' : null;
+        }
+      });
+      $('#completedSignRequests').removeClass('hidden');
+      $('#signRequestsLoader').remove();
+    }
+  });
+}
 
 /***/ })
 /******/ ]);

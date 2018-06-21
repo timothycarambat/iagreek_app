@@ -3,7 +3,7 @@ text.ct-label {
   font-weight: 800;
 }
 
-#endCampaign {
+#endCampaign, #deleteCampaign {
   opacity: .4;
   &:hover {
     opacity: 1;

@@ -90,4 +90,24 @@ class PagesController extends Controller
       ]);
     }
 
+    public function archives(Request $request){
+      return view('app.archives',
+      [
+        'title'=>'Organization Archive',
+        'view'=>'archives',
+        'campaigns'=>Auth::user()->campaigns()->where('archived',true)->orderBy('updated_at','ASC')->get(),
+      ]);
+    }
+
+    public function archive_edit(Request $request, $campaign_id){
+      $campaign = Campaign::where('id', (integer)$campaign_id)->get()[0];
+      return view('app.archive_edit',
+      [
+        'title'=>$campaign->name." :: Archived :: Review",
+        'view'=>'archive_edit',
+        'campaign'=>$campaign,
+        'sign_requests' => $campaign->sign_requests()->orderBy('status','DESC')->paginate(10),
+      ]);
+    }
+
 }

@@ -23,6 +23,8 @@ Route::get('/documents', 'PagesController@documents')->middleware(['auth','subsc
 Route::get('/documents/edit/{doc_id}', 'PagesController@document_edit')->middleware(['auth','subscribed','ownsDocument']);
 Route::get('/campaigns', 'PagesController@campaigns')->middleware(['auth','subscribed']);
 Route::get('/campaign/edit/{campaign_id}', 'PagesController@campaign_edit')->middleware(['auth','subscribed','ownsCampaign']);
+Route::get('/archives', 'PagesController@archives')->middleware(['auth','subscribed']);
+Route::get('/archive/edit/{campaign_id}', 'PagesController@archive_edit')->middleware(['auth','subscribed','ownsCampaign']);
 
 
 
@@ -46,6 +48,8 @@ Route::get('/campaigns/remove_campaign/{campaign_id}', 'CampaignController@remov
 Route::get('campaign/response_status/{id}', 'CampaignController@responseStatus')->middleware('auth');
 Route::get('/campaigns/end_campaign/{campaign_id}', 'CampaignController@removeCampaign')->middleware('auth');
 Route::get('/campaigns/send_reminders/{campaign_id}', 'CampaignController@sendReminders')->middleware('auth');
+
+Route::get('/archive/delete_campaign/{campaign_id}', 'ArchiveController@deleteArchive')->middleware('auth');
 
 
 

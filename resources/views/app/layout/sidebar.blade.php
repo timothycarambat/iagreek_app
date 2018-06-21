@@ -46,8 +46,8 @@ Tip 2: you can change the color of the active button using the data-active-color
                     <p>Campaigns</p>
                 </a>
             </li>
-            <li class="{{ Request::is('archive') ? 'active':null }}">
-                <a href="/archive">
+            <li class="{{ (Request::is('archives') || Request::is('archive/edit/*')) ? 'active':null }}">
+                <a href="/archives">
                     <i class="fas fa-archive"></i>
                     <p>Archive</p>
                 </a>

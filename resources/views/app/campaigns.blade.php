@@ -51,6 +51,14 @@
                 </div>
             </div>
           @endforeach
+        @else
+          <div class="col-md-12 text-center" style="opacity:0.4">
+            <i class="fas fa-university fa-8x"></i>
+            <h2>You Don't Have Any Active Campaigns!
+              <br>
+              Click the "Start New Campaign" Button To Get Started
+            </h2>
+          </div>
         @endif
       </div>
 

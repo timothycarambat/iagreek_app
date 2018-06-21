@@ -16355,10 +16355,10 @@ text.ct-label {
   font-weight: 800;
 }
 
-#endCampaign {
+#endCampaign, #deleteCampaign {
   opacity: .4;
 }
 
-#endCampaign:hover {
+#endCampaign:hover, #deleteCampaign:hover {
   opacity: 1;
 }
