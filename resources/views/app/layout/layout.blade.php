@@ -88,7 +88,6 @@
 	<script type="text/javascript">
 	  window.pkeys = {
 	    Stripe: "{{$_ENV['STRIPE_KEY']}}",
-	    Places: "{{$_ENV['GOOGLE_PLACES_API']}}"
 	  }
 	</script>
 	<script src='{{asset("js/app.js")}}'></script>
