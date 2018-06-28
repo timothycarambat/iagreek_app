@@ -199,7 +199,7 @@
 	</div>
 
 <!-- User Profile image Modal -->
-<div style='position:fixed' class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div style='overflow-y: scroll;' class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -225,7 +225,7 @@
 
 
 <!-- User Cancel Profile Modal -->
-<div style='position:fixed' class="modal fade" id="cancelAccount" tabindex="-1" role="dialog" aria-hidden="true">
+<div style='overflow-y: scroll;' class="modal fade" id="cancelAccount" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header alert alert-danger">
@@ -253,10 +253,15 @@
 				<textarea name="cancel_comments" rows="8" style="width:100%;resize:vertical"></textarea>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-danger btn-wd" data-cancel-account>Cancel Account</button>
+				<button type="submit" class="btn btn-danger btn-wd" data-cancel-account>Cancel Account</button>
+				<button class="btn btn-default btn-wd" data-dismiss="modal">Close</button>
       </div>
 			{!!Form::close()!!}
     </div>
   </div>
 </div>
+
+@if(request()->upgrade)
+	@include('app.components.profile.upgradeModal')
+@endif
 @endsection
