@@ -41,8 +41,8 @@
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
-                <label>Billing Address</label>
-                {{Form::text('address',Auth::user()->billing_address,['placeholder'=>'Billing Address', 'class'=>'form-control border-input','required'=>'required'])}}
+                <label>Address</label>
+                {{Form::text('address',Auth::user()->address,['placeholder'=>'Billing Address', 'class'=>'form-control border-input','required'=>'required'])}}
             </div>
         </div>
     </div>
@@ -50,20 +50,20 @@
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                <label>Billing City</label>
-                {{Form::text('city',Auth::user()->billing_city,['placeholder'=>'Billing City', 'class'=>'form-control border-input','required'=>'required'])}}
+                <label>City</label>
+                {{Form::text('city',Auth::user()->city,['placeholder'=>'Billing City', 'class'=>'form-control border-input','required'=>'required'])}}
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label>Billing State</label>
-                {{Form::select('state', App\States::makeStateSelection(), Auth::user()->billing_state,['class'=>'form-control border-input','required'=>'required'])}}
+                <label>State</label>
+                {{Form::select('state', App\States::makeStateSelection(), Auth::user()->state,['class'=>'form-control border-input','required'=>'required'])}}
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label>Billing Zip Code</label>
-                {{Form::number('zip',Auth::user()->billing_zip,['placeholder'=>'ZIP Code', 'class'=>'form-control border-input','required'=>'required'])}}
+                <label>Zip Code</label>
+                {{Form::number('zip',Auth::user()->zip,['placeholder'=>'ZIP Code', 'class'=>'form-control border-input','required'=>'required'])}}
             </div>
         </div>
     </div>

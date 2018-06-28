@@ -18,7 +18,7 @@ class UserIsSubscribed
       if ($request->user() && !$request->user()->subscribed($sub_name) ) {
         // This user is not a paying customer...
         $support_email = $_ENV['SUPPORT_EMAIL'];
-        Session::flash('failure', "This Acccount's subscription has been suspended or cancelled.
+        Session::flash('error', "This Acccount's subscription has been suspended or cancelled.
          Contact <a style='color: #0c5460;font-weight:600;' href='mailto:$support_email'>Support</a> if this is not correct.");
         return redirect('/');
       }

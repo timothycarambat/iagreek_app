@@ -91,18 +91,43 @@ class ProfileController extends Controller
           'city' => $request->city,
           'state' => $request->state,
           'zip' => $request->zip,
-          'billing_name' => $request->first_name." ".$request->last_name,
-          'billing_phone' => preg_replace('/\D+/', '', $request->phone),
-          'billing_address' => $request->address,
-          'billing_city' => $request->city,
-          'billing_state' => $request->state,
-          'billing_zip' => $request->zip,
         ]);
       }
       if( $update_user ){
-        Session::flash('success','Account details updated!');
+        Session::flash('success','Account Profile Information updated!');
       }else{
-        Session::flash('failure','Account details were not updated!');
+        Session::flash('error','Account Profile Information were not updated!');
+      }
+      return Redirect::to('/profile');
+    }
+
+    public static function updateBilling(Request $request){
+      $validatedData = Validator::validate($request->all(),[
+        'first_name' => 'required|string',
+        'last_name' => 'required|string',
+        'billing_address' => 'required|string',
+        'billing_city' => 'required|string',
+        'billing_state' => 'required|string|size:2',
+        'billing_zip' => 'required|string|size:5',
+        'stripeToken' => 'required',
+      ]);
+
+      if(is_null($validatedData)){
+        $update_user = User::where('id', Auth::user()->id)->update([
+          'billing_name' => $request->first_name." ".$request->last_name,
+          'billing_phone' =>  preg_replace('/\D+/', '', $request->billing_phone),
+          'billing_address' => $request->billing_address,
+          'billing_city' => $request->billing_city,
+          'billing_state' => $request->billing_state,
+          'billing_zip' => $request->billing_zip,
+        ]);
+        Auth::user()->updateCard($request->stripeToken);
+      }
+
+      if( $update_user ){
+        Session::flash('success','Billing Information updated!');
+      }else{
+        Session::flash('error','Billing Information were not updated!');
       }
       return Redirect::to('/profile');
     }
@@ -115,7 +140,7 @@ class ProfileController extends Controller
       if( $update_user ){
         Session::flash('success','Account notifications updated!');
       }else{
-        Session::flash('failure','Account notifications were not updated!');
+        Session::flash('error','Account notifications were not updated!');
       }
       return Redirect::to('/profile');
 

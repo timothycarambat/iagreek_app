@@ -49,7 +49,7 @@ class CampaignController extends Controller
       if($remove_campaign){
         Session::flash('success','The Campaign was sucessfully archived');
       }else{
-        Session::flash('failure','The Campaign could not be archived');
+        Session::flash('error','The Campaign could not be archived');
       }
       Redirect::to('/campaigns')->send();
     }

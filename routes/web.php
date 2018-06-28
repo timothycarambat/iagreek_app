@@ -31,6 +31,7 @@ Route::get('/archive/edit/{campaign_id}', 'PagesController@archive_edit')->middl
 Route::post('/profile/upload/letterhead', 'ProfileController@updateLetterhead')->middleware('auth');
 Route::post('/profile/upload/avatar', 'ProfileController@updateAvatar')->middleware('auth');
 Route::post('/profile/update', 'ProfileController@updateInfo')->middleware('auth');
+Route::post('/billing/update', 'ProfileController@updateBilling')->middleware('auth');
 Route::post('/profile/update/notify', 'ProfileController@updateNotifs')->middleware('auth');
 
 Route::post('/members/upload/roster', 'MemberController@updateRoster')->middleware('auth');

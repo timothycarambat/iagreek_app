@@ -110,7 +110,7 @@
 														</div>
 													</div>
 
-													<div class="tab-pane active" id="billingInfo">
+													<div class="tab-pane" id="billingInfo">
 														<div class="content">
 															@include('app.components.profile.billingInfo')
 														</div>

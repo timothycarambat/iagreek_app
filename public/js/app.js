@@ -11033,7 +11033,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(10);
-module.exports = __webpack_require__(59);
+module.exports = __webpack_require__(60);
 
 
 /***/ }),
@@ -11077,7 +11077,7 @@ __webpack_require__(55);
 __webpack_require__(56);
 __webpack_require__(57);
 __webpack_require__(58);
-__webpack_require__(64);
+__webpack_require__(59);
 
 /***/ }),
 /* 11 */
@@ -59517,16 +59517,6 @@ function loadResponseChart(id) {
 /* 59 */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 60 */,
-/* 61 */,
-/* 62 */,
-/* 63 */,
-/* 64 */
-/***/ (function(module, exports) {
-
 $(function () {
   if (window.view === "archive_edit") {
     var campaignId = window.location.pathname.split('/').reverse()[0];
@@ -59559,6 +59549,12 @@ function loadResponseChart(id) {
     }
   });
 }
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
