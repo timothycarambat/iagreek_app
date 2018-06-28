@@ -16,11 +16,11 @@
   			 <h3>Hey There!</h3>
 				 <p>We wanted to let you know that you were signed up by the account admin for <b>{{$org_name}}</b>.</p>
 				 <p>This means that now instead of having to manually print and copy and send any signed documents is old news - using our service.
-				 You can just <a>Sign In</a> and now sign these doucments online! </p>
-				 <p>To get started you can <a>Click this link</a> and set your account password!</p>
+				 You can just <a href="{{$_ENV['SIGN_URL']}}">Sign In</a> and now sign these doucments online! </p>
+				 <p>To get started you can <a href="{{$_ENV['SIGN_URL']}}/forgot?email={{$model->email}}">Click this link</a> and set your account password!</p>
 				 <br>
 				 <p>Now anytime you need to sign a document we will let you know via email and you can sign online!</p>
-
+				 <a href="{{$_ENV['SIGN_URL']}}/forgot?email={{$model->email}}">{{$_ENV['SIGN_URL']}}/forgot?email={{$model->email}}</a>
 				 <br>
 				 <p>Best, <br> IAGREEK Support Team </p>
 
