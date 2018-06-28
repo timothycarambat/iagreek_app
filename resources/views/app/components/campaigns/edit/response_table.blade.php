@@ -57,9 +57,12 @@
       <div class="row">
         <div class="col-md-12">
           <div class="col-md-3">
-            <div class="btn btn-wd btn-primary" data-toggle='modal' data-target='#sendReminders'>
-              Send Reminder Emails
-            </div>
+            @if( App\SignRequest::where('campaign_id', (integer)request()->campaign_id )->where('status', false)->count() > 0 )
+              <div class="btn btn-wd btn-primary" data-toggle='modal' data-target='#sendReminders'>
+                Send Reminder Emails
+              </div>
+            @endif
+
           </div>
           <div class="col-md-3 pull-right">
             <div class="btn btn-wd btn-danger" id='endCampaign' data-toggle='modal' data-target='#endCampaignModal'>

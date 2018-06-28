@@ -21,7 +21,7 @@ class SignRequest extends Model
       $additonals = (array)json_decode($this->additionals);
       $additonals = array_values($additonals);
       $completed = (array)array_pop($additonals);
-      return count($completed)." of ".count($additonals);
+      return count($completed)." of ".count( array_filter($additonals) );
     }
 
     public function campaign() {
