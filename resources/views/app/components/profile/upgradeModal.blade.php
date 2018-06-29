@@ -6,9 +6,12 @@
       </div>
       <div class="modal-body" style="font-size:20px;">
 				Hey there,
+        <?php
+        $upgraded_plan = Auth::user()->getUpgradePlan();
+        ?>
 
-				Currently your Subscription plan only allows up to __ <b>Active</b> members. In order to have more active members you can mail and manage
-        You will need to upgrade your account to the ____ Subscription; which allows _______.
+				Currently your Subscription plan only allows up to {{Auth::user()->getPlanMax()}} <b>Active</b> members. In order to have more active members you can mail and manage
+        You will need to upgrade your account to the <b>{{$upgraded_plan[1]}}</b> Subscription; which allows <b>{{$upgraded_plan[2]}}</b> Members.
 				<br><br>
         Any pro-rated billing for your upgrade will be handled automatically! We like to keep it simple.
         <br><br>

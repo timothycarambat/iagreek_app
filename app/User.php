@@ -70,6 +70,25 @@ class User extends Authenticatable
       return count($this->members()->where('status','!=','inactive')->get());
     }
 
+    public function getUpgradePlan() {
+      if ($this->active_org_size() <= (integer)SystemVar::where('name','org_small')->pluck('value')[0] ) {
+        return ['iag_med', 'Medium', SystemVar::where('name','org_med')->pluck('value')[0] ];
+      }elseif ($this->active_org_size() >= (integer)SystemVar::where('name','org_med')->pluck('value')[0] ) {
+        return ['iag_large', 'Large', 'Unlimited'];
+      }else{
+        return ['iag_small', 'Small', SystemVar::where('name','org_small')->pluck('value')[0] ];
+      }
+    }
+
+    public function getPlanMax() {
+      $plan = Subscription::getSubStripePlan($this->id);
+      if( $plan === 'iag_large' ){
+        return 'Unlimited';
+      }else{
+        return SystemVar::where('name', $plan)->pluck('value')[0];
+      }
+    }
+
     # make identicon for new users stored in avatars/
     private static function makeIdenticon($org_name){
       $icon = new \Jdenticon\Identicon(array(
