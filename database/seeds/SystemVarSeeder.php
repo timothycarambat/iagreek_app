@@ -14,9 +14,11 @@ class SystemVarSeeder extends Seeder
     {
         DB::table('system')->truncate();
         SystemVar::create([ 'name' => "trial_days", 'value' => "15" ]);
-        SystemVar::create([ 'name' => "org_small", 'value' => "100"]);
-        SystemVar::create([ 'name' => "org_med", 'value' => "200"]);
-        SystemVar::create([ 'name' => "iag_small", 'value' => "100"]);
-        SystemVar::create([ 'name' => "iag_med", 'value' => "200"]);
+        SystemVar::create([ 'name' => "org_small", 'value' => "50"]);
+        SystemVar::create([ 'name' => "org_med", 'value' => "100"]);
+        SystemVar::create([ 'name' => "org_large", 'value' => "Unlimited"]);
+        SystemVar::create([ 'name' => "iag_small", 'value' => "50"]);
+        SystemVar::create([ 'name' => "iag_med", 'value' => "100"]);
+        SystemVar::create([ 'name' => "iag_large", 'value' => "Unlimited"]);
     }
 }
