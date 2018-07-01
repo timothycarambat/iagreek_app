@@ -11,13 +11,13 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li>
+                <!-- <li>
                   <a href="#"data-toggle="dropdown">
                         <i class="fas fa-bell"></i>
                         <p class="notification">0</p>
                   			<p>Notifications</p>
                   </a>
-                </li>
+                </li> -->
 
 
                 <li  class="dropdown">
