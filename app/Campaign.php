@@ -75,6 +75,17 @@ class Campaign extends Model
     Redirect::to('/campaign/edit/'.$this->id)->send();
   }
 
+  public function getNumericProgress(){
+    $sign_reqs = $this->sign_requests()->get();
+    $signed = 0;
+    foreach ($sign_reqs as $req) {
+      if($req->status){
+        $signed++;
+      }
+    }
+    return ($signed/ count($sign_reqs) )*100;
+  }
+
   //This function will look through all three qualifying parameters and
   //then will filter out the duplicates
   private static function getUniqueMemberList($tags,$positions,$member_ids){
