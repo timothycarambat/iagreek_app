@@ -31,13 +31,13 @@
                     <div class="text-center">
                         <div class="row">
                             <div class="col-md-3 col-md-offset-1">
-                                <h5>0<br /><small>Org. Size</small></h5>
+                                <h5>{{Auth::user()->org_size()}}<br /><small>Org. Size</small></h5>
                             </div>
                             <div class="col-md-4">
-                                <h5>0<br /><small>Documents</small></h5>
+                                <h5>{{Auth::user()->documents()->count()}}<br /><small>Documents</small></h5>
                             </div>
                             <div class="col-md-3">
-                                <h5>0<br /><small>Campaigns</small></h5>
+                                <h5>{{Auth::user()->campaigns()->where('archived','false')->count()}}<br /><small>Campaigns</small></h5>
                             </div>
                         </div>
                     </div>
