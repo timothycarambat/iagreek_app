@@ -31,7 +31,7 @@ class DocumentsController extends Controller
         $document->delete();
         Session::flash('success',"Document deleted!");
       }else{
-        Session::flash('failure',"This Document could not be deleted.");
+        Session::flash('error',"This Document could not be deleted.");
       }
       Redirect::to('/documents')->send();
     }

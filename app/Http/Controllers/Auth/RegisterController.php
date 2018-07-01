@@ -122,7 +122,7 @@ class RegisterController extends Controller
         }catch(\Stripe\Error\Card $e) {
             $body = $e->getJsonBody();
             $err  = $body['error'];
-            Session::flash('failure',$err['message']);
+            Session::flash('error',$err['message']);
             User::find($new_user->id)->delete();
             return Redirect::to('/register')->withInput()->send();
         }

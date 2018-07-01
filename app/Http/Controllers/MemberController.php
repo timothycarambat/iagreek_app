@@ -9,6 +9,8 @@ use Session;
 use Redirect;
 
 use App\Member;
+use App\Subscription;
+use App\Fee;
 
 class MemberController extends Controller
 {
@@ -38,13 +40,19 @@ class MemberController extends Controller
           'status' => $request->status,
           'org_admin_id' => Auth::user()->id,
         ];
-        $addMember = Member::addNewMember($new_member);
-      }
 
-      if( $addMember ){
-        Session::flash('success','The Member was added and the signup email was sent!');
-      }else{
-        Session::flash('failure','The Member could not be added!');
+        if( MemberController::memberCanBeAdded($request) ){
+          $addMember = Member::addNewMember($new_member);
+          if( $addMember ){
+            Session::flash('success','The Member was added and the signup email was sent!');
+          }else{
+            Session::flash('error','The Member could not be added!');
+          }
+        }else{
+          Session::flash('error',
+          "<strong>You're Growing!</strong> Looks like to add this new active member you're gonna need to set some existing members inactive or
+           <a style='color:#351515' href='/profile?upgrade=true'>upgrade your subscription!</a>");
+        }
       }
 
       return Redirect::to('/members');
@@ -85,7 +93,7 @@ class MemberController extends Controller
       if( $update_member ){
         Session::flash('success',"The Member's information was updated!");
       }else{
-        Session::flash('failure','The Member could not be updated!');
+        Session::flash('error','The Member could not be updated!');
       }
 
       return Redirect::to('/members');
@@ -103,5 +111,15 @@ class MemberController extends Controller
       Session::flash('success',"<b>$member->name</b>'s tags were updated!");
 
       return Redirect::to('/members');
+    }
+
+    public static function memberCanBeAdded($request){
+      $current_org_size = Member::where('org_admin_id', Auth::user()->id)->where('status','active')->count();
+      if($request->status == 'active'){
+        if( Subscription::getSubStripePlan(Auth::user()->id) != Fee::determineNewUserSubType($current_org_size + 1) ){
+          return false;
+        }
+      }
+      return true;
     }
 }

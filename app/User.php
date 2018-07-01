@@ -8,6 +8,7 @@ use Laravel\Cashier\Billable;
 use Storage;
 
 use App\Subscription;
+use App\SystemVar;
 
 class User extends Authenticatable
 {
@@ -63,11 +64,57 @@ class User extends Authenticatable
     }
 
     public function org_size() {
-      return count($this->members()->get());
+      return $this->members()->count();
     }
 
     public function active_org_size() {
-      return count($this->members()->where('status','!=','inactive')->get());
+      return $this->members()->where('status','active')->count();
+    }
+
+    public function inactive_org_size() {
+      return $this->members()->where('status','inactive')->count();
+    }
+
+    public function other_status_counts() {
+      $other_statuses = $this->members()->where('status','!=','active')->where('status','!=','inactive')->pluck('status');
+      if( !empty($other_statuses) ){
+        $res = [];
+        foreach ($other_statuses as $status) {
+          $res[$status] = $this->members()->where('status',$status)->count();
+        }
+        return $res;
+      }else {
+        return null;
+      }
+    }
+
+    public function getPlanMax() {
+      $plan = Subscription::getSubStripePlan($this->id);
+      if( $plan === 'iag_large' ){
+        return 'Unlimited';
+      }else{
+        return SystemVar::where('name', $plan)->pluck('value')[0];
+      }
+    }
+
+    public function eligableForDowngrade(){
+      $plan = Subscription::getSubStripePlan($this->id);
+      //if already on smallest plan you can't downgrade
+      if($plan === 'iag_small'){return false;}
+      $org_map = [
+        'iag_small' => SystemVar::org_limit('iag_small'),
+        'iag_med' => SystemVar::org_limit('iag_med')
+      ];
+
+      if( $plan === 'iag_med' && $this->active_org_size() < $org_map['iag_small'] ){
+        //medium user can downgrade to small
+        return true;
+      }elseif ($plan === 'iag_large' && $this->active_org_size() < $org_map['iag_med'] ) {
+        //large user can downgrade to medium
+        return true;
+      }else {
+        return false;
+      }
     }
 
     # make identicon for new users stored in avatars/

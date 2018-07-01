@@ -48,106 +48,90 @@
                     </div>
                     <div class="content">
                         <ul class="list-unstyled team-members">
+													<?php $enum  = 1; ?>
+													@if(App\Campaign::where('org_admin_id', Auth::user()->id)->where('archived', false)->count() > 0)
+														@foreach(Auth::user()->campaigns as $campaign)
+															@if(!$campaign->archived)
+																<li>
+																		<div class="row">
+																				<div class="col-xs-3">
+																						<div class='counter'> {{$enum}} </div>
+																				</div>
+																				<div class="col-xs-6">
+																						{{$campaign->name}}
+																						<br />
+																						<span class="text-muted">Created: <small>{{$campaign->created_at->diffForHumans()}}</small></span>
+																				</div>
 
-                                    <li>
-                                        <div class="row">
-                                            <div class="col-xs-3">
-                                                <div class='counter'> 1 </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                Campaign One
-                                                <br />
-                                                <span class="text-muted">Created: <small> 5/25/2018</small></span>
-                                            </div>
-
-                                            <div class="col-xs-3 text-right">
-                                                <btn class="btn btn-sm btn-success btn-icon"><i class="far fa-eye"></i></btn>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                </ul>
+																				<div class="col-xs-3 text-right">
+																					<a href="/campaign/edit/{{$campaign->id}}">
+																						<btn class="btn btn-sm btn-success btn-icon"><i class="far fa-eye"></i></btn>
+																					</a>
+																				</div>
+																		</div>
+																</li>
+															@endif
+														@endforeach
+													@else
+														<li>
+															<div class="row">
+																<div class="col-xs-12 text-center">
+																	No Active Campaigns
+																</div>
+															</div>
+														</li>
+													@endif
+                        </ul>
                     </div>
                 </div>
             </div>
             <div class="col-lg-8 col-md-7">
                 <div class="card">
-                    <div class="header">
-                        <h4 class="title">Edit Profile</h4>
-                    </div>
-                    <div class="content">
-                        {!!Form::open(['url'=>'/profile/update'])!!}
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Organization</label>
-																				{{Form::text('org_name',Auth::user()->org_name,['placeholder'=>'Organization', 'class'=>'form-control border-input','disabled'=>'disabled','required'=>'required'])}}
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Email address</label>
-																				{{Form::email('email',Auth::user()->email,['placeholder'=>'Email', 'class'=>'form-control border-input','required'=>'required'])}}
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>First Name</label>
-																				{{Form::text('first_name',explode(' ', Auth::user()->name)[0],['placeholder'=>'First Name', 'class'=>'form-control border-input','required'=>'required'])}}
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Last Name</label>
-																				{{Form::text('last_name',explode(' ', Auth::user()->name)[1],['placeholder'=>'Last Name', 'class'=>'form-control border-input','required'=>'required'])}}
-                                    </div>
-                                </div>
-																<div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Phone</label>
-																				{{Form::text('phone',App\User::formatPhone(Auth::user()->phone),['placeholder'=>'(555) 123-4567', 'class'=>'form-control border-input','required'=>'required'])}}
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Billing Address</label>
-																				{{Form::text('address',Auth::user()->billing_address,['placeholder'=>'Billing Address', 'class'=>'form-control border-input','required'=>'required'])}}
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Billing City</label>
-																				{{Form::text('city',Auth::user()->billing_city,['placeholder'=>'Billing City', 'class'=>'form-control border-input','required'=>'required'])}}
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Billing State</label>
-																				{{Form::select('state', App\States::makeStateSelection(), Auth::user()->billing_state,['class'=>'form-control border-input','required'=>'required'])}}
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Billing Zip Code</label>
-																				{{Form::number('zip',Auth::user()->billing_zip,['placeholder'=>'ZIP Code', 'class'=>'form-control border-input','required'=>'required'])}}
-                                    </div>
-                                </div>
-                            </div>
+									<div class="row">
+										<div class="col-md-12">
 
-														<div class="text-center">
-																<button type="submit" class="btn btn-info btn-wd">Update Profile</button>
+											<ul class="nav nav-tabs">
+												<li class="nav-item active">
+													<a class="nav-link active" href="#profileInfo" data-toggle="tab">Profile Info</a>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link" href="#billingInfo" data-toggle="tab">Billing Info</a>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link" href="#subscriptionInfo" data-toggle="tab">Subscription Info</a>
+												</li>
+											</ul>
+
+												<div class="tab-content">
+
+													<div class="tab-pane active" id="profileInfo">
+														<div class="content">
+															@include('app.components.profile.profileInfo')
 														</div>
-														<div class="clearfix"></div>
-												{!!Form::close()!!}
+													</div>
+
+													<div class="tab-pane" id="billingInfo">
+														<div class="content">
+															@include('app.components.profile.billingInfo')
+														</div>
+													</div>
+
+													<div class="tab-pane" id="subscriptionInfo">
+														<div class="content">
+															@include('app.components.profile.subscriptionInfo')
+														</div>
+													</div>
+
+												</div>
+
+										</div>
+									</div>
+
+
+                    <div class="content">
 												<hr>
 												{!!Form::open(['url'=>'/profile/update/notify'])!!}
 	                        <div class="row">
@@ -224,7 +208,7 @@
 	</div>
 
 <!-- User Profile image Modal -->
-<div style='position:fixed' class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div style='overflow-y: scroll;' class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -250,7 +234,7 @@
 
 
 <!-- User Cancel Profile Modal -->
-<div style='position:fixed' class="modal fade" id="cancelAccount" tabindex="-1" role="dialog" aria-hidden="true">
+<div style='overflow-y: scroll;' class="modal fade" id="cancelAccount" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header alert alert-danger">
@@ -278,10 +262,15 @@
 				<textarea name="cancel_comments" rows="8" style="width:100%;resize:vertical"></textarea>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-danger btn-wd" data-cancel-account>Cancel Account</button>
+				<button type="submit" class="btn btn-danger btn-wd" data-cancel-account>Cancel Account</button>
+				<button class="btn btn-default btn-wd" data-dismiss="modal">Close</button>
       </div>
 			{!!Form::close()!!}
     </div>
   </div>
 </div>
+
+@if(request()->upgrade)
+	@include('app.components.profile.upgradeModal')
+@endif
 @endsection
