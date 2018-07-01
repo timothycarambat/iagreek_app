@@ -4,17 +4,20 @@
       <br><br>If you need multiple signatures on single document
       for it to be 'complete' - thats the next step!
     </div>
-    <div class="form-group">
-        <label>Everyone With the Tag... (can select multiple)</label>
-        {{Form::select('select_by_tags',
-        App\Member::where('org_admin_id',Auth::user()->id)->first()->existingTags()->pluck('name','slug')
-        ,"",
-        ['placeholder'=>'Select By Tags',
-        'class'=>'form-control border-input',
-        'multiple'=>'multiple',
-        'name'=>'select_by_tags[]'
-        ])}}
-    </div>
+
+    @if( Auth::user()->members()->count() > 0 )
+      <div class="form-group">
+          <label>Everyone With the Tag... (can select multiple)</label>
+          {{Form::select('select_by_tags',
+          App\Member::where('org_admin_id',Auth::user()->id)->first()->existingTags()->pluck('name','slug')
+          ,"",
+          ['placeholder'=>'Select By Tags',
+          'class'=>'form-control border-input',
+          'multiple'=>'multiple',
+          'name'=>'select_by_tags[]'
+          ])}}
+      </div>
+    @endif  
 
     <div class="form-group">
         <label>Everyone In the Position... (can select multiple)</label>
