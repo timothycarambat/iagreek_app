@@ -36,7 +36,7 @@ class Subscription extends Model
     public static function getMonthlyCost($plan){
       switch ($plan) {
         case 'iag_small':
-          return "$15.00";
+          return "$10.00";
           break;
         case 'iag_med':
           return "$20.00";
