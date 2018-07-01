@@ -10,6 +10,7 @@ use Session;
 use Redirect;
 
 use App\User;
+use App\Subscription;
 
 class ProfileController extends Controller
 {
@@ -144,5 +145,32 @@ class ProfileController extends Controller
       }
       return Redirect::to('/profile');
 
+    }
+
+    public static function upgradeSubscription(){
+      $uid = Auth::user()->id;
+      $current_plan = Auth::user()
+      ->subscription(Subscription::getSubName($uid));
+      $upgraded_plan = Subscription::getUpgradePlan($current_plan->stripe_plan);
+
+      $current_plan->swap($upgraded_plan[0]);
+      Session::flash('success',"You Plan was upgraded to the <b>$upgraded_plan[1]</b> Plan!");
+      Redirect::to('/profile')->send();
+    }
+
+    public static function downgradeSubscription(){
+      $uid = Auth::user()->id;
+      $current_plan = Auth::user()
+      ->subscription( Subscription::getSubName($uid));
+      $downgrade_plan = Subscription::getDowngradePlan($current_plan->stripe_plan);
+
+      if( Auth::user()->eligableForDowngrade() ){
+        $current_plan->swap($downgrade_plan[0]);
+        Session::flash('success',"You Plan was changed to the <b>$downgrade_plan[1]</b> Plan!");
+      }else{
+        Session::flash('error',"You were not eligable for a subscription downgrade!");
+      }
+
+      Redirect::to('/profile')->send();
     }
 }

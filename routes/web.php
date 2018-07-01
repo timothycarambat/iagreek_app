@@ -33,6 +33,9 @@ Route::post('/profile/upload/avatar', 'ProfileController@updateAvatar')->middlew
 Route::post('/profile/update', 'ProfileController@updateInfo')->middleware('auth');
 Route::post('/billing/update', 'ProfileController@updateBilling')->middleware('auth');
 Route::post('/profile/update/notify', 'ProfileController@updateNotifs')->middleware('auth');
+Route::post('/profile/upgrade', 'ProfileController@upgradeSubscription')->middleware('auth');
+Route::get('/profile/downgrade', 'ProfileController@downgradeSubscription')->middleware('auth');
+
 
 Route::post('/members/upload/roster', 'MemberController@updateRoster')->middleware('auth');
 Route::post('/members/submit/newmember', 'MemberController@addNewMember')->middleware('auth');

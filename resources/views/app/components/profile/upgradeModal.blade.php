@@ -7,7 +7,7 @@
       <div class="modal-body" style="font-size:20px;">
 				Hey there,
         <?php
-        $upgraded_plan = Auth::user()->getUpgradePlan();
+        $upgraded_plan = App\Subscription::getUpgradePlan( App\Subscription::getSubStripePlan(Auth::user()->id) );
         ?>
 
 				Currently your Subscription plan only allows up to {{Auth::user()->getPlanMax()}} <b>Active</b> members. In order to have more active members you can mail and manage
@@ -20,7 +20,7 @@
 				Best,
 				<br>
 				IAGREEK Support Team
-				{!!Form::open(['url'=>'/user/'.Auth::user()->id.'/upgrade'])!!}
+				{!!Form::open(['url'=>'/profile/upgrade'])!!}
       </div>
       <div class="modal-footer">
         <a href="/profile">

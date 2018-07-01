@@ -100,6 +100,9 @@
 												<li class="nav-item">
 													<a class="nav-link" href="#billingInfo" data-toggle="tab">Billing Info</a>
 												</li>
+												<li class="nav-item">
+													<a class="nav-link" href="#subscriptionInfo" data-toggle="tab">Subscription Info</a>
+												</li>
 											</ul>
 
 												<div class="tab-content">
@@ -113,6 +116,12 @@
 													<div class="tab-pane" id="billingInfo">
 														<div class="content">
 															@include('app.components.profile.billingInfo')
+														</div>
+													</div>
+
+													<div class="tab-pane" id="subscriptionInfo">
+														<div class="content">
+															@include('app.components.profile.subscriptionInfo')
 														</div>
 													</div>
 
