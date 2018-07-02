@@ -13,8 +13,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(SystemVarSeeder::class);
         $this->call(StatesTableSeeder::class);
-        $this->call(UsersTableSeeder::class);
-        $this->call(MemberSeeder::class);
-        $this->call(DocumentSeeder::class);
+        if( $_ENV['APP_ENV'] === 'local'){
+          $this->call(UsersTableSeeder::class);
+          $this->call(MemberSeeder::class);
+          $this->call(DocumentSeeder::class);
+        }
     }
 }
