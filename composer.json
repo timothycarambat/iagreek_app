@@ -16,7 +16,8 @@
         "phpoffice/phpspreadsheet": "^1.2",
         "rtconner/laravel-tagging": "~2.2",
         "snowfire/beautymail": "dev-master",
-        "stripe/stripe-php": "^5.7"
+        "stripe/stripe-php": "^5.7",
+        "tecnickcom/tcpdf": "^6.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

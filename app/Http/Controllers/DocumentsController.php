@@ -47,4 +47,9 @@ class DocumentsController extends Controller
       return json_encode($res);
     }
 
+    public static function previewDocument($doc_id){
+      $document = Document::find($doc_id);
+      return $document->generatePreview();
+    }
+
 }

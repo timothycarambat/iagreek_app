@@ -8,6 +8,11 @@
           <div class="col-md-1 btn btn-wd btn-info save-btn">
             Save Document
           </div>
+					<a href="/document/preview/{{$document->id}}" target="_blank">
+						<div class="col-md-1 btn btn-wd btn-default pull-right">
+							Preview
+						</div>
+					</a>
         </div>
 
         <div class="row">
