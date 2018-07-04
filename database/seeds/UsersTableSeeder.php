@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
         DB::table('subscriptions')->truncate();
         DB::table('users')->truncate();
         DB::table('documents')->truncate();
+        DB::table('campaigns')->truncate();
 
         //Make Admin
       $main_user = User::create([

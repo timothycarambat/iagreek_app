@@ -25,7 +25,7 @@ class Campaign extends Model
 
   public static function createCampaign($data){
     $member_list = Campaign::getUniqueMemberList($data->select_by_tags, $data->select_by_position, $data->select_by_member);
-    $additionals = Campaign::compileAdditionals($data->second_signer,$data->third_signer,$data->fourth_signer);
+    (array)$additionals = Campaign::compileAdditionals($data->second_signer,$data->third_signer,$data->fourth_signer);
     $dir = md5((string)\Carbon\Carbon::now().str_random(24));
     $campaign = Campaign::create([
       'name' => $data->name,
