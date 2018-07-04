@@ -19,7 +19,7 @@ class CreateSignRequestsTable extends Migration
           $table->integer('member_id');
           $table->boolean('status')->default(false);
           $table->boolean('additional_required')->default(false);
-          $table->jsonb('additionals')->default(json_encode(["one"=>null,"two"=>null,"three"=>null]));
+          $table->text('additionals')->nullable();
           $table->text('file_link')->nullable();
 
           $table->timestamps();
