@@ -131,7 +131,7 @@ class Member extends Model
     public static function sendSignUpEmail($model){
       $beautymail = app()->make(\Snowfire\Beautymail\Beautymail::class);
       $beautymail->send('emails.member_signup',
-        ['model'=>$model, 'org_name'=>Auth::user()->org_name],
+        ['model'=>$model, 'org_name'=>$model->org_admin->org_name],
         function($message) use($model) {
           $message
               ->to($model->email)
