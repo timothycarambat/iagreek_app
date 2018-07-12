@@ -58,19 +58,19 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                               FAQ
+                            <a href="{{$_ENV['ALT_URL']}}/getting_started">
+                               Getting Started
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="mailto:support@iagreek.com">
                                 Support
                             </a>
                         </li>
                     </ul>
                 </nav>
                 <div class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i>
+                    &copy; <script>document.write(new Date().getFullYear())</script>, IAGREEK
                 </div>
             </div>
         </footer>
