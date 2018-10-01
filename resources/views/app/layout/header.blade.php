@@ -11,13 +11,23 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <!-- <li>
-                  <a href="#"data-toggle="dropdown">
-                        <i class="fas fa-bell"></i>
-                        <p class="notification">0</p>
-                  			<p>Notifications</p>
-                  </a>
-                </li> -->
+                @if( Auth::user()->onValidTrial() )
+                  <li>
+                    <a href="#"data-toggle="dropdown">
+                          <i class="fas fa-clock"></i>
+                          <p class="notification">{{Auth::user()->trialDaysRemaining()}}</p>
+                    			<p>Trial Days Remaining</p>
+                    </a>
+                  </li>
+                @elseif( Auth::user()->onExpiredTrial() )
+                  <li>
+                    <a href="/profile">
+                          <i class="fas fa-clock"></i>
+                          <p class="notification">{{Auth::user()->trialDaysRemaining()}}</p>
+                          <p>Trial Days Remaining</p>
+                    </a>
+                  </li>
+                @endif
 
 
                 <li  class="dropdown">

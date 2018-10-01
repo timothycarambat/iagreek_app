@@ -77,4 +77,21 @@ class Subscription extends Model
           break;
       }
     }
+
+    public static function getPlanList(){
+      return ['iag_small' => "Small - ".Subscription::getMonthlyCost('iag_small'),
+             'iag_med' => "Medium - ".Subscription::getMonthlyCost('iag_med'),
+             'iag_large' => "Large - ".Subscription::getMonthlyCost('iag_large'),
+             ];
+    }
+
+    public static function isCouponValid($coupon){
+      \Stripe\Stripe::setApiKey($_ENV['STRIPE_SECRET']);
+      try {
+          $coupon = \Stripe\Coupon::retrieve($coupon);
+          return $coupon->valid;
+      } catch(\Exception $e) {
+          return false;
+      }
+    }
 }

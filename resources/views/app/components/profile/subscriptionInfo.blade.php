@@ -4,11 +4,21 @@
 
 <div class="row">
   <div class="col-md-12" style="margin-top:10px; font-size:18px;">
-    <b>Current Subscription</b>: {{App\Subscription::getSubStripePlanHuman( App\Subscription::getSubStripePlan(Auth::user()->id) )}}
+    @if( Auth::user()->onValidTrial() )
+      <b>Current Subscription</b>: <b>Trial</b> ({{Auth::user()->trialDaysRemaining()}} days remaining)
+    @elseif( Auth::user()->onExpiredTrial() )
+      <b>Current Subscription</b>: <b> Expired Trial </b>
+    @else
+      <b>Current Subscription</b>: {{App\Subscription::getSubStripePlanHuman( App\Subscription::getSubStripePlan(Auth::user()->id) )}}
+    @endif
   </div>
 
   <div class="col-md-12" style="margin-top:10px; font-size:18px;">
-    <b>Monthly Cost</b>: {{App\Subscription::getMonthlyCost( App\Subscription::getSubStripePlan(Auth::user()->id) )}}
+    @if( Auth::user()->onValidTrial() || Auth::user()->onExpiredTrial() )
+      <b>Current Subscription</b>: 0.00
+    @else
+      <b>Monthly Cost</b>: {{App\Subscription::getMonthlyCost( App\Subscription::getSubStripePlan(Auth::user()->id) )}}
+    @endif
   </div>
 
   <div class="col-md-6" style="margin-top:10px; font-size:18px;">
@@ -27,7 +37,11 @@
         </tr>
         <tr>
           <th>Active</th>
-          <th>{{Auth::user()->active_org_size()}} of {{App\SystemVar::org_limit( App\Subscription::getSubStripePlan(Auth::user()->id) ) }}</th>
+          @if( Auth::user()->onValidTrial() || Auth::user()->onExpiredTrial() )
+            <th>{{Auth::user()->active_org_size()}} of 10</th>
+          @else
+            <th>{{Auth::user()->active_org_size()}} of {{App\SystemVar::org_limit( App\Subscription::getSubStripePlan(Auth::user()->id) ) }}</th>
+          @endif
         </tr>
         <tr>
           <th>Inactive</th>
@@ -50,7 +64,7 @@
   </div>
 </div>
 
-@if( Auth::user()->eligableForDowngrade() )
+<!-- @if( !(Auth::user()->onValidTrial() || Auth::user()->onExpiredTrial()) && Auth::user()->eligableForDowngrade() )
 <hr>
   <div class="row">
     <div class="col-xs-12">
@@ -59,4 +73,4 @@
       <a href="/profile/downgrade" class="btn btn-wd btn-primary">Change Subscription</a>
     </div>
   </div>
-@endif
+@endif -->

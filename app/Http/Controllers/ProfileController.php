@@ -11,6 +11,7 @@ use Redirect;
 
 use App\User;
 use App\Subscription;
+use App\SystemVar;
 
 class ProfileController extends Controller
 {
@@ -145,6 +146,56 @@ class ProfileController extends Controller
       }
       return Redirect::to('/profile');
 
+    }
+
+    public static function newSubscription(Request $request){
+      // User is on Trial and can be added to Stripe now
+      $user = Auth::user();
+
+      // if no Stripe token, send them back
+      if(is_null($request['stripeToken'])){
+        Session::flash('failure','A Card is Required');
+        return Redirect::to('/profile')->withInput()->send();
+      }
+
+      // If they input a coupon, but it was invalid
+      $hasCoupon = !empty($request['coupon']);
+      $couponValid = !empty($request['coupon']) ? Subscription::isCouponValid($request['coupon']) : false;
+      if($hasCoupon && !$couponValid){
+        Session::flash('failure','That Coupon is Not Valid.');
+        return Redirect::to('/profile')->withInput()->send();
+      }
+
+      try{
+        # register new user and subscribe them to the appropriate plan w/ trial days and coupon if applicable
+        if($hasCoupon){
+          $user->newSubscription('subscription', $request['org_type']  )
+                ->withCoupon($request['coupon'])
+                ->create($request['stripeToken'],[
+                        'email' => $user->email
+                      ]);
+        }else{
+          $user->newSubscription('subscription', $request['org_type'] )
+                ->create($request['stripeToken'],[
+                        'email' => $user->email
+                      ]);
+        }
+
+        $user->trial_ends_at = null;
+        $user->save();
+        Session::flash('success','Thank you for signing up with <b>IAGREEK</b>! You are now offically subscribed - if you havent you may want to checkout the
+        <b><u><a style="color:#42A084" href="'.$_ENV['ALT_URL'].'/getting_started"> getting started guide</a></u></b>.');
+        return Redirect::to('/profile')->send();
+
+      }catch(\Stripe\Error\Card $e) {
+        # should the card present errors; capture them and return to frontend
+          $body = $e->getJsonBody();
+          $err  = $body['error'];
+          Session::flash('failure',$err['message']);
+          return Redirect::to('/profile')->withInput()->send();
+      }
+
+      // $user->newSubscription('main', 'monthly')->create($stripeToken);
     }
 
     public static function upgradeSubscription(){

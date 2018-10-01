@@ -10,6 +10,7 @@ use Redirect;
 
 use App\Member;
 use App\Subscription;
+use App\SystemVar;
 use App\Fee;
 
 class MemberController extends Controller
@@ -115,6 +116,22 @@ class MemberController extends Controller
 
     public static function memberCanBeAdded($request){
       $current_org_size = Member::where('org_admin_id', Auth::user()->id)->where('status','active')->count();
+
+      if( Auth::user()->onValidTrial() || Auth::user()->onExpiredTrial() ){
+        $trial_limit = (int)SystemVar::where('name', 'trial_members')->pluck('value')[0];
+        if( (Auth::user()->org_size() + 1) > $trial_limit ){
+          $res = [
+            'Status'=>'Failure',
+            'Message'=>"<strong>You're Growing!</strong> Maybe just a bit more than expected though.
+            Looks like your on the trial peroid still and you are capped at $trial_limit members.
+            You can going to need to <a style='color:#351515' href='/profile?upgrade=true'>upgrade to a subscription!</a></strong>"
+          ];
+          return false;
+        }else{
+          return true;
+        }
+      }
+
       if($request->status == 'active'){
         if( Subscription::getSubStripePlan(Auth::user()->id) != Fee::determineNewUserSubType($current_org_size + 1) ){
           return false;

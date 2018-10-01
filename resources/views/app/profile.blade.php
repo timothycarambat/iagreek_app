@@ -115,7 +115,11 @@
 
 													<div class="tab-pane" id="billingInfo">
 														<div class="content">
-															@include('app.components.profile.billingInfo')
+															@if( Auth::user()->onValidTrial() || Auth::user()->onExpiredTrial() )
+																@include('app.components.profile.billingInfo_signup')
+															@else
+																@include('app.components.profile.billingInfo')
+															@endif
 														</div>
 													</div>
 

@@ -32,6 +32,7 @@ Route::post('/profile/upload/letterhead', 'ProfileController@updateLetterhead')-
 Route::post('/profile/upload/avatar', 'ProfileController@updateAvatar')->middleware('auth');
 Route::post('/profile/update', 'ProfileController@updateInfo')->middleware('auth');
 Route::post('/billing/update', 'ProfileController@updateBilling')->middleware('auth');
+Route::post('/billing/subscribe', 'ProfileController@newSubscription')->middleware('auth');
 Route::post('/profile/update/notify', 'ProfileController@updateNotifs')->middleware('auth');
 Route::post('/profile/upgrade', 'ProfileController@upgradeSubscription')->middleware('auth');
 Route::get('/profile/downgrade', 'ProfileController@downgradeSubscription')->middleware('auth');

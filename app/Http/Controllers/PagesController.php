@@ -76,6 +76,7 @@ class PagesController extends Controller
         'title'=>'Organization Campaigns',
         'view'=>'campaigns',
         'campaigns'=>Auth::user()->campaigns()->where('archived',false)->orderBy('updated_at','ASC')->get(),
+        'total_campaigns' =>Auth::user()->campaigns->count(),
       ]);
     }
 

@@ -59130,94 +59130,107 @@ $(function () {
 /***/ (function(module, exports) {
 
 $(function () {
-    if (window.view === "profile") {
+  if (window.view === "profile") {
 
-        //upload new letterhead image
-        $('input[name=letterhead]').change(function () {
-            $(this).simpleUpload("/profile/upload/letterhead", {
+    //upload new letterhead image
+    $('input[name=letterhead]').change(function () {
+      $(this).simpleUpload("/profile/upload/letterhead", {
 
-                beforeSend: function beforeSend(jqXHR, settings) {
-                    //attach csrf token manually
-                    jqXHR.setRequestHeader('X-CSRF-TOKEN', window.csrf_token);
-                },
+        beforeSend: function beforeSend(jqXHR, settings) {
+          //attach csrf token manually
+          jqXHR.setRequestHeader('X-CSRF-TOKEN', window.csrf_token);
+        },
 
-                start: function start(file) {
-                    //upload started
-                    $('#filename').html(file.name);
-                    $('#progress').html("");
-                    $('#progressBar').width(0);
-                },
+        start: function start(file) {
+          //upload started
+          $('#filename').html(file.name);
+          $('#progress').html("");
+          $('#progressBar').width(0);
+        },
 
-                progress: function progress(_progress) {
-                    //received progress
-                    $('#progress').html("Progress: " + Math.round(_progress) + "%");
-                    $('#progressBar').width(_progress + "%");
-                },
+        progress: function progress(_progress) {
+          //received progress
+          $('#progress').html("Progress: " + Math.round(_progress) + "%");
+          $('#progressBar').width(_progress + "%");
+        },
 
-                success: function success(data) {
-                    //upload successful
-                    var data_decoded = JSON.parse(data);
-                    $('#filename,#progress,#progressBar').empty();
-                    if (data_decoded.Status == 'Success') {
-                        Notify(data_decoded.Message, 'success');
-                        $("[data-letterhead-well]").empty();
-                        $("[data-letterhead-well]").append("<img class='letterhead-img' src='" + data_decoded.Data + "' />");
-                    } else {
-                        Notify(data_decoded.Message, 'danger');
-                    }
-                },
+        success: function success(data) {
+          //upload successful
+          var data_decoded = JSON.parse(data);
+          $('#filename,#progress,#progressBar').empty();
+          if (data_decoded.Status == 'Success') {
+            Notify(data_decoded.Message, 'success');
+            $("[data-letterhead-well]").empty();
+            $("[data-letterhead-well]").append("<img class='letterhead-img' src='" + data_decoded.Data + "' />");
+          } else {
+            Notify(data_decoded.Message, 'danger');
+          }
+        },
 
-                error: function error(_error) {
-                    //upload failed
-                    $('#progress').html("Failure!<br>" + _error.name + ": " + _error.message);
-                }
-            });
-        });
+        error: function error(_error) {
+          //upload failed
+          $('#progress').html("Failure!<br>" + _error.name + ": " + _error.message);
+        }
+      });
+    });
 
-        //upload new avatar Image
-        $('input[name=avatar]').change(function () {
-            $(this).simpleUpload("/profile/upload/avatar", {
+    //upload new avatar Image
+    $('input[name=avatar]').change(function () {
+      $(this).simpleUpload("/profile/upload/avatar", {
 
-                beforeSend: function beforeSend(jqXHR, settings) {
-                    //attach csrf token manually
-                    jqXHR.setRequestHeader('X-CSRF-TOKEN', window.csrf_token);
-                },
+        beforeSend: function beforeSend(jqXHR, settings) {
+          //attach csrf token manually
+          jqXHR.setRequestHeader('X-CSRF-TOKEN', window.csrf_token);
+        },
 
-                start: function start(file) {
-                    //upload started
-                    $('#filename').html(file.name);
-                    $('#progress').html("");
-                    $('#progressBar').width(0);
-                },
+        start: function start(file) {
+          //upload started
+          $('#filename').html(file.name);
+          $('#progress').html("");
+          $('#progressBar').width(0);
+        },
 
-                progress: function progress(_progress2) {
-                    //received progress
-                    $('#progress').html("Progress: " + Math.round(_progress2) + "%");
-                    $('#progressBar').width(_progress2 + "%");
-                },
+        progress: function progress(_progress2) {
+          //received progress
+          $('#progress').html("Progress: " + Math.round(_progress2) + "%");
+          $('#progressBar').width(_progress2 + "%");
+        },
 
-                success: function success(data) {
-                    //upload successful
-                    var data_decoded = JSON.parse(data);
-                    $('#filename,#progress,#progressBar').empty();
-                    if (data_decoded.Status == 'Success') {
-                        Notify(data_decoded.Message, 'success');
-                        $("[data-avatar-well]").empty();
-                        $("[data-avatar-well]").append("<img class='avatar-img' src='" + data_decoded.Data + "' />");
-                        $("#profileModal").modal('hide');
-                        $("img.avatar").attr('src', data_decoded.Data);
-                    } else {
-                        Notify(data_decoded.Message, 'danger');
-                    }
-                },
+        success: function success(data) {
+          //upload successful
+          var data_decoded = JSON.parse(data);
+          $('#filename,#progress,#progressBar').empty();
+          if (data_decoded.Status == 'Success') {
+            Notify(data_decoded.Message, 'success');
+            $("[data-avatar-well]").empty();
+            $("[data-avatar-well]").append("<img class='avatar-img' src='" + data_decoded.Data + "' />");
+            $("#profileModal").modal('hide');
+            $("img.avatar").attr('src', data_decoded.Data);
+          } else {
+            Notify(data_decoded.Message, 'danger');
+          }
+        },
 
-                error: function error(_error2) {
-                    //upload failed
-                    $('#progress').html("Failure!<br>" + _error2.name + ": " + _error2.message);
-                }
-            });
-        });
-    }
+        error: function error(_error2) {
+          //upload failed
+          $('#progress').html("Failure!<br>" + _error2.name + ": " + _error2.message);
+        }
+      });
+    });
+
+    $('input[name="org_size"]').change(function () {
+      var size = +$(this).val();
+      var plan_select = $('select[name="org_type"]');
+
+      if (size <= 50) {
+        plan_select.val('iag_small');
+      } else if (size > 50 && size <= 199) {
+        plan_select.val('iag_med');
+      } else if (size > 199) {
+        plan_select.val('iag_large');
+      }
+    });
+  }
 }); //end windowif
 
 /***/ }),
