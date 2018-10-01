@@ -34,6 +34,12 @@
 					</div>
 					@endif
 
+					@if($errors->any())
+					<div class="alert alert-danger">
+					  <strong>Hmm..</strong> {{$errors->first()}}
+					</div>
+					@endif
+
 					{{Form::label('email', 'Email:',['style'=>'font-weight:800'])}}
           {{Form::email('email',null,['placeholder'=>'alpha@betagamma.org','required' => 'required']) }}
 
