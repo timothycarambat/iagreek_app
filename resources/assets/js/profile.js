@@ -86,6 +86,19 @@ $(function(){ if(window.view === "profile"){
       });
   });
 
+  $('input[name="org_size"]').change(function(){
+    let size = +$(this).val();
+    let plan_select = $('select[name="org_type"]');
+
+    if( size <= 50 ){
+      plan_select.val('iag_small')
+    }else if (size > 50 && size <= 199) {
+      plan_select.val('iag_med')
+    }else if (size > 199) {
+      plan_select.val('iag_large')
+    }
+  })
+
 
 
 }}); //end windowif

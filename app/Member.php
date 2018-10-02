@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Subscription;
+use App\SystemVar;
 use App\Fee;
 
 use Auth;
@@ -25,7 +26,7 @@ class Member extends Model
       parent::boot();
       self::creating(function($model) {
         //send email when creating new Member!
-        Member::sendSignUpEmail($model);
+          Member::sendSignUpEmail($model);
       });
     }
 
@@ -43,7 +44,7 @@ class Member extends Model
           $cellIterator->setIterateOnlyExistingCells(false);
           $rowdata = [];
           $column = 0;
-          $column_names = ['name','email','position','status','tags'];
+          $column_names = ['Member Name','Member Email','Member Position','Status','Tags'];
           foreach ($cellIterator as $cell) {
               if (!is_null($cell)) {
                   $value = $cell->getCalculatedValue();
@@ -63,38 +64,57 @@ class Member extends Model
       ];
 
       //get member count who appear in Roster
-      $roster_emails = array_column($roster, 'email');
+      $roster_emails = array_column($roster, 'Member Email');
       $member_update_count = Member::whereIn('email', $roster_emails)->count();
       $member_new_count = count($roster_emails) - $member_update_count;
+      $skip_paid_member_process = false;
 
-      $estimate_new_org_size = Auth::user()->active_org_size() + $member_new_count;
-      // compare the users current stripe plan name with the plan name determined by organization size.
-      // if they are equal -OK. If they are not then the user needs to upgrade their plan.
-      if( Subscription::getSubStripePlan(Auth::user()->id) != Fee::determineNewUserSubType($estimate_new_org_size) ){
-        $res = [
-          'Status'=>'Failure',
-          'Message'=>"<strong>You're Growing!</strong> Looks like to add these new members in youre gonna need to set some existing members inactive or
-           <a style='color:#351515' href='/profile?upgrade=true'>upgrade your subscription!</a>"
-        ];
-        return $res;
+      //If User is on Trial we need to stop them if they are trying to break the limit. Size is 10 flat, regardless of actives
+      if( Auth::user()->onValidTrial() || Auth::user()->onExpiredTrial() ){
+        $trial_limit = (int)SystemVar::where('name', 'trial_members')->pluck('value')[0];
+        if( (Auth::user()->org_size() + $member_new_count) > $trial_limit ){
+          $res = [
+            'Status'=>'Failure',
+            'Message'=>"<strong>You're Growing!</strong> Maybe just a bit more than expected though.
+            Looks like your on the trial peroid still and you are capped at $trial_limit members.
+            You can going to need to <a style='color:#351515' href='/profile?upgrade=true'>upgrade to a subscription!</a></strong>"
+          ];
+          return $res;
+        }
+
+        $skip_paid_member_process = true;
+      }
+
+      if(!$skip_paid_member_process){
+        $estimate_new_org_size = Auth::user()->active_org_size() + $member_new_count;
+        // compare the users current stripe plan name with the plan name determined by organization size.
+        // if they are equal -OK. If they are not then the user needs to upgrade their plan.
+        if( Subscription::getSubStripePlan(Auth::user()->id) != Fee::determineNewUserSubType($estimate_new_org_size) ){
+          $res = [
+            'Status'=>'Failure',
+            'Message'=>"<strong>You're Growing!</strong> Looks like to add these new members in youre gonna need to set some existing members inactive or
+             <a style='color:#351515' href='/profile?upgrade=true'>upgrade your subscription!</a>"
+          ];
+          return $res;
+        }
       }
 
       foreach($roster as $member){
-        if( empty(trim($member['tags'])) ){
+        if( empty(trim($member['Tags'])) ){
           // if tag field empty then empty the tags instead of parsing
           $tags = [];
         }else{
-          $tags = explode(',',$member['tags']);
+          $tags = explode(',',$member['Tags']);
         }
 
         // assign writable fields
-        $member = Member::updateOrCreate(['email' => $member['email'] ],
-        ['name' => $member['name'],
-        'password'=> bcrypt(str_random(24)),
-        'position' => ucfirst($member['position']),
-        'status' => strtolower($member['status']),
-        'org_admin_id' => Auth::user()->id
-        ]);
+        $member = Member::updateOrCreate(['email' => $member['Member Email'] ],
+         ['name' => $member['Member Name'],
+         'password'=> bcrypt(str_random(24)),
+         'position' => ucfirst($member['Member Position']),
+         'status' => strtolower($member['Status']),
+         'org_admin_id' => Auth::user()->id
+         ]);
         // retag member if necessary
         $member->retag($tags);
       }

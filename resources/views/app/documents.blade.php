@@ -4,15 +4,17 @@
 <div class="content">
     <div class="container-fluid">
 
-      <div class="row" style="margin-bottom:10px;">
-        <div class="col-md-12">
-          <a data-target='#newDocumentModal' data-toggle='modal'>
-            <div class="col-md-2 btn btn-wd btn-info">
-              <i class="fas fa-plus fa-fw"></i>Create Document
-            </div>
-          </a>
+      @if( (Auth::user()->onValidTrial() && Auth::user()->withinLimit('trial_documents', count($documents)) && !Auth::user()->onExpiredTrial()) || Auth::user()->isPayingCustomer()  )
+        <div class="row" style="margin-bottom:10px;">
+          <div class="col-md-12">
+            <a data-target='#newDocumentModal' data-toggle='modal'>
+              <div class="col-md-2 btn btn-wd btn-info">
+                <i class="fas fa-plus fa-fw"></i>Create Document
+              </div>
+            </a>
+          </div>
         </div>
-      </div>
+      @endif
 
 
 
@@ -63,6 +65,8 @@
     </div>
 </div>
 
-@include('app.components.documents.newDocumentModal')
+@if( (Auth::user()->onValidTrial() && Auth::user()->withinLimit('trial_documents', count($documents)) && !Auth::user()->onExpiredTrial()) || Auth::user()->isPayingCustomer()  )
+  @include('app.components.documents.newDocumentModal')
+@endif
 
 @endsection

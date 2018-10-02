@@ -4,15 +4,17 @@
 <div class="content">
     <div class="container-fluid">
 
-      <div class="row" style="margin-bottom:10px;">
-        <div class="col-md-12">
-          <a data-target='#newCampaignModal' data-toggle='modal'>
-            <div class="col-md-3 btn btn-wd btn-info">
-              <i class="fas fa-plus fa-fw"></i>Start New Campaign
-            </div>
-          </a>
+      @if( (Auth::user()->onValidTrial() && Auth::user()->withinLimit('trial_campaigns', $total_campaigns) && !Auth::user()->onExpiredTrial()) || Auth::user()->isPayingCustomer()  )
+        <div class="row" style="margin-bottom:10px;">
+          <div class="col-md-12">
+            <a data-target='#newCampaignModal' data-toggle='modal'>
+              <div class="col-md-3 btn btn-wd btn-info">
+                <i class="fas fa-plus fa-fw"></i>Start New Campaign
+              </div>
+            </a>
+          </div>
         </div>
-      </div>
+      @endif
 
 
 

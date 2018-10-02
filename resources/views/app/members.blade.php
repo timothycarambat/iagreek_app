@@ -7,12 +7,16 @@
 					<div class="col-md-3">
 
 						@if(request()->showAll)
-							<a href="?showAll=true" class="btn btn-wd btn-defaultactive">Showing All ({{$org_size}} Members)</a>
+							<a href="?showAll=true" class="btn btn-wd btn-default active">Showing All ({{$org_size}} Members)</a>
 						@else
 							<a href="?showAll=true" class="btn btn-wd btn-default">Show All ({{$org_size}} Members)</a>
 						@endif
 
-						<a data-toggle="modal" data-target="#newMemberModal" style='margin-top:5px;' class="btn btn-wd btn-default"><i class="fa-fw fas fa-plus"></i>Add More Members</a>
+
+						@if( (Auth::user()->onValidTrial() && Auth::user()->withinLimit('trial_members', count($members)) && !Auth::user()->onExpiredTrial()) || Auth::user()->isPayingCustomer()  )
+							<a data-toggle="modal" data-target="#newMemberModal" style='margin-top:5px;' class="btn btn-wd btn-default"><i class="fa-fw fas fa-plus"></i>Add More Members</a>
+						@endif
+
 
 					</div>
 				</div>
@@ -68,7 +72,11 @@
 			</div>
 	</div>
 
-@include('app.components.members.newMemberModal')
+
+@if( (Auth::user()->onValidTrial() && Auth::user()->withinLimit('trial_members', count($members)) && !Auth::user()->onExpiredTrial()) || Auth::user()->isPayingCustomer()  )
+	@include('app.components.members.newMemberModal')
+@endif
+
 @include('app.components.members.addTagsModal')
 
 

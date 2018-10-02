@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Cashier\Billable;
 use Storage;
+use Carbon\Carbon;
 
 use App\Subscription;
 use App\SystemVar;
@@ -40,6 +41,13 @@ class User extends Authenticatable
       "billing_zip",
       "org_size",
       "avatar",
+    ];
+
+    protected $dates = [
+      'trial_ends_at',
+      'created_at',
+      'updated_at',
+      'deleted_at'
     ];
 
     protected $hidden = [
@@ -115,6 +123,27 @@ class User extends Authenticatable
       }else {
         return false;
       }
+    }
+
+    public function withinLimit($limit_key, $count){
+      return ($count < (int)SystemVar::where('name', $limit_key)->pluck('value')[0]);
+    }
+
+    public function isPayingCustomer(){
+       if($this->onValidTrial() || $this->onExpiredTrial()){ return false;}
+       return $this->subscribed( Subscription::getSubName($this->id ));
+    }
+
+    public function onValidTrial(){
+      return ($this->onGenericTrial() && $this->trialDaysRemaining() >= 0);
+    }
+
+    public function onExpiredTrial(){
+      return (!$this->onGenericTrial() && !$this->trialDaysRemaining() >= 0 && is_null($this->stripe_id));
+    }
+
+    public function trialDaysRemaining(){
+      return Carbon::parse($this->trial_ends_at)->diffInDays(Carbon::now());
     }
 
     # make identicon for new users stored in avatars/
