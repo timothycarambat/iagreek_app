@@ -55,10 +55,27 @@ class PagesController extends Controller
     }
 
     public function home(){
-      return view('app.login',
+      return view('auth.login',
       [
         'title'=>'Greek Document Managment',
         'view'=>'login'
+      ]);
+    }
+
+    public function email(){
+      return view('auth.passwords.email',
+      [
+        'title'=>'Greek Document Managment',
+        'view'=>'password.forgot'
+      ]);
+    }
+
+    public function reset($token){
+      return view('auth.passwords.reset',
+      [
+        'title'=>'Greek Document Managment',
+        'view'=>'password.reset',
+        'token'=>$token,
       ]);
     }
 
