@@ -34,6 +34,12 @@
 					</div>
 					@endif
 
+					@if(session('success'))
+					<div class="alert alert-info">
+						<strong>Hooray!</strong> 	{!!session('success')!!}
+					</div>
+					@endif
+
 					@if($errors->any())
 					<div class="alert alert-danger">
 					  <strong>Hmm..</strong> {{$errors->first()}}
@@ -51,10 +57,14 @@
 			      <div class="submit-under"></div>
 			    </div><!--allsub-->
 
+					<div class="allsub">
+						<a href="{{route('password.request')}}" style="text-decoration:none"><div class="CA">Forgot Password</div></a>
+					</div><!--allsub-->
+
 					<br>
 
 					<div class="allsub">
-			      <a href="{{$_ENV['ALT_URL']}}/register" style="text-decoration:none"><div class="CA">Create An Account</div></a>
+			      <a href="{{$_ENV['ALT_URL']}}/register" style="text-decoration:none"><div style="background: unset; color:#000;" class="CA">Create An Account</div></a>
 			    </div><!--allsub-->
 
 			 </div><!--input-contain-->
