@@ -10,10 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
+// Auth::routes();
 
 //Base View Routes
-Route::get('/',['as'=>'login','uses'=>"PagesController@home"]);
+Route::get('/',['uses'=>"PagesController@home"]);
+Route::post('login', 'PagesController@doLogin');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/dashboard', 'PagesController@dashboard')->middleware(['auth','subscribed']);

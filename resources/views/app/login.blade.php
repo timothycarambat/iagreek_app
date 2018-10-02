@@ -17,7 +17,7 @@
 	</head>
 	<body>
 
-		{!! Form::open(['url' => 'login','class' =>'sub-form']) !!}
+		{!! Form::open(['url' => '/login','class' =>'sub-form']) !!}
 			<form class="sub-form">
 			  <div class="input-contain">
 			    <div class="circle circle-quill">

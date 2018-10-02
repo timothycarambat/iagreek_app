@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use Validator;
+use Illuminate\Support\Facades\Input;
+use Redirect;
+use Session;
 
 use App\Document;
 use App\Member;
@@ -11,6 +15,45 @@ use App\Campaign;
 
 class PagesController extends Controller
 {
+
+    public function doLogin() {
+      // validate the info, create rules for the inputs
+      $rules = array(
+          'email'    => 'required|email|exists:users,email', // make sure the email is an actual email
+          'password' => 'required' // password can only be alphanumeric and has to be greater than 3 characters
+      );
+      $messages = [
+        'required' => 'The :attribute field is required.',
+        'email' => 'The email input is not a valid email adddress.',
+        'exists' => 'That email was not found as a user.'
+
+     ];
+
+      $validator = Validator::make(Input::all(), $rules, $messages);
+
+      if ($validator->fails()) {
+          return Redirect::to('/')
+              ->withErrors($validator) // send back all errors to the login form
+              ->withInput(Input::except('password')); // send back the input (not the password) so that we can repopulate the form
+      } else {
+          // create our user data for the authentication
+          $userdata = array(
+              'email'     => Input::get('email'),
+              'password'  => Input::get('password')
+          );
+
+          // attempt to do the login
+          if (Auth::attempt($userdata)) {
+              return Redirect::to('/dashboard');
+          } else {
+              Session::flash('failure', "That Password was incorrect");
+              return Redirect::to('/')
+              ->withErrors($validator);
+          }
+
+      }
+    }
+
     public function home(){
       return view('app.login',
       [
